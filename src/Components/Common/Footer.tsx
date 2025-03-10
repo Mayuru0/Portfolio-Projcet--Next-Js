@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaSquareFacebook, FaSquareInstagram, FaSquareGithub } from "react-icons/fa6";
 import { FaLinkedin, FaYoutube, FaTwitterSquare } from "react-icons/fa";
+import Link from 'next/link';
 
 // Define the type for each social media link object
 interface SocialMedia {
@@ -22,7 +23,7 @@ const Footer: React.FC = () => {
   return (
     <div className='max-w-[1200px] p-6 sm:p-12 flex flex-col sm:flex-row justify-between items-center sm:items-start mx-auto'>
       <span className='primary text-center sm:text-left'>
-        <a href='/'>MAYURU MADHURANGA</a>
+      <Link href='/'>MAYURU MADHURANGA</Link>
       </span>
 
       <div className='flex gap-6 mt-6 sm:mt-0 sm:mb-0'>
