@@ -31,7 +31,8 @@ const Profile: React.FC = () => {
           data-aos="fade-in"
           data-aos-duration="1600"
         >
-          <span className="primary">I'm a</span> <br />
+          <span className="primary">I&apos;m a</span>
+
         </h1>
         {/* Ignore TypeScript errors */}
         <TypeAnimation
@@ -47,14 +48,10 @@ const Profile: React.FC = () => {
           className="text-white text-2xl sm:text-5xl"
         />
 
-        <p
-          className="text-white sm:text-lg my-6 lg:text-xl"
-          data-aos="zoom-in-down"
-          data-aos-duration="1600"
-        >
-          I'm Mayuru Madhuranga, and I'm interested in Full-Stack development or
-          MERN Stack development.
-        </p>
+<p className="text-white sm:text-lg my-6 lg:text-xl" data-aos="zoom-in-down" data-aos-duration="1600">
+  I&apos;m Mayuru Madhuranga, and I&apos;m interested in Full-Stack development or MERN Stack development.
+</p>
+
 
         {/* Download CV Button */}
         <div className="my-8" data-aos="fade-in" data-aos-duration="2000">

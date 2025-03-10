@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { FaGithub } from "react-icons/fa";
 import type Project from '@/types/project';
+import Image from 'next/image';
 
 
 
@@ -112,7 +113,9 @@ const Project: React.FC = () => {
                 className='w-full h-full object-cover transform group-hover:scale-110 transition duration-500'
               />
             ) : (
-              <img
+              <Image
+                width={500}
+                height={500}
                 src={projects[currentProject].image || '/assets/default.png'} // Default image if no image path is available
                 alt={projects[currentProject].title}
                 className='w-full h-full object-cover transform group-hover:scale-110 transition duration-500'
