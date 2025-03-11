@@ -16,47 +16,54 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'Skills', path: '/skill' },
-    { name: 'About', path: '/about' },
+    { name: 'About', path: '/about/aboutme' },
     { name: 'Project', path: '/project' },
     { name: 'Contact', path: '/contact' },
   ];
 
   return (
-    <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center'>
-      <h1 className='text-3xl font-bold primary ml-4 font-mono'>
+    <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4'>
+      <h1 className='text-3xl font-bold primary font-mono'>
         <Link href='/'>MAYURU MADHURANGA</Link>
       </h1>
-      
+
+      {/* Desktop Navigation */}
       <ul className='hidden md:flex'>
         {navLinks.map((link) => (
           <li 
             key={link.name} 
-            className={`p-5 hover:text-blue-600 ${pathname === link.path ? 'text-blue-600 border-b-2 border-blue-600 ' : ''}`}
+            className={`p-5 hover:text-blue-600 transition duration-300 ${
+              pathname === link.path ? 'text-blue-600 font-bold' : ''
+            }`}
           >
             <Link href={link.path}>{link.name}</Link>
           </li>
         ))}
       </ul>
 
-      <div onClick={handleNav} className='block md:hidden cursor-pointer'>
-        {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
+      {/* Mobile Menu Icon */}
+      <div onClick={handleNav} className='block md:hidden cursor-pointer text-blue-500'>
+        {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
       </div>
 
+      {/* Mobile Navigation */}
       <div
-        className={
-          nav
-            ? 'fixed h-full left-0 top-0 w-[60%] bg-[#202121] z-10 ease-in-out duration-500'
-            : 'fixed left-[-100%]'
-        }
+        className={`fixed h-full left-0 top-0 w-[60%] bg-[#202121] z-10 ease-in-out duration-500 ${
+          nav ? 'left-0' : 'left-[-100%]'
+        }`}
       >
-        <h1 className='text-3xl font-bold primary m-4'>Mayuru Madhuranga</h1>
+        <h1 className='text-3xl font-bold text-blue-500 m-4'>Mayuru Madhuranga</h1>
         <ul className='pt-8 text-2xl'>
           {navLinks.map((link) => (
             <li 
               key={link.name} 
-              className={`p-5 hover:text-blue-600 ${pathname === link.path ? 'text-blue-600' : ''}`}
+              className={`p-5 hover:text-blue-600 transition duration-300 ${
+                pathname === link.path ? 'text-blue-600 font-bold' : ''
+              }`}
             >
-              <Link href={link.path} onClick={() => setNav(false)}>{link.name}</Link>
+              <Link href={link.path} onClick={() => setNav(false)}>
+                {link.name}
+              </Link>
             </li>
           ))}
         </ul>

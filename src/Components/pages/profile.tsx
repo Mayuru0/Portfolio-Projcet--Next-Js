@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+//import Image from "next/image";
 import Social from "./Social";
 import { TypeAnimation } from "react-type-animation"; // make sure it's named correctly
+import ProfilePhoto from "../ProfilePhoto";
 
 const Profile: React.FC = () => {
   return (
@@ -13,7 +14,7 @@ const Profile: React.FC = () => {
     >
       {/* Profile Image */}
       <div className="col-span-1 my-auto mx-auto lg:-ml-10">
-        <div className="w-[230px] h-auto lg:w-[320px] mix-blend-lighten">
+        {/* <div className="w-[230px] h-auto lg:w-[320px] mix-blend-lighten">
           <Image
             src="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png"
             alt="Mayuru Madhuranga's Profile Picture"
@@ -21,7 +22,8 @@ const Profile: React.FC = () => {
             height={320}
             priority
           />
-        </div>
+        </div> */}
+        <ProfilePhoto/>
       </div>
 
       {/* Profile Info */}
@@ -49,7 +51,7 @@ const Profile: React.FC = () => {
         />
 
 <p className="text-white sm:text-lg my-6 lg:text-xl" data-aos="zoom-in-down" data-aos-duration="1600">
-  I&apos;m Mayuru Madhuranga, and I&apos;m interested in Full-Stack development or MERN Stack development.
+  I&apos;m Mayuru Madhuranga, and I&apos;m interested in Full-Stack Developer or MERN Stack Developer.
 </p>
 
 
