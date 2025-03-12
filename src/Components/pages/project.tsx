@@ -24,9 +24,9 @@ const Project: React.FC = () => {
       Count: "01",
     },
     {
-      video: "https://res.cloudinary.com/dy972wrlb/video/upload/v1741629596/Portfolio%20%20%28React%20Js%29/zetorq460rg2isubzxfg.mp4",
-      description: "A personal portfolio showcasing my skills, projects, and experience in web development.",
-      description0: "💻Technologies Used: React JS, JavaScript",
+      video: "https://res.cloudinary.com/dy972wrlb/video/upload/v1741757787/Portfolio%20%20%28React%20Js%29/wr9iuzfuqyjzt4kdwnwj.mp4",
+      description: "A personal portfolio showcasing my skills, projects, and experience in web development, built with Next.js, TypeScript, and animated with AOS and Framer Motion. Designed with Tailwind CSS for a sleek, responsive interface.",
+      description0: "💻Technologies Used: Next.js, TypeScript, AOS, Framer Motion, Tailwind CSS",
       title: "My Portfolio",
       link: "https://github.com/Mayuru0/Portfolio-Project--React-Js---vite-.git",
       Count: "02",

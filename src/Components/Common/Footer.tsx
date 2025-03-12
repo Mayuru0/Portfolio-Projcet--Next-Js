@@ -33,10 +33,16 @@ const Footer: React.FC = () => {
           </a>
         ))}
       </div>
-
+   <div>
       <p className='text-gray-600 text-center sm:text-right mt-6 sm:mt-0'>
         maurumaduranga5@gmail.com
       </p>
+      </div>
+      <div className='flex text-center justify-center items-center'>
+      <h1 className="absolute  md:bottom-6  text-gray-700 md:text-sm text-xs  ">
+          © 2025 Mayuru Madhuranga. All Rights Reserved.
+        </h1>
+      </div>
     </div>
   );
 }

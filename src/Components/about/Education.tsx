@@ -48,7 +48,7 @@ const Education = () => {
     <div className="border border-gray-800 rounded-r-2xl text-white flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 mt-2">
       {/* Education Section */}
       <div className="space-y-8">
-        <h1 className="text-2xl sm:text-3xl font-mono mb-6 text-primary animate-bounce" data-aos="fade-up">
+        <h1 className="text-2xl sm:text-3xl font-mono mb-6 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent animate-bounce" data-aos="fade-up">
           Education
         </h1>
 
@@ -70,7 +70,7 @@ const Education = () => {
 
       {/* Certifications Section */}
       <div className="space-y-8 mt-8">
-        <h1 className="text-2xl sm:text-3xl font-mono mb-6 text-primary animate-bounce" data-aos="fade-up">
+        <h1 className="text-2xl sm:text-3xl font-mono mb-6 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent animate-bounce" data-aos="fade-up">
           Certifications
         </h1>
 
