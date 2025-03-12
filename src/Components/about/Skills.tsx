@@ -66,7 +66,7 @@ const Skills: React.FC = () => {
     {
       title: "Tools & Technologies",
       skills: [
-        { name: "Git/GitHub", img:github },
+        { name: "GitHub", img:github },
         { name: "Docker", img: docker },
         { name: "Figma", img: Figma },
         { name: "WordPress", img: wordpress },
@@ -110,7 +110,7 @@ const Skills: React.FC = () => {
             <h3 className="text-xl font-semibold mb-4 bg-gradient-to-l from-cyan-500 to-blue-500 bg-clip-text text-transparent" data-aos="fade-down">{category.title}</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {category.skills.map((skill, skillIndex) => (
-                <div key={skillIndex} className="flex flex-col items-center animate-pulse" data-aos="zoom-out">
+                <div key={skillIndex} className="flex flex-col items-center " data-aos="zoom-out">
                   <Image
                     src={skill.img || "/placeholder.svg"}
                     alt={skill.name}
