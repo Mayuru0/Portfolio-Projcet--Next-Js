@@ -30,8 +30,8 @@ const ProjectComponent: React.FC = () => {
       description2: "🔴Backend: Express.js, Node.js",
       description3: "🔴State Management: Redux",
       description4: "🔴Database: MongoDB",
-      title: "Event Management System",
-      link: "https://github.com/Mayuru0/Event-Management-System.git", // Link to your GitHub repo or project page
+      title: "Event Management System(NextEvent)",
+      link: "https://event-management-frontend-next-event.vercel.app/", // Link to your GitHub repo or project page
       Count: "01",
     },
 
