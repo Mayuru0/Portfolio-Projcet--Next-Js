@@ -58,7 +58,7 @@ const Profile: React.FC = () => {
         {/* Download CV Button */}
         <div className="my-8" data-aos="fade-in" data-aos-duration="2000">
           <a
-            href="https://drive.google.com/file/d/14MALNBO0ABS05mspMeZBcDEFgcCfhinr/view?usp=sharing"
+            href="https://drive.google.com/file/d/19o2t6klbFtzhc4fZGD-oRgGNomtV8F2B/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 w-full rounded-xl mr-4 border border-gray-400 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 text-white hover:border-none"
