@@ -5,6 +5,7 @@ import React from "react";
 import Social from "./Social";
 import { TypeAnimation } from "react-type-animation"; // make sure it's named correctly
 import ProfilePhoto from "../ProfilePhoto";
+import { FaDownload } from "react-icons/fa";
 
 const Profile: React.FC = () => {
   return (
@@ -23,7 +24,7 @@ const Profile: React.FC = () => {
             priority
           />
         </div> */}
-        <ProfilePhoto/>
+        <ProfilePhoto />
       </div>
 
       {/* Profile Info */}
@@ -34,7 +35,6 @@ const Profile: React.FC = () => {
           data-aos-duration="1600"
         >
           <span className="primary">I&apos;m a</span>
-
         </h1>
         {/* Ignore TypeScript errors */}
         <TypeAnimation
@@ -50,20 +50,25 @@ const Profile: React.FC = () => {
           className="text-white text-2xl sm:text-5xl"
         />
 
-<p className="text-white sm:text-lg my-6 lg:text-xl" data-aos="zoom-in-down" data-aos-duration="1600">
-  I&apos;m Mayuru Madhuranga, and I&apos;m interested in Full-Stack Developer or MERN Stack Developer.
-</p>
-
+        <p
+          className="text-white sm:text-lg my-6 lg:text-xl"
+          data-aos="zoom-in-down"
+          data-aos-duration="1600"
+        >
+          I&apos;m Mayuru Madhuranga, and I&apos;m interested in Full-Stack
+          Developer or MERN Stack Developer.
+        </p>
 
         {/* Download CV Button */}
         <div className="my-8" data-aos="fade-in" data-aos-duration="2000">
           <a
-            href="https://drive.google.com/file/d/100TrkZQt7q1Q2L49PSi3zWdnGKwKLnw1/view?usp=sharing"
+            href="https://drive.google.com/file/d/1JAN4p9RdSlxyScfYk3XMecgcdVgtC2Ke/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 w-full rounded-xl mr-4 border border-gray-400 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 text-white hover:border-none"
+            className="px-4 py-2 sm:px-6 sm:py-3 w-[150px] sm:w-[200px] rounded-xl mr-4 border border-gray-400 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 text-white hover:border-none flex items-center justify-center space-x-2 text-xs sm:text-sm md:text-base"
           >
-            Download CV
+            <FaDownload size={16} />
+            <span>Download CV</span>
           </a>
         </div>
 

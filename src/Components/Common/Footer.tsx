@@ -1,50 +1,115 @@
-import React from 'react'
-import { FaSquareFacebook, FaSquareInstagram, FaSquareGithub } from "react-icons/fa6";
-import { FaLinkedin, FaYoutube, FaTwitterSquare } from "react-icons/fa";
-import Link from 'next/link';
+"use client";
 
-// Define the type for each social media link object
-interface SocialMedia {
-  icon: React.ReactElement;
-  path: string;
-}
+import type React from "react";
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaTwitter, FaEnvelope } from "react-icons/fa";
 
 const Footer: React.FC = () => {
-  // Define an array of social media links with their corresponding icons and paths
-  const socialMedia: SocialMedia[] = [
-    { icon: <FaSquareFacebook className='text-white w-5 h-5' />, path: "https://www.facebook.com/profile.php?id=100080722121368" },
-    { icon: <FaSquareInstagram className='text-white w-5 h-5' />, path: "https://www.instagram.com/_mayuru_madhuranga_/" },
-    { icon: <FaLinkedin className='text-white w-5 h-5' />, path: "https://www.linkedin.com/in/mayuru-madhuranga-7bbb73312/" },
-    { icon: <FaYoutube className='text-white w-5 h-5' />, path: "https://www.youtube.com/@0_madhuranga_0" },
-    { icon: <FaTwitterSquare className='text-white w-5 h-5' />, path: "https://x.com/00_Marsh_00" },
-    { icon: <FaSquareGithub className='text-white w-5 h-5' />, path: "https://github.com/Mayuru0" },
+  const currentYear = new Date().getFullYear();
+
+  const quickLinks = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: "About", path: "/about/aboutme" },
+    { name: "Project", path: "/project" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  const socialLinks = [
+    {
+      icon: <FaGithub size={20} />,
+      url: "https://github.com/Mayuru0",
+      label: "GitHub",
+    },
+    {
+      icon: <FaLinkedin size={20} />,
+      url: "https://www.linkedin.com/in/mayuru-madhuranga-7bbb73312/",
+      label: "LinkedIn",
+    },
+    {
+      icon: <FaTwitter size={20} />,
+      url: "https://x.com/00_Marsh_00",
+      label: "Twitter",
+    },
+    {
+      icon: <FaEnvelope size={20} />,
+      url: "mailto:mayurumaduranga@gmail.com",
+      label: "Gmail",
+    },
   ];
 
   return (
-    <div className='max-w-[1200px] p-6 sm:p-12 flex flex-col sm:flex-row justify-between items-center sm:items-start mx-auto'>
-      <span className='primary text-center sm:text-left'>
-      <Link href='/'>MAYURU MADHURANGA</Link>
-      </span>
+    <footer className="bg-black text-gray-400 pt-10 pb-6">
+      <div className="max-w-[1200px] mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3  gap-8 mb-8">
+          {/* About Section */}
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-4 font-mono">
+              MAYURU MADHURANGA
+            </h3>
+            <p className="mb-4">
+              Full-stack developer specializing in creating beautiful,
+              functional, and responsive web applications.
+            </p>
+            <div className="flex space-x-4">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-blue-600 transition duration-300"
+                  aria-label={link.label}
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
+          </div>
 
-      <div className='flex gap-6 mt-6 sm:mt-0 sm:mb-0'>
-        {socialMedia.map((social, index) => (
-          <a key={index} href={social.path} target="_blank" rel="noopener noreferrer">
-            {social.icon}
-          </a>
-        ))}
+          
+
+          {/* Quick Links */}
+          <div className="grid">
+            <h3 className="text-xl font-bold text-white mb-4">Quick Links</h3>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.path}
+                    className="hover:text-blue-600 transition duration-300"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
+            <p className="mb-2">Email: mayurumaduranga@gmail.com</p>
+            <p className="mb-2">Phone: +94 774366459</p>
+            <div className="flex">
+              <p className="mr-2">Location:</p>
+              <p className="flex">
+                No. 79, Maryland, Wathurugama, Gampaha, Sri Lanka
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-800 my-6"></div>
+
+        {/* Copyright */}
+        <div className="text-center">
+          <p>&copy; {currentYear} Mayuru Madhuranga. All rights reserved.</p>
+        </div>
       </div>
-   <div>
-      <p className='text-gray-600 text-center sm:text-right mt-6 sm:mt-0'>
-        maurumaduranga5@gmail.com
-      </p>
-      </div>
-      <div className='flex text-center justify-center items-center'>
-      <h1 className="absolute  md:bottom-6  text-gray-700 md:text-sm text-xs  ">
-          © 2025 Mayuru Madhuranga. All Rights Reserved.
-        </h1>
-      </div>
-    </div>
+    </footer>
   );
-}
+};
 
 export default Footer;

@@ -83,7 +83,7 @@ const Services: FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="zoom-out">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="zoom-out" >
         {services.map((service, index) => (
           <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} />
         ))}
