@@ -1,6 +1,6 @@
 import html from "../../public/assets/html.png";
 import css from "../../public/assets/css.png";
-import javascript from "../../public/assets/JavaScript.png";
+import JavaScript from "../../public/assets/JavaScript.png";
 import react from "../../public/assets/react.png";
 import java from "../../public/assets/java.png";
 import Nodejs from "../../public/assets//Nodejs.png";
@@ -45,7 +45,7 @@ export const skillCategories: SkillCategory[] = [
     emoji: "👨‍💻",
     title: " Programming Languages",
     skills: [
-      { name: "JavaScript", img: javascript },
+      { name: "JavaScript", img: JavaScript },
       { name: "TypeScript", img: typescript },
       { name: "Java", img: java },
       { name: "C#", img: C },
