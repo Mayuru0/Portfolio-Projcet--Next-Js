@@ -49,7 +49,7 @@ const AboutSideBar = () => {
               <button
                 key={link.href}
                 onClick={() => handleNavClick(link.href)}
-                className={`transition-all font-kulim duration-300 text-xl font-medium p-2 w-[90%] rounded-full flex text-center justify-center ${
+                className={`transition-all font-kulim duration-300 text-xl font-medium p-2 w-[90%] rounded-full flex text-center justify-center cursor-pointer ${
                   isActive
                     ? "text-white bg-blue-600"
                     : "text-white hover:text-[#6200EE] hover:underline"

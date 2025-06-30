@@ -39,13 +39,14 @@ import Firebase from "../../public/assets/Firebase.png";
 import Xampp from "../../public/assets/XAMPP.webp";
 import Vercel from "../../public/assets/Vercel.png";
 import Cloudinary from "../../public/assets/Cloudinary.png";
+import JavaScript from "../../public/assets/JavaScript.png";
 
 export const skillCategories: SkillCategory[] = [
   {
     emoji: "👨‍💻",
     title: " Programming Languages",
     skills: [
-      { name: "JavaScript", img: java },
+      { name: "JavaScript", img: JavaScript },
       { name: "TypeScript", img: typescript },
       { name: "Java", img: java },
       { name: "C#", img: C },
