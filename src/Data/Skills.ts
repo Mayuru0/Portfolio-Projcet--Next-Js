@@ -39,7 +39,7 @@ import Firebase from "../../public/assets/Firebase.png";
 import Xampp from "../../public/assets/XAMPP.webp";
 import Vercel from "../../public/assets/Vercel.png";
 import Cloudinary from "../../public/assets/Cloudinary.png";
-import JavaScript from "../../public/assets/JavaScript.png";
+import JavaScript from "../../public/assets/js.png";
 
 export const skillCategories: SkillCategory[] = [
   {
