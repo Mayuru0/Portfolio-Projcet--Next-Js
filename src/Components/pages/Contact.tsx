@@ -101,7 +101,7 @@ const Contact: FC = () => {
             <div>
               <button
                 type="submit"
-                className="text-xl w-full p-4 font-medium text-white bg-[#29a9e1] rounded-md hover:bg-[#1d8cbf] transition-colors"
+                className="text-xl w-full p-4 font-medium text-white bg-[#29a9e1] rounded-md hover:bg-[#1d8cbf] transition-colors cursor-pointer"
               >
                 Send message
               </button>

@@ -119,7 +119,7 @@ const ProjectComponent: React.FC = () => {
           {projects[currentProject].link && (
             <a href={projects[currentProject].link} target="_blank" rel="noopener noreferrer">
               <div className="border-t-4 border-gray-700 mt-2">
-                <button className="flex items-center text-white bg-gradient-to-r scale-100 px-6 py-2 rounded-full transition duration-300 mt-2 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700">
+                <button className="flex items-center text-white bg-gradient-to-r scale-100 px-6 py-2 rounded-full transition duration-300 mt-2 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 cursor-pointer">
                   View Project <GrView className="ml-2 scale-100" />
                 </button>
               </div>
@@ -163,7 +163,7 @@ const ProjectComponent: React.FC = () => {
                         e.stopPropagation()
                         prevImage()
                       }}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10 cursor-pointer"
                       aria-label="Previous image"
                     >
                       <FaChevronLeft />
@@ -173,7 +173,7 @@ const ProjectComponent: React.FC = () => {
                         e.stopPropagation()
                         nextImage()
                       }}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10 cursor-pointer"
                       aria-label="Next image"
                     >
                       <FaChevronRight />
@@ -208,13 +208,13 @@ const ProjectComponent: React.FC = () => {
       <div className="flex justify-between mt-8">
         <button
           onClick={prevProject}
-          className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300"
+          className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300 cursor-pointer"
         >
           Previous
         </button>
         <button
           onClick={nextProject}
-          className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300"
+          className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300 cursor-pointer"
         >
           Next
         </button>
