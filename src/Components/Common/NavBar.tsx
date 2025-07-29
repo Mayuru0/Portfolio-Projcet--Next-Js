@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Head from 'next/head';
 
 const Navbar: React.FC = () => {
   const [nav, setNav] = useState(false);
@@ -22,6 +23,11 @@ const Navbar: React.FC = () => {
   ];
 
   return (
+    <>
+    <Head>
+  <title>Home | Mayuru Maduranga</title>
+  <meta name="description" content="Welcome to my portfolio. I'm a full-stack developer passionate about building modern web applications." />
+</Head>
     <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4'>
       <h1 className='text-3xl font-bold primary font-mono'>
         <Link href='/'>MAYURU MADHURANGA</Link>
@@ -69,6 +75,7 @@ const Navbar: React.FC = () => {
         </ul>
       </div>
     </div>
+    </>
   );
 };  
 
