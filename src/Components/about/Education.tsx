@@ -16,7 +16,7 @@ const Education = () => {
           {educationDetails.map((edu, index) => (
             <div key={index} className="bg-[#252525] rounded-lg p-6 relative">
               <div className="text-[#1da1f2] animate-pulse">{edu.year}</div>
-              <h2 className="text-lg font-semibold mt-1">{edu.title}</h2>
+              <h2 className="text-lg font-semibold mt-1 ">{edu.title}</h2>
               <div className="mt-4 flex items-center">
                 <div className="w-2 h-2 rounded-full bg-[#1da1f2] mr-2"></div>
                 <Link href={edu.link} className="cursor-pointer hover:text-blue-600 hover:underline">

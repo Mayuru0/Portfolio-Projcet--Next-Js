@@ -3,9 +3,8 @@
 import Image from "next/image";
 import React, { useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css"
+import "aos/dist/aos.css";
 export default function AboutMe() {
-
   useEffect(() => {
     AOS.init({
       duration: 1000, // Animation duration in milliseconds
@@ -26,7 +25,9 @@ export default function AboutMe() {
     <div className="min-h-screen bg-black border border-gray-800 rounded-r-2xl text-white flex flex-col p-4 md:p-8 lg:p-12 mt-2">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
-        <h1 className="text-4xl font-bold mb-8 primary animate-bounce">About Me</h1>
+        <h1 className="text-4xl font-bold mb-8 primary animate-bounce">
+          About Me
+        </h1>
 
         {/* Profile Section */}
         <div className="flex flex-col md:flex-row items-center md:items-start mb-12 gap-6">
@@ -43,7 +44,9 @@ export default function AboutMe() {
 
           {/* Personal Info */}
           <div className="flex-1 " data-aos="fade-left">
-            <h2 className="text-2xl font-semibold" data-aos="fade-up">{personalInfo.name}</h2>
+            <h2 className="text-2xl font-semibold" data-aos="fade-up">
+              {personalInfo.name}
+            </h2>
             <p className="text-lg text-gray-400 mb-4 animate-pulse">
               Fullstack Developer | MERN Stack Developer
             </p>
@@ -66,12 +69,13 @@ export default function AboutMe() {
         </div>
 
         {/* Interests & Hobbies */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 " data-aos="fade-left">
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 "
+          data-aos="fade-left"
+        >
           {/* Interests */}
           <section>
-            <h3 className="text-2xl font-semibold mb-4 primary">
-              Interests
-            </h3>
+            <h3 className="text-2xl font-semibold mb-4 primary">Interests</h3>
             <ul className="list-disc list-inside text-gray-300 leading-relaxed">
               {personalInfo.interests.map((interest, index) => (
                 <li key={index}>{interest}</li>
@@ -81,9 +85,7 @@ export default function AboutMe() {
 
           {/* Hobbies */}
           <section>
-            <h3 className="text-2xl font-semibold mb-4 primary">
-              Hobbies
-            </h3>
+            <h3 className="text-2xl font-semibold mb-4 primary">Hobbies</h3>
             <ul className="list-disc list-inside text-gray-300 leading-relaxed">
               {personalInfo.hobbies.map((hobby, index) => (
                 <li key={index}>{hobby}</li>
@@ -94,27 +96,46 @@ export default function AboutMe() {
 
         {/* My Journey Section */}
         <section className="mt-12" data-aos="fade-up">
-          <h3 className="text-2xl font-semibold mb-4 primary" data-aos="fade-up">
+          <h3
+            className="text-2xl font-semibold mb-4 primary"
+            data-aos="fade-up"
+          >
             My Journey
           </h3>
-          <p className="text-gray-300 leading-relaxed mb-4">
-  I&apos;m a committed and capable student now working toward a Higher
-  National Diploma in Information Technology. A committed and skilled
-  full-stack developer with expertise in the MERN stack, Next.js, and
-  Rust, specializing in building responsive web applications and
-  desktop applications. Passionate about writing high-quality,
-  efficient code and contributing to collaborative, agile development
-  environments. Experienced in developing RESTful APIs, integrating
-  modern technologies, and ensuring seamless user experiences.
-</p>
-<p className="text-gray-300 leading-relaxed">
-  I have a solid background in a variety of programming languages and
-  development tools, and I&apos;m excited to provide creative, approachable
-  solutions to a fast-paced, dynamic organization. Additionally, I aim
-  to expand my knowledge by pursuing a top-up degree to further
-  enhance my expertise.
-</p>
-
+          <p className="text-gray-300 leading-relaxed mb-4 text-justify">
+            I&apos;m a committed and capable student currently pursuing a Higher
+            National Diploma in Information Technology. As a passionate and
+            skilled Full-Stack Developer, I specialize in building responsive
+            web applications using the MERN stack and Next.js, and developing
+            cross-platform desktop applications using Rust and Tauri.js.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-4 text-justify">
+            I have 6 months of hands-on internship experience and over 1 year of
+            self-driven project development, where I actively used GitHub for
+            version control, collaboration, and code management. My backend
+            development experience includes Node.js, Express.js, and basic
+            knowledge of NestJS, along with using Firebase for backend services.
+            Additionally, I have implemented image uploading functionality using
+            Cloudinary.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-4 text-justify">
+            My development journey includes working with JavaScript, TypeScript,
+            and Redux, as well as implementing JWT authentication and optimizing
+            both MongoDB and MySQL databases for better performance and
+            scalability.
+          </p>
+          <p className="text-gray-300 leading-relaxed mb-4 text-justify">
+            I&apos;ve also used Docker to containerize applications and streamline
+            deployment processes. I&apos;m passionate about writing clean, efficient,
+            and maintainable code, and I thrive in agile, collaborative
+            development environments.
+          </p>
+          <p className="text-gray-300 leading-relaxed text-justify ">
+            With a solid foundation in various programming languages and tools,
+            I&apos;m eager to contribute creative and practical solutions to dynamic,
+            fast-paced teams. Additionally, I aim to pursue a top-up degree to
+            further deepen my technical expertise and career growth.
+          </p>
         </section>
       </div>
     </div>

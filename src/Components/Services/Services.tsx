@@ -9,7 +9,6 @@ import {
   Film,
 } from "lucide-react";
 
-
 const ServiceCard: FC<{
   title: string;
   description: string;
@@ -65,7 +64,6 @@ const Services: FC = () => {
       icon: <Film className="h-6 w-6" />,
     },
   ];
-  
 
   return (
     <div
@@ -78,24 +76,36 @@ const Services: FC = () => {
         <h2 className="text-4xl font-bold text-white mb-4">My Services</h2>
         <div className="w-20 h-1 bg-[#29a9e1] mx-auto mb-6"></div>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          I offer a comprehensive range of digital services to help bring your vision to life. Each service is tailored
-          to meet your specific needs and goals.
+          I offer a comprehensive range of digital services to help bring your
+          vision to life. Each service is tailored to meet your specific needs
+          and goals.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="zoom-out" >
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        data-aos="zoom-out"
+      >
         {services.map((service, index) => (
-          <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} />
+          <ServiceCard
+            key={index}
+            title={service.title}
+            description={service.description}
+            icon={service.icon}
+          />
         ))}
       </div>
 
       <div className="mt-16 text-center" data-aos="fade-in">
         <div className="bg-[#212129] rounded-xl p-8 max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold text-white mb-4">Need a custom solution?</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Need a custom solution?
+          </h3>
           <p className="text-gray-400 mb-6">
-  I&apos;m always open to discussing new projects and creative ideas. If you have a specific requirement that&apos;s not
-  listed above, let&apos;s talk about it.
-</p>
+            I&apos;m always open to discussing new projects and creative ideas.
+            If you have a specific requirement that&apos;s not listed above,
+            let&apos;s talk about it.
+          </p>
 
           <a
             href="/contact"

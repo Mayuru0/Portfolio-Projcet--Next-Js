@@ -14,18 +14,19 @@ const WorkExperience = () => {
             Experience
           </h1>
 
-          <div className="text-gray-300 leading-relaxed" data-aos="fade-up">
+          <div className="text-gray-300 leading-relaxed text-justify" data-aos="fade-up">
             <p>
               As a full-stack developer, I create quick, scalable, and intuitive
-              online apps with MERN and Next.js. Additionally, I successfully
-              finished a good internship where I worked on more than five
-              desktop and web programs using the framework. Additionally,
-              learned how to use the GitHub web application effectively and
-              concentrated on developing code that was clear, effective, and
-              reusable while adhering to industry best practices for agile
-              techniques, version control (Git), and code quality. worked in
-              cross-functional teams to improve application security, optimize
-              APIs, and develop user-friendly features.
+              web applications using the MERN stack, Next.js, and Redux for
+              state management. I successfully completed a 6-month internship
+              during which I worked on more than five desktop and web
+              applications using these frameworks. During this time, I
+              effectively utilized the GitHub web application and focused on
+              writing clear, efficient, and reusable code while adhering to
+              industry best practices including agile methodologies, version
+              control (Git), and maintaining high code quality. I collaborated
+              with cross-functional teams to enhance application security,
+              optimize REST APIs, and develop user-friendly features.
             </p>
           </div>
 
