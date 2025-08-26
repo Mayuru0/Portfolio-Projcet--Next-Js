@@ -26,6 +26,31 @@ export const projects: Project[] = [
   },
 
   {
+  image: "https://res.cloudinary.com/dy972wrlb/image/upload/v1756188135/Screenshot_2025-08-26_112634_cn15qa.png", 
+  image1: "https://res.cloudinary.com/dy972wrlb/image/upload/v1756189160/Screenshot_2025-08-26_114914_mm4iap.png", 
+  image2: "https://res.cloudinary.com/dy972wrlb/image/upload/v1756188134/Screenshot_2025-08-26_112738_coqibt.png", 
+  image3: "https://res.cloudinary.com/dy972wrlb/image/upload/v1756188135/Screenshot_2025-08-26_112821_kx1c2v.png", 
+  image4: "https://res.cloudinary.com/dy972wrlb/image/upload/v1756188136/Screenshot_2025-08-26_112840_yjnu53.png", 
+  image5: "https://res.cloudinary.com/dy972wrlb/image/upload/v1756188755/Screenshot_2025-08-26_114226_ovulgh.png", 
+
+
+  description:
+    "The Recipe App allows users to explore delicious meals, view detailed recipes with ingredients and instructions, and add their favorite recipes to a personal list. The app provides search, category filters, and a responsive design for smooth usage across devices.",
+
+  description0: "💻Technologies Used: ",
+  description1: "🔴Frontend: React.js, Tailwind CSS",
+  description2: "🔴Backend: Node.js, Express.js",
+  description3: "🔴Database: MongoDB",
+  description4: "🔴State Management: Redux Toolkit",
+  description5: "🔴Authentication: JWT",
+
+  title: "Recipe Management App",
+  link: "https://your-recipe-app-link.vercel.app/",
+  Count: "02",
+},
+
+
+  {
     image:
       "https://res.cloudinary.com/dy972wrlb/image/upload/v1741761243/Portfolio%20%20%28React%20Js%29/Event/hjjak3k05osjgckojk82.png",
     image1:
@@ -41,7 +66,7 @@ export const projects: Project[] = [
     description4: "🔴Database: MongoDB",
     title: "Event Management System(NextEvent)",
     link: "https://event-management-frontend-next-event.vercel.app/", // Link to your GitHub repo or project page
-    Count: "02",
+    Count: "03",
   },
 
   {
@@ -57,7 +82,7 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB ",
     title: "Cypsolabs Website",
     link: "https://cypsolabs.com/",
-    Count: "03",
+    Count: "04",
   },
 
   {
@@ -71,7 +96,7 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB",
     title: "MERN Airline Reservation System",
     link: "https://github.com/Mayuru0/Skyline-React-Project-.git",
-    Count: "04",
+    Count: "055",
   },
 
   {
@@ -83,7 +108,7 @@ export const projects: Project[] = [
       "💻Technologies Used: Next.js, TypeScript, AOS, Framer Motion, Tailwind CSS",
     title: "My Portfolio",
     link: "https://mayuru-portfolio.vercel.app/",
-    Count: "05",
+    Count: "06",
   },
 
   {
@@ -101,7 +126,7 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB",
     title: "EverTech Computer Shop Management System",
     link: "https://www.evertech.lk/",
-    Count: "06",
+    Count: "07",
   },
 
   {
@@ -120,7 +145,7 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB (if required)",
     title: "Serendipity-Travels (Travel Booking Website)",
     link: "https://serendipity-travels-vn85.vercel.app/",
-    Count: "07",
+    Count: "08",
   },
 
   {
@@ -131,7 +156,7 @@ export const projects: Project[] = [
     description1: "🔴NetBeans IDE, Java, JavaScript, MySQL, XAMPP Server",
     title: "Inventory Management System",
     link: "https://github.com/Mayuru0/Pos-System-java-.git",
-    Count: "08",
+    Count: "09",
   },
   {
     video: "/assets/W.mp4",
@@ -140,6 +165,6 @@ export const projects: Project[] = [
     description0: "💻Technologies Used: ",
     description1: "🔴WordPress, XAMPP Server",
     title: "E-commerce Website (MARK Computer)",
-    Count: "09",
+    Count: "10",
   },
 ];
