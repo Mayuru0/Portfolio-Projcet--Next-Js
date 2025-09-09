@@ -94,7 +94,7 @@ export const projects: Project[] = [
     description1: "🔴Frontend: React JS",
     description2: "🔴Backend: Express JS, Node JS",
     description3: "🔴Database: MongoDB",
-    title: "MERN Airline Reservation System",
+    title: " Airline Reservation System",
     link: "https://github.com/Mayuru0/Skyline-React-Project-.git",
     Count: "055",
   },
