@@ -45,7 +45,7 @@ export const projects: Project[] = [
   description5: "🔴Authentication: JWT",
 
   title: "Recipe Management App",
-  link: "https://your-recipe-app-link.vercel.app/",
+  link: "https://recipe-app-vert-chi.vercel.app/",
   Count: "02",
 },
 
