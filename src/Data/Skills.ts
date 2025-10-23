@@ -40,6 +40,7 @@ import Xampp from "../../public/assets/XAMPP.webp";
 import Vercel from "../../public/assets/Vercel.png";
 import Cloudinary from "../../public/assets/Cloudinary.png";
 import JavaScript from "../../public/assets/js.png";
+import AWS from "../../public/assets/AWS.png";
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -124,6 +125,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "Firebase", img: Firebase },
       { name: "Vercel", img: Vercel },
       { name: "Cloudinary", img: Cloudinary }, 
+      { name: "AWS", img: AWS }, 
       { name: "WordPress", img: wordpress },
     ],
   },

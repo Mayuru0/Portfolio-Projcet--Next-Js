@@ -14,7 +14,7 @@ export default function AboutMe() {
   }, []);
   const personalInfo = {
     name: "Mayuru Madhuranga",
-    age: 24,
+    age: 25,
     from: "79,Maryland Wathurugama",
     languages: ["Sinhala", "English"],
     interests: ["Programming", "Video Editing"],
@@ -125,13 +125,16 @@ export default function AboutMe() {
             scalability.
           </p>
           <p className="text-gray-300 leading-relaxed mb-4 text-justify">
-            I&apos;ve also used Docker to containerize applications and streamline
-            deployment processes. I&apos;m passionate about writing clean, efficient,
-            and maintainable code, and I thrive in agile, collaborative
-            development environments.
+            I&apos;ve also gained experience in Docker for containerizing
+            applications, and implemented CI/CD pipelines using GitHub Actions
+            to automate build, test, and deployment workflows. Furthermore, I&apos;ve
+            deployed and managed applications on AWS EC2 with Nginx and SSL
+            configurations, ensuring secure and efficient deployment processes.
           </p>
           <p className="text-gray-300 leading-relaxed text-justify ">
-            With a solid foundation in various programming languages and tools,
+            I&apos;m passionate about writing clean, efficient, and maintainable
+            code, and I thrive in agile, collaborative development environments.
+            With a solid foundation in multiple programming languages and tools,
             I&apos;m eager to contribute creative and practical solutions to dynamic,
             fast-paced teams. Additionally, I aim to pursue a top-up degree to
             further deepen my technical expertise and career growth.
