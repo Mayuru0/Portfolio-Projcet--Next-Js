@@ -96,7 +96,7 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB",
     title: " Airline Reservation System",
     link: "https://github.com/Mayuru0/Skyline-React-Project-.git",
-    Count: "055",
+    Count: "05",
   },
 
   {
@@ -107,7 +107,7 @@ export const projects: Project[] = [
     description0:
       "💻Technologies Used: Next.js, TypeScript, AOS, Framer Motion, Tailwind CSS",
     title: "My Portfolio",
-    link: "https://mayuru-portfolio.vercel.app/",
+    link: "https://www.mayurumadhuranga.ooguy.com/",
     Count: "06",
   },
 
