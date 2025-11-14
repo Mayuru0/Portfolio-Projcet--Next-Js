@@ -41,6 +41,13 @@ import Vercel from "../../public/assets/Vercel.png";
 import Cloudinary from "../../public/assets/Cloudinary.png";
 import JavaScript from "../../public/assets/js.png";
 import AWS from "../../public/assets/AWS.png";
+import Nginx from "../../public/assets/Nginx.png";
+import AaPanel_Logo from "../../public/assets/AaPanel_Logo.png";
+import Jenkins from "../../public/assets/Jenkins.png";
+import cicd from "../../public/assets/cicd.png";
+import githubaction from "../../public/assets/githubaction.png";
+import WAMP  from "../../public/assets/WAMP.png";
+import Cursor  from "../../public/assets/Cursor.png";
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -110,22 +117,41 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
+  emoji: "🚀",
+  title: " DevOps & Cloud Engineering",
+  skills: [
+    { name: "Docker", img: docker },
+    { name: "GitHub Actions", img: githubaction },
+    { name: "CI/CD Pipelines", img: cicd },
+    { name: "AWS", img: AWS },
+    { name: "Jenkins", img: Jenkins },
+    { name: "aaPanel", img: AaPanel_Logo },
+    { name: "Nginx", img: Nginx }, 
+    { name: "Cloudinary", img: Cloudinary },
+    { name: "Vercel", img: Vercel },
+    { name: "Firebase Hosting", img: Firebase },
+    // { name: "Postman", img: POSTMAN },
+  ],
+},
+  {
     emoji: "🛠 ",
     title: "Software & Tools",
     skills: [
       { name: "VS Code", img: VSCode },
+      { name: "Cursor ", img: Cursor },
       { name: "IntelliJ", img: IntelliJ },
       { name: "Apache NetBeans", img:  NetBeans },
       { name: "Android Studio", img: Android },
       { name: "GitHub", img: github },
       { name: "GIT", img: GIT },
-      { name: "Docker", img: docker },
+      // { name: "Docker", img: docker },
       { name: "POSTMAN", img: POSTMAN },
       { name: "Xampp", img: Xampp },
-      { name: "Firebase", img: Firebase },
-      { name: "Vercel", img: Vercel },
-      { name: "Cloudinary", img: Cloudinary }, 
-      { name: "AWS", img: AWS }, 
+      { name: "WAMP ", img: WAMP  },
+      // { name: "Firebase", img: Firebase },
+      // { name: "Vercel", img: Vercel },
+      // { name: "Cloudinary", img: Cloudinary }, 
+      // { name: "AWS", img: AWS }, 
       { name: "WordPress", img: wordpress },
     ],
   },

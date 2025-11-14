@@ -128,7 +128,7 @@ export default function AboutMe() {
             I&apos;ve also gained experience in Docker for containerizing
             applications, and implemented CI/CD pipelines using GitHub Actions
             to automate build, test, and deployment workflows. Furthermore, I&apos;ve
-            deployed and managed applications on AWS EC2 with Nginx and SSL
+            deployed and managed applications on AWS EC2 and AWS Lightsail with Nginx and SSL
             configurations, ensuring secure and efficient deployment processes.
           </p>
           <p className="text-gray-300 leading-relaxed text-justify ">
