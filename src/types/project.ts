@@ -19,6 +19,5 @@ export default interface Project {
     title: string;
     link?: string;
     Count: string;
-    
   }
   
