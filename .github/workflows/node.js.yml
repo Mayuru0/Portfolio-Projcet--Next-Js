@@ -35,10 +35,10 @@ jobs:
           pm2 stop nextjs_portfolio || true
           pm2 delete nextjs_portfolio || true
 
-      # - name: Start Next.js app with PM2
-      #   run: |
-      #     pm2 start npm --name "nextjs_portfolio" -- run start
-      #     pm2 save
+      - name: Start Next.js app with PM2
+        run: |
+          pm2 start npm --name "nextjs_portfolio" -- run start
+          pm2 save
 
-      # - name: Verify PM2 status
-      #   run: pm2 list
+      - name: Verify PM2 status
+        run: pm2 list
