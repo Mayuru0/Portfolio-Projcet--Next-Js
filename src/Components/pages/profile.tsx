@@ -24,6 +24,7 @@ const Profile: React.FC = () => {
             priority
           />
         </div> */}
+        
         <ProfilePhoto />
       </div>
 
