@@ -49,6 +49,7 @@ import githubaction from "../../public/assets/githubaction.png";
 import WAMP  from "../../public/assets/WAMP.png";
 import Cursor  from "../../public/assets/Cursor.png";
 import Linux  from "../../public/assets/Linux-Logo.png";
+import reactnative  from "../../public/assets/React Native.png";
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -106,6 +107,7 @@ export const skillCategories: SkillCategory[] = [
     title: " Mobile Development",
     skills: [
       { name: "Flutter", img: Flutter },
+      { name: "React Native", img: reactnative },
     ],
   },
    {
