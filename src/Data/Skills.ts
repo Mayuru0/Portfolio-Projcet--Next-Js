@@ -106,8 +106,11 @@ export const skillCategories: SkillCategory[] = [
     emoji: "📱",
     title: " Mobile Development",
     skills: [
+
       { name: "Flutter", img: Flutter },
+
       { name: "React Native", img: reactnative },
+      
     ],
   },
    {
