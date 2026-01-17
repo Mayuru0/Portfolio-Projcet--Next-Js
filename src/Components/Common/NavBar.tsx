@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
   <title>Home | Mayuru Maduranga</title>
   <meta name="description" content="Welcome to my portfolio. I'm a full-stack developer passionate about building modern web applications." />
 </Head>
-    <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4 relative z'>
+    <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4'>
       <h1 className='text-3xl font-bold primary font-mono'>
         <Link href='/'>MAYURU MADHURANGA</Link>
       </h1>
@@ -48,13 +48,13 @@ const Navbar: React.FC = () => {
       </ul>
 
       {/* Mobile Menu Icon */}
-      <div onClick={handleNav} className='block md:hidden cursor-pointer text-blue-500'>
+      <div onClick={handleNav} className='block md:hidden cursor-pointer text-blue-500 '>
         {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
       </div>
 
       {/* Mobile Navigation */}
       <div
-        className={`fixed h-full left-0 top-0 w-[60%] bg-[#202121] z-10 ease-in-out duration-500 ${
+        className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-20 ease-in-out duration-500 ${
           nav ? 'left-0' : 'left-[-100%]'
         }`}
       >
