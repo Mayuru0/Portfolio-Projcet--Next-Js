@@ -11,21 +11,19 @@ interface AboutLayoutProps {
 const AboutLayout: React.FC<AboutLayoutProps> = ({ children }) => {
   return (
     <div className="relative min-h-screen bg-transparent overflow-hidden">
-      
       {/* Background particles */}
       <Particles />
 
       {/* Content layer */}
       <div className="relative z-10 flex flex-col items-center">
-        <div className="flex px-10 w-full max-w-7xl">
+        <div className="flex flex-col md:flex-row px-3 sm:px-6 lg:px-10 w-full max-w-7xl">
           <AboutSideBar />
 
-          <main className="flex-1 ml-1 flex items-center">
+          <main className="flex-1 md:ml-1 flex items-center w-full">
             {children}
           </main>
         </div>
       </div>
-
     </div>
   );
 };
