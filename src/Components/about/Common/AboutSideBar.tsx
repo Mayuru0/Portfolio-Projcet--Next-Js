@@ -50,9 +50,37 @@ const AboutSideBar = () => {
 
 
       {/* Desktop Sidebar - desktop එකේ පැත්තේ තියෙන sidebar */}
-      <div className="hidden  md:flex md:flex-col w-64 bg-black border border-gray-800 text-white p-4 rounded-l-3xl md:mt-2">
+      {/* <div className="hidden  md:flex md:flex-col w-64 bg-black border border-gray-800 text-white p-4 rounded-l-3xl md:mt-2"> */}
         {/* Navigation */}
-        <nav className="flex flex-col space-y-10 mt-6 flex-grow">
+        {/* <nav className="flex flex-col space-y-10 mt-6 flex-grow">
+          {sideBarLinks.map((link) => {
+            const isActive = pathname.includes(link.href);
+            return (
+              <button
+                key={link.href}
+                onClick={() => handleNavClick(link.href)}
+                className={`transition-all font-kulim duration-300 text-xl font-medium p-2 w-[90%] rounded-full flex text-center justify-center cursor-pointer ${
+                  isActive
+                    ? "text-white bg-blue-600"
+                    : "text-white hover:text-[#6200EE] hover:underline"
+                }`}
+              >
+                {link.label}
+              </button>
+            );
+          })}
+        </nav>
+      </div> */}
+
+
+
+       {/* Desktop Sidebar - desktop එකේ පැත්තේ තියෙන sidebar */}
+      <div
+        className="hidden md:flex md:flex-col w-64 bg-black border border-gray-800 text-white p-4 rounded-l-3xl
+                    fixed top-27 left-24 h-[87%]"
+      >
+        {/* Navigation */}
+        <nav className="flex flex-col space-y-10 mt-6= overflow-y-auto">
           {sideBarLinks.map((link) => {
             const isActive = pathname.includes(link.href);
             return (
