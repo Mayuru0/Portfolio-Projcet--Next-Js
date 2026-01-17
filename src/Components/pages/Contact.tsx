@@ -17,7 +17,7 @@ const Contact: FC = () => {
       }, []);
   return (
     <div
-      className="max-w-[1200px] mx-auto bg-black border border-gray-700 rounded-4xl sm:py-20 py-10 px-5"
+      className="max-w-[1200px] mx-auto  border border-gray-700 rounded-4xl sm:py-20 py-10 px-5"
       id="contact"
       data-aos="fade-in"
       data-aos-duration="1600"

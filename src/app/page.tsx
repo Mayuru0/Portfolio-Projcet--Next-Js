@@ -1,3 +1,4 @@
+import Particles from '@/Components/Animating/Particles'
 import Profile from '@/Components/pages/profile'
 import Head from 'next/head'
 import React from 'react'
@@ -23,9 +24,15 @@ const page = () => {
   <meta name="twitter:image" content="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png" />
 </Head>
 
-    <div>
-      <Profile/>
-    </div>
+   <div className="relative overflow-hidden">
+  <Particles />
+
+  {/* Foreground content */}
+  <div className="relative z-10">
+    <Profile />
+  </div>
+</div>
+
     </>
   )
 }

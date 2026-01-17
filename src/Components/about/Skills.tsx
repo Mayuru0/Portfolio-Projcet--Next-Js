@@ -9,7 +9,7 @@ const Skills: React.FC = () => {
   return (
     <div className="w-5xl mt-2">
       <section
-        className="text-white py-10  bg-black border border-gray-800 rounded-r-2xl"
+        className="text-white py-10   border border-gray-800 rounded-r-2xl"
         data-aos="fade-in"
         data-aos-duration="1600"
       >

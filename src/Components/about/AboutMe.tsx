@@ -22,7 +22,7 @@ export default function AboutMe() {
   };
 
   return (
-    <div className="min-h-screen bg-black border border-gray-800 rounded-r-2xl text-white flex flex-col p-4 md:p-8 lg:p-12 mt-2">
+    <div className="min-h-screen bg-transparent border border-gray-800 rounded-r-2xl text-white flex flex-col p-4 md:p-8 lg:p-12 mt-2">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <h1 className="text-4xl font-bold mb-8 primary animate-bounce">

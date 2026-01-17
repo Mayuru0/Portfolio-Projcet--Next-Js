@@ -10,7 +10,8 @@ import { FaDownload } from "react-icons/fa";
 const Profile: React.FC = () => {
   return (
     <div
-      className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8 bg-black"
+      // className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8 bg-black"
+       className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8 bg-transparent"
       id="p"
     >
       {/* Profile Image */}

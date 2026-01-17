@@ -5,7 +5,7 @@ const page = () => {
   return (
     <AboutLayout>
         <h1 className='hidden'>About Me</h1>
-      
+       
     </AboutLayout>
   )
 }

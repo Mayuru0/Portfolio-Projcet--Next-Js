@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
   <title>Home | Mayuru Maduranga</title>
   <meta name="description" content="Welcome to my portfolio. I'm a full-stack developer passionate about building modern web applications." />
 </Head>
-    <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4'>
+    <div className='bg-black h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4 relative z'>
       <h1 className='text-3xl font-bold primary font-mono'>
         <Link href='/'>MAYURU MADHURANGA</Link>
       </h1>

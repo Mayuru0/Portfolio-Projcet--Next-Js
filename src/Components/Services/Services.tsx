@@ -67,7 +67,7 @@ const Services: FC = () => {
 
   return (
     <div
-      className="max-w-[1200px] mx-auto bg-black sm:py-20 py-10 px-5"
+      className="max-w-[1200px] mx-auto bg-transparent border border-gray-900 rounded-4xl sm:py-20 py-10 px-5"
       id="services"
       data-aos="fade-in"
       data-aos-duration="1600"
