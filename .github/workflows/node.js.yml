@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
+      - name: Build Next.js app
         run: npm run build
         env:
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
@@ -50,3 +50,6 @@ jobs:
 
       - name: Verify PM2 status
         run: pm2 list
+
+      - name: Check PM2 logs (optional)
+        run: pm2 logs nextjs_portfolio --lines 20
