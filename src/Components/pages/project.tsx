@@ -18,7 +18,6 @@ const ProjectComponent: React.FC = () => {
 
   // Projects array
   
-
   const nextProject = () => {
     setCurrentProject((prev) => (prev + 1) % projects.length)
   }
