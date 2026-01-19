@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import ProfileViews from "./Animating/ProfileViews";
 
 
 const ProfilePhoto: React.FC = () => {
@@ -46,6 +47,10 @@ const ProfilePhoto: React.FC = () => {
           </motion.svg>
         </div>
       </motion.div>
+            {/* Profile Views */}
+  <div className="flex justify-center mb-3 mt-10">
+    <ProfileViews />
+  </div>
     </div>
   );
 };
