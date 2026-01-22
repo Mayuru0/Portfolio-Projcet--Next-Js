@@ -24,14 +24,23 @@ const ProjectComponent: React.FC = () => {
     return () => clearTimeout(timer);
   }, [currentProject]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   // Projects array
 
-  const nextProject = () => {
+const nextProject = () => {
     setCurrentProject((prev) => (prev + 1) % projects.length);
+    scrollToTop();
   };
 
   const prevProject = () => {
     setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+    scrollToTop();
   };
 
   const nextImage = () => {
