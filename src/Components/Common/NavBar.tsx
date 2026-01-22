@@ -65,12 +65,15 @@ const Navbar: React.FC = () => {
       </Head>
 
       <div
-        className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4 transition-all duration-300 ${
-          scrolled ? " backdrop-blur-md rounded-b-lg" : "bg-transparent"
-        }`}
+        className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4 transition-all duration-300
+    bg-black md:bg-transparent
+    md:${scrolled ? "backdrop-blur-md rounded-b-lg" : "bg-transparent"}
+  `}
       >
         <h1 className="text-3xl font-bold primary font-mono">
-          <Link href="/" onClick={scrollToTop}>MAYURU MADHURANGA</Link>
+          <Link href="/" onClick={scrollToTop}>
+            MAYURU MADHURANGA
+          </Link>
         </h1>
 
         {/* Desktop Navigation */}
@@ -82,7 +85,9 @@ const Navbar: React.FC = () => {
                 pathname === link.path ? "text-blue-600 font-bold" : ""
               }`}
             >
-            <Link href={link.path} onClick={scrollToTop}>{link.name}</Link>
+              <Link href={link.path} onClick={scrollToTop}>
+                {link.name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -97,11 +102,10 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Navigation */}
         <div
-  className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-[999] ease-in-out duration-500 ${
-    nav ? "left-0" : "left-[-100%]"
-  }`}
->
-
+          className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-20 ease-in-out duration-500 ${
+            nav ? "left-0" : "left-[-100%]"
+          }`}
+        >
           <h1 className="text-3xl font-bold text-blue-500 m-4">
             Mayuru Madhuranga
           </h1>
