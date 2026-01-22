@@ -15,6 +15,20 @@ const Navbar: React.FC = () => {
     setNav(!nav);
   };
 
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  // Handle navigation with scroll to top
+  const handleNavClick = () => {
+    setNav(false);
+    scrollToTop();
+  };
+
   // Listen for scroll to change background color
   useEffect(() => {
     const handleScroll = () => {
@@ -52,13 +66,11 @@ const Navbar: React.FC = () => {
 
       <div
         className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4 transition-all duration-300 ${
-          scrolled
-            ? " backdrop-blur-md rounded-b-lg"
-            : "bg-transparent"
+          scrolled ? " backdrop-blur-md rounded-b-lg" : "bg-transparent"
         }`}
       >
         <h1 className="text-3xl font-bold primary font-mono">
-          <Link href="/">MAYURU MADHURANGA</Link>
+          <Link href="/" onClick={scrollToTop}>MAYURU MADHURANGA</Link>
         </h1>
 
         {/* Desktop Navigation */}
@@ -70,7 +82,7 @@ const Navbar: React.FC = () => {
                 pathname === link.path ? "text-blue-600 font-bold" : ""
               }`}
             >
-              <Link href={link.path}>{link.name}</Link>
+            <Link href={link.path} onClick={scrollToTop}>{link.name}</Link>
             </li>
           ))}
         </ul>
@@ -100,7 +112,7 @@ const Navbar: React.FC = () => {
                   pathname === link.path ? "text-blue-600 font-bold" : ""
                 }`}
               >
-                <Link href={link.path} onClick={() => setNav(false)}>
+                <Link href={link.path} onClick={handleNavClick}>
                   {link.name}
                 </Link>
               </li>
