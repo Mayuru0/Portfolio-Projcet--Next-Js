@@ -80,7 +80,7 @@ const AboutSideBar = () => {
                     fixed top-27 left-24 h-[87%]"
       >
         {/* Navigation */}
-        <nav className="flex flex-col space-y-10 mt-6= overflow-y-auto">
+        <nav className="flex flex-col space-y-10 mt-6= overflow-y- mt-8">
           {sideBarLinks.map((link) => {
             const isActive = pathname.includes(link.href);
             return (
