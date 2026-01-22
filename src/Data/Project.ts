@@ -1,6 +1,37 @@
 import Project from "@/types/project";
 
 export const projects: Project[] = [
+
+  {
+  image:
+    "https://res.cloudinary.com/dy972wrlb/image/upload/v1769061954/1_twqzn8.png",
+  image1:
+    "https://res.cloudinary.com/dy972wrlb/image/upload/v1769061947/2_ukqbkk.png",
+  image2:
+    "https://res.cloudinary.com/dy972wrlb/image/upload/v1769061951/3_vfyuty.png",
+  image3:
+    "https://res.cloudinary.com/dy972wrlb/image/upload/v1769061949/4_dcwpwy.png",
+  image4:
+    "https://res.cloudinary.com/dy972wrlb/image/upload/v1769061950/6_hhae6y.png",
+  image5:
+     "https://res.cloudinary.com/dy972wrlb/image/upload/v1769061947/5_rcjkpw.png",  
+
+  description:
+    "The Land Valuation Mobile App enables users to calculate accurate land values based on location, land size, and land type. It offers a clean, user-friendly mobile interface along with a report generation feature, allowing users to create, view, and download detailed land valuation reports instantly.",
+
+  description0: "💻 Technologies Used:",
+  description1: "🔴 Mobile App: React Native (Expo),Tailwind CSS",
+  description2: "🔴Backend: Node.js, Express.js",
+  description3: "🔴Database: MongoDB",
+  description4: "🔴State Management: Redux Toolkit",
+  description5: "🔴 Platform: Android",
+
+  title: "Land Valuation Mobile App",
+  link: "https://land-valuation-downloard-now-web.vercel.app/", 
+  Count: "01",
+  status:"portrait"
+}
+,
   {
     image:
       "https://res.cloudinary.com/dy972wrlb/image/upload/v1751614683/Screenshot_2025-07-04_125327_u00t2g.png",
@@ -22,7 +53,8 @@ export const projects: Project[] = [
       "🔴Video Display & Filtering: Custom Components with Pagination",
     title: "Travel Blog Website",
     link: "https://madhuranga-travel-blog.vercel.app/", 
-    Count: "01",
+    Count: "02",
+    status:"landscape"
   },
 
   {
@@ -46,7 +78,8 @@ export const projects: Project[] = [
 
   title: "Recipe Management App",
   link: "https://recipeapp.gleeze.com/",
-  Count: "02",
+  Count: "03",
+  status:"landscape"
 },
 
 
@@ -66,7 +99,8 @@ export const projects: Project[] = [
     description4: "🔴Database: MongoDB",
     title: "Event Management System(NextEvent)",
     link: "https://event-management-frontend-next-event.vercel.app/", // Link to your GitHub repo or project page
-    Count: "03",
+    Count: "04",
+    status:"landscape"
   },
 
   {
@@ -82,7 +116,8 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB ",
     title: "Cypsolabs Website",
     link: "https://cypsolabs.com/",
-    Count: "04",
+    Count: "05",
+    status:"landscape"
   },
 
   {
@@ -96,7 +131,8 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB",
     title: " Airline Reservation System",
     link: "https://github.com/Mayuru0/Skyline-React-Project-.git",
-    Count: "05",
+    Count: "06",
+    status:"landscape"
   },
 
   {
@@ -108,7 +144,8 @@ export const projects: Project[] = [
       "💻Technologies Used: Next.js, TypeScript, AOS, Framer Motion, Tailwind CSS",
     title: "My Portfolio",
     link: "https://www.mayurumadhuranga.ooguy.com/",
-    Count: "06",
+    Count: "07",
+    status:"landscape"
   },
 
   {
@@ -126,7 +163,8 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB",
     title: "EverTech Computer Shop Management System",
     link: "https://www.evertech.lk/",
-    Count: "07",
+    Count: "08",
+    status:"landscape"
   },
 
   {
@@ -145,7 +183,8 @@ export const projects: Project[] = [
     description3: "🔴Database: MongoDB (if required)",
     title: "Serendipity-Travels (Travel Booking Website)",
     link: "https://serendipity-travels-vn85.vercel.app/",
-    Count: "08",
+    Count: "09",
+    status:"landscape"
   },
 
   {
@@ -156,7 +195,8 @@ export const projects: Project[] = [
     description1: "🔴NetBeans IDE, Java, JavaScript, MySQL, XAMPP Server",
     title: "Inventory Management System",
     link: "https://github.com/Mayuru0/Pos-System-java-.git",
-    Count: "09",
+    Count: "10",
+    status:"landscape"
   },
   {
     video: "/assets/W.mp4",
@@ -165,6 +205,7 @@ export const projects: Project[] = [
     description0: "💻Technologies Used: ",
     description1: "🔴WordPress, XAMPP Server",
     title: "E-commerce Website (MARK Computer)",
-    Count: "10",
+    Count: "11",
+    status:"landscape"
   },
 ];

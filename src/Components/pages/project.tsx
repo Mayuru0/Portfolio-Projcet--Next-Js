@@ -1,84 +1,112 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect } from "react"
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
-import type Project from "@/types/project"
-import Image from "next/image"
-import { projects } from "@/Data/Project"
+import type Project from "@/types/project";
+import Image from "next/image";
+import { projects } from "@/Data/Project";
 const ProjectComponent: React.FC = () => {
-  const [currentProject, setCurrentProject] = useState<number>(0)
-  const [currentImage, setCurrentImage] = useState<number>(0)
+  const [currentProject, setCurrentProject] = useState<number>(0);
+  const [currentImage, setCurrentImage] = useState<number>(0);
 
   // Reset image carousel when project changes
   useEffect(() => {
-    setCurrentImage(0)
-  }, [currentProject])
+    setCurrentImage(0);
+  }, [currentProject]);
 
   // Projects array
-  
+
   const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length)
-  }
+    setCurrentProject((prev) => (prev + 1) % projects.length);
+  };
 
   const prevProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length)
-  }
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+  };
 
   const nextImage = () => {
-    const project = projects[currentProject]
-    const imageCount = countImages(project)
+    const project = projects[currentProject];
+    const imageCount = countImages(project);
     if (imageCount > 1) {
-      setCurrentImage((prev) => (prev + 1) % imageCount)
+      setCurrentImage((prev) => (prev + 1) % imageCount);
     }
-  }
+  };
 
   const prevImage = () => {
-    const project = projects[currentProject]
-    const imageCount = countImages(project)
+    const project = projects[currentProject];
+    const imageCount = countImages(project);
     if (imageCount > 1) {
-      setCurrentImage((prev) => (prev - 1 + imageCount) % imageCount)
+      setCurrentImage((prev) => (prev - 1 + imageCount) % imageCount);
     }
-  }
+  };
 
   // Helper function to count images in a project
   const countImages = (project: Project): number => {
-    let count = 0
-    if (project.image) count++
-    if (project.image1) count++
-    if (project.image2) count++
-    if (project.image3) count++
-    if (project.image4) count++
-    if (project.image5) count++
-    if (project.image6) count++
-    return count
-  }
+    let count = 0;
+    if (project.image) count++;
+    if (project.image1) count++;
+    if (project.image2) count++;
+    if (project.image3) count++;
+    if (project.image4) count++;
+    if (project.image5) count++;
+    if (project.image6) count++;
+    return count;
+  };
 
   // Helper function to get current image URL
   const getCurrentImageUrl = (project: Project): string | undefined => {
     switch (currentImage) {
       case 0:
-        return project.image
+        return project.image;
       case 1:
-        return project.image1
+        return project.image1;
       case 2:
-        return project.image2
+        return project.image2;
       case 3:
-        return project.image3
+        return project.image3;
       case 4:
-        return project.image4
+        return project.image4;
       case 5:
-        return project.image5
+        return project.image5;
       case 6:
-        return project.image6
+        return project.image6;
       default:
-        return project.image
+        return project.image;
     }
-  }
+  };
 
   // Check if current project has multiple images
-  const hasMultipleImages = countImages(projects[currentProject]) > 1
+  const hasMultipleImages = countImages(projects[currentProject]) > 1;
+
+  useEffect(() => {
+    if (!hasMultipleImages || projects[currentProject].video) return;
+
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => {
+        const imageCount = countImages(projects[currentProject]);
+        return (prev + 1) % imageCount;
+      });
+    }, 3000); // 3 seconds
+
+    return () => clearInterval(interval);
+  }, [currentProject, hasMultipleImages]);
+
+  const getImageSize = (status?: string) => {
+    if (status === "portrait") {
+      return { width: 600, height: 400 }; // Mobile screenshot
+    }
+    return { width: 1200, height: 700 }; // Landscape web
+  };
+
+  const getImageClass = (status?: string) => {
+    if (status === "portrait") {
+      return "h-[350px] w-full object-contain";
+    }
+    return "h-full w-full object-cover";
+  };
+  const size = getImageSize(projects[currentProject].status);
 
   return (
     <div className="max-w-[1200px] mx-auto p-5">
@@ -109,14 +137,28 @@ const ProjectComponent: React.FC = () => {
             {projects[currentProject].title}
           </h3>
           <div data-aos="zoom-in" data-aos-duration="1600">
-            <p className="text-gray-200 mb-1">{projects[currentProject].description}</p>
-            <p className="text-gray-200">{projects[currentProject].description0}</p>
-            <p className="text-gray-500 ml-6">{projects[currentProject].description1}</p>
-            <p className="text-gray-500 ml-6">{projects[currentProject].description2}</p>
-            <p className="text-gray-500 ml-6">{projects[currentProject].description3}</p>
+            <p className="text-gray-200 mb-1">
+              {projects[currentProject].description}
+            </p>
+            <p className="text-gray-200">
+              {projects[currentProject].description0}
+            </p>
+            <p className="text-gray-500 ml-6">
+              {projects[currentProject].description1}
+            </p>
+            <p className="text-gray-500 ml-6">
+              {projects[currentProject].description2}
+            </p>
+            <p className="text-gray-500 ml-6">
+              {projects[currentProject].description3}
+            </p>
           </div>
           {projects[currentProject].link && (
-            <a href={projects[currentProject].link} target="_blank" rel="noopener noreferrer">
+            <a
+              href={projects[currentProject].link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <div className="border-t-4 border-gray-700 mt-2">
                 <button className="flex items-center text-white bg-gradient-to-r scale-100 px-6 py-2 rounded-full transition duration-300 mt-2 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 cursor-pointer">
                   View Project <GrView className="ml-2 scale-100" />
@@ -147,11 +189,16 @@ const ProjectComponent: React.FC = () => {
               // Image or Carousel display
               <div className="relative">
                 <Image
-                  width={500}
-                  height={500}
-                  src={getCurrentImageUrl(projects[currentProject]) || "/assets/default.png"}
+                  width={size.width}
+                  height={size.height}
+                  src={
+                    getCurrentImageUrl(projects[currentProject]) ||
+                    "/assets/default.png"
+                  }
                   alt={projects[currentProject].title}
-                  className="w-full h-full object-cover transform "
+                  className={`w-full rounded-lg transition-transform duration-500 ${getImageClass(
+                    projects[currentProject].status,
+                  )}`}
                 />
 
                 {/* Carousel Controls - Only show if multiple images */}
@@ -159,8 +206,8 @@ const ProjectComponent: React.FC = () => {
                   <>
                     <button
                       onClick={(e) => {
-                        e.stopPropagation()
-                        prevImage()
+                        e.stopPropagation();
+                        prevImage();
                       }}
                       className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10 cursor-pointer"
                       aria-label="Previous image"
@@ -169,8 +216,8 @@ const ProjectComponent: React.FC = () => {
                     </button>
                     <button
                       onClick={(e) => {
-                        e.stopPropagation()
-                        nextImage()
+                        e.stopPropagation();
+                        nextImage();
                       }}
                       className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10 cursor-pointer"
                       aria-label="Next image"
@@ -180,15 +227,19 @@ const ProjectComponent: React.FC = () => {
 
                     {/* Carousel Indicators */}
                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
-                      {Array.from({ length: countImages(projects[currentProject]) }).map((_, index) => (
+                      {Array.from({
+                        length: countImages(projects[currentProject]),
+                      }).map((_, index) => (
                         <button
                           key={index}
                           onClick={(e) => {
-                            e.stopPropagation()
-                            setCurrentImage(index)
+                            e.stopPropagation();
+                            setCurrentImage(index);
                           }}
                           className={`w-2 h-2 rounded-full transition-all ${
-                            currentImage === index ? "bg-white scale-125" : "bg-white/50"
+                            currentImage === index
+                              ? "bg-white scale-125"
+                              : "bg-white/50"
                           }`}
                           aria-label={`Go to image ${index + 1}`}
                         />
@@ -219,8 +270,7 @@ const ProjectComponent: React.FC = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProjectComponent
-
+export default ProjectComponent;
