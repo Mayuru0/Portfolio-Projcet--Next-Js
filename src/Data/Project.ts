@@ -137,7 +137,7 @@ export const projects: Project[] = [
 
   {
     video:
-      "https://res.cloudinary.com/dy972wrlb/video/upload/v1741757787/Portfolio%20%20%28React%20Js%29/wr9iuzfuqyjzt4kdwnwj.mp4",
+      "https://res.cloudinary.com/dy972wrlb/video/upload/v1769065160/Desktop_2026.01.22_-_12.20.10.01_ekk63g.mp4",
     description:
       "A personal portfolio showcasing my skills, projects, and experience in web development, built with Next.js, TypeScript, and animated with AOS and Framer Motion. Designed with Tailwind CSS for a sleek, responsive interface.",
     description0:

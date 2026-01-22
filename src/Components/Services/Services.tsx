@@ -83,26 +83,25 @@ const Services: FC = () => {
       </div>
 
       <div
-  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-  data-aos="zoom-out"
->
-  {services.map((service, index) => (
-    <div
-      key={index}
-      data-aos="fade-up"
-      data-aos-delay={index * 150} // 👈 one by one
-      data-aos-duration="800"
-      data-aos-once="true"
-    >
-      <ServiceCard
-        title={service.title}
-        description={service.description}
-        icon={service.icon}
-      />
-    </div>
-  ))}
-</div>
-
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        data-aos="zoom-out"
+      >
+        {services.map((service, index) => (
+          <div
+            key={index}
+            data-aos="fade-up"
+            data-aos-delay={index * 150} // 👈 one by one
+            data-aos-duration="800"
+            data-aos-once="true"
+          >
+            <ServiceCard
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
+            />
+          </div>
+        ))}
+      </div>
 
       <div className="mt-16 text-center" data-aos="fade-in">
         <div className="bg-[#212129] rounded-xl p-8 max-w-3xl mx-auto">
