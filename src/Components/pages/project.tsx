@@ -10,10 +10,18 @@ import { projects } from "@/Data/Project";
 const ProjectComponent: React.FC = () => {
   const [currentProject, setCurrentProject] = useState<number>(0);
   const [currentImage, setCurrentImage] = useState<number>(0);
-
-  // Reset image carousel when project changes
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  // Reset image carousel when project changes with transition
   useEffect(() => {
+    setIsTransitioning(true);
     setCurrentImage(0);
+
+    // Small delay to allow smooth transition
+    const timer = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [currentProject]);
 
   // Projects array
@@ -102,54 +110,47 @@ const ProjectComponent: React.FC = () => {
 
   const getImageClass = (status?: string) => {
     if (status === "portrait") {
-      return "h-[350px] w-full object-contain";
+      return "h-[300px] w-full object-contain";
     }
     return "h-full w-full object-cover";
   };
   const size = getImageSize(projects[currentProject].status);
 
   return (
-    <div className="max-w-[1200px] mx-auto p-5">
-      <div className="pb-8" data-aos="fade-in" data-aos-duration="1600">
-        <p className="text-4xl mb-3 font-bold primary">My Projects</p>
-        <p className="text-gray-400">Check out some of my recent work</p>
+    <div className="max-w-[1200px] mx-auto p-4 sm:p-6">
+      {/* Header */}
+      <div className="pb-6 text-center sm:text-left">
+        <p className="text-3xl sm:text-4xl font-bold primary mb-2">
+          My Projects
+        </p>
+        <p className="text-gray-400 text-sm sm:text-base">
+          Check out some of my recent work
+        </p>
       </div>
 
       <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
         {/* Description Section */}
         <div className="flex-1 md:order-1 text-center md:text-left">
-          <h1
-            className="text-4xl text-white font-extrabold"
-            data-aos="fade-right"
-            data-aos-offset="300"
-            data-aos-easing="ease-in-sine"
-            data-aos-duration="1600"
-          >
+          <h1 className="text-3xl sm:text-4xl text-white font-extrabold mb-2">
             {projects[currentProject].Count}
           </h1>
-          <h3
-            className="text-2xl font-bold mb-4 text-white"
-            data-aos="fade-right"
-            data-aos-offset="300"
-            data-aos-easing="ease-in-sine"
-            data-aos-duration="1600"
-          >
+          <h3 className="text-xl sm:text-2xl font-bold mb-3 text-white">
             {projects[currentProject].title}
           </h3>
-          <div data-aos="zoom-in" data-aos-duration="1600">
-            <p className="text-gray-200 mb-1">
+          <div>
+            <p className="text-gray-200 text-sm sm:text-base mb-1">
               {projects[currentProject].description}
             </p>
-            <p className="text-gray-200">
+            <p className="text-gray-200 text-sm sm:text-base">
               {projects[currentProject].description0}
             </p>
-            <p className="text-gray-500 ml-6">
+            <p className="text-gray-500 text-sm ml-4 sm:ml-6">
               {projects[currentProject].description1}
             </p>
-            <p className="text-gray-500 ml-6">
+            <p className="text-gray-500 text-sm ml-4 sm:ml-6">
               {projects[currentProject].description2}
             </p>
-            <p className="text-gray-500 ml-6">
+            <p className="text-gray-500 text-sm ml-4 sm:ml-6">
               {projects[currentProject].description3}
             </p>
           </div>
@@ -159,7 +160,7 @@ const ProjectComponent: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div className="border-t-4 border-gray-700 mt-2">
+              <div className="border-t-4 border-gray-700 mt-2 justify-center flex md:justify-start">
                 <button className="flex items-center text-white bg-gradient-to-r scale-100 px-6 py-2 rounded-full transition duration-300 mt-2 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 cursor-pointer">
                   View Project <GrView className="ml-2 scale-100" />
                 </button>
@@ -187,19 +188,31 @@ const ProjectComponent: React.FC = () => {
               />
             ) : (
               // Image or Carousel display
-              <div className="relative">
-                <Image
-                  width={size.width}
-                  height={size.height}
-                  src={
-                    getCurrentImageUrl(projects[currentProject]) ||
-                    "/assets/default.png"
-                  }
-                  alt={projects[currentProject].title}
-                  className={`w-full rounded-lg transition-transform duration-500 ${getImageClass(
-                    projects[currentProject].status,
-                  )}`}
-                />
+              <div
+                className={`relative transition-opacity duration-300 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+              >
+                <div
+                  className={`relative ${getImageClass(projects[currentProject].status)}`}
+                >
+                  <Image
+                    key={`${currentProject}-${currentImage}`}
+                    width={size.width}
+                    height={size.height}
+                    src={
+                      getCurrentImageUrl(projects[currentProject]) ||
+                      "/assets/default.png"
+                    }
+                    alt={projects[currentProject].title}
+                    className="w-full h-full rounded-lg transition-all duration-500"
+                    style={{
+                      objectFit:
+                        projects[currentProject].status === "portrait"
+                          ? "contain"
+                          : "cover",
+                    }}
+                    priority={currentProject === 0}
+                  />
+                </div>
 
                 {/* Carousel Controls - Only show if multiple images */}
                 {hasMultipleImages && (
@@ -255,7 +268,7 @@ const ProjectComponent: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between mt-8 ">
         <button
           onClick={prevProject}
           className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300 cursor-pointer"
