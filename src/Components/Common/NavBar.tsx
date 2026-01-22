@@ -90,17 +90,18 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Icon */}
         <div
           onClick={handleNav}
-          className="block md:hidden cursor-pointer text-blue-500 z-50"
+          className="block md:hidden cursor-pointer text-blue-500 "
         >
           {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
         </div>
 
         {/* Mobile Navigation */}
         <div
-          className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-20 ease-in-out duration-500 z-50 ${
-            nav ? "left-0" : "left-[-100%]"
-          }`}
-        >
+  className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-[999] ease-in-out duration-500 ${
+    nav ? "left-0" : "left-[-100%]"
+  }`}
+>
+
           <h1 className="text-3xl font-bold text-blue-500 m-4">
             Mayuru Madhuranga
           </h1>
