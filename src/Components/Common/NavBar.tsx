@@ -65,11 +65,13 @@ const Navbar: React.FC = () => {
       </Head>
 
       <div
-        className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto flex justify-between items-center px-4 transition-all duration-300
-    bg-black md:bg-transparent
-    md:${scrolled ? "backdrop-blur-md rounded-b-lg" : "bg-transparent"}
+  className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto 
+  flex justify-between items-center px-4 transition-all duration-300
+  bg-black md:bg-transparent
+  ${scrolled ? "md:backdrop-blur-md md:rounded-b-4xl" : ""}
   `}
-      >
+>
+
         <h1 className="text-3xl font-bold primary font-mono">
           <Link href="/" onClick={scrollToTop}>
             MAYURU MADHURANGA
