@@ -8,6 +8,7 @@ import {
   Palette,
   Film,
 } from "lucide-react";
+import { BiMobile } from "react-icons/bi";
 
 const ServiceCard: FC<{
   title: string;
@@ -15,12 +16,17 @@ const ServiceCard: FC<{
   icon: React.ReactNode;
 }> = ({ title, description, icon }) => {
   return (
-    <div className="bg-[#212129] rounded-xl p-6 transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg hover:shadow-[#29a9e1]/10">
+    <div className="bg-[#212129] rounded-xl p-6 h-full flex flex-col transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg hover:shadow-[#29a9e1]/10">
+      
       <div className="bg-[#1a1a20] p-4 rounded-lg w-fit mb-4">
         <div className="text-[#29a9e1]">{icon}</div>
       </div>
+
       <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-      <p className="text-gray-400">{description}</p>
+
+      {/* 👇 this makes description stretch evenly */}
+      <p className="text-gray-400 flex-grow">{description}</p>
+
     </div>
   );
 };
@@ -46,11 +52,17 @@ const Services: FC = () => {
       icon: <MonitorSmartphone className="h-6 w-6" />,
     },
     {
-      title: "Desktop App Development",
+      title: "Desktop  App Development",
       description:
         "Creating powerful and efficient desktop applications using Tauri.js and other cross-platform frameworks.",
-      icon: <Laptop className="h-6 w-6" />,
+      icon: <Laptop className="h-6 w-6" /> ,
     },
+    {
+  title: "Mobile App Development",
+  description:
+    "Building high-performance and user-friendly mobile applications using Flutter, React Native, and other modern cross-platform technologies.",
+  icon: <BiMobile className="h-6 w-6" />,
+},
     {
       title: "Graphic Design",
       description:
