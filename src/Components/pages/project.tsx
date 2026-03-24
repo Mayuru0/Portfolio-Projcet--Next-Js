@@ -2,295 +2,444 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { GrView } from "react-icons/gr";
-import type Project from "@/types/project";
 import Image from "next/image";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaTimes,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
+import type Project from "@/types/project";
 import { projects } from "@/Data/Project";
-const ProjectComponent: React.FC = () => {
-  const [currentProject, setCurrentProject] = useState<number>(0);
-  const [currentImage, setCurrentImage] = useState<number>(0);
-  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
-  // Reset image carousel when project changes with transition
-  useEffect(() => {
-    setIsTransitioning(true);
-    setCurrentImage(0);
 
-    // Small delay to allow smooth transition
-    const timer = setTimeout(() => {
-      setIsTransitioning(false);
-    }, 300);
+const CATEGORIES = ["All", "Web", "Mobile", "Desktop"] as const;
+type Category = (typeof CATEGORIES)[number];
 
-    return () => clearTimeout(timer);
-  }, [currentProject]);
+function getProjectCategory(project: Project): "web" | "mobile" | "desktop" {
+  if (project.status === "portrait") return "mobile";
+  const allDesc = [
+    project.description1,
+    project.description2,
+    project.description3,
+    project.description4,
+    project.description5,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  if (allDesc.includes("netbeans") || allDesc.includes("java ")) return "desktop";
+  return "web";
+}
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
+function parseTechBadges(project: Project): string[] {
+  const fields = [
+    project.description0,
+    project.description1,
+    project.description2,
+    project.description3,
+    project.description4,
+    project.description5,
+  ];
+  const techs: string[] = [];
+  for (const field of fields) {
+    if (!field) continue;
+    const stripped = field.replace(/^[^a-zA-Z(]+/, "").trim();
+    if (/^technologies used:?\s*$/i.test(stripped)) continue;
+    const colonIdx = stripped.indexOf(":");
+    const techPart =
+      colonIdx !== -1 ? stripped.slice(colonIdx + 1).trim() : stripped;
+    if (!techPart) continue;
+    techPart.split(",").forEach((t) => {
+      const cleaned = t.trim();
+      if (cleaned && !techs.includes(cleaned)) techs.push(cleaned);
     });
-  };
+  }
+  return techs.slice(0, 6);
+}
 
-  // Projects array
+function getImages(project: Project): string[] {
+  return [
+    project.image,
+    project.image1,
+    project.image2,
+    project.image3,
+    project.image4,
+    project.image5,
+    project.image6,
+  ].filter(Boolean) as string[];
+}
 
-const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length);
-    scrollToTop();
-  };
+const ProjectComponent: React.FC = () => {
+  const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [modalImageIdx, setModalImageIdx] = useState(0);
 
-  const prevProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
-    scrollToTop();
-  };
-
-  const nextImage = () => {
-    const project = projects[currentProject];
-    const imageCount = countImages(project);
-    if (imageCount > 1) {
-      setCurrentImage((prev) => (prev + 1) % imageCount);
-    }
-  };
-
-  const prevImage = () => {
-    const project = projects[currentProject];
-    const imageCount = countImages(project);
-    if (imageCount > 1) {
-      setCurrentImage((prev) => (prev - 1 + imageCount) % imageCount);
-    }
-  };
-
-  // Helper function to count images in a project
-  const countImages = (project: Project): number => {
-    let count = 0;
-    if (project.image) count++;
-    if (project.image1) count++;
-    if (project.image2) count++;
-    if (project.image3) count++;
-    if (project.image4) count++;
-    if (project.image5) count++;
-    if (project.image6) count++;
-    return count;
-  };
-
-  // Helper function to get current image URL
-  const getCurrentImageUrl = (project: Project): string | undefined => {
-    switch (currentImage) {
-      case 0:
-        return project.image;
-      case 1:
-        return project.image1;
-      case 2:
-        return project.image2;
-      case 3:
-        return project.image3;
-      case 4:
-        return project.image4;
-      case 5:
-        return project.image5;
-      case 6:
-        return project.image6;
-      default:
-        return project.image;
-    }
-  };
-
-  // Check if current project has multiple images
-  const hasMultipleImages = countImages(projects[currentProject]) > 1;
+  const filtered = projects.filter((p) => {
+    if (activeCategory === "All") return true;
+    return getProjectCategory(p) === activeCategory.toLowerCase();
+  });
 
   useEffect(() => {
-    if (!hasMultipleImages || projects[currentProject].video) return;
+    document.body.style.overflow = selectedProject ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
 
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => {
-        const imageCount = countImages(projects[currentProject]);
-        return (prev + 1) % imageCount;
-      });
-    }, 3000); // 3 seconds
-
-    return () => clearInterval(interval);
-  }, [currentProject, hasMultipleImages]);
-
-  const getImageSize = (status?: string) => {
-    if (status === "portrait") {
-      return { width: 600, height: 400 }; // Mobile screenshot
-    }
-    return { width: 1200, height: 700 }; // Landscape web
+  const openModal = (project: Project) => {
+    setSelectedProject(project);
+    setModalImageIdx(0);
   };
 
-  const getImageClass = (status?: string) => {
-    if (status === "portrait") {
-      return "h-[300px] w-full object-contain";
-    }
-    return "h-full w-full object-cover";
-  };
-  const size = getImageSize(projects[currentProject].status);
+  const closeModal = () => setSelectedProject(null);
+  const modalImages = selectedProject ? getImages(selectedProject) : [];
 
   return (
-    <div className="max-w-[1200px] mx-auto p-4 sm:p-6">
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10">
       {/* Header */}
-      <div className="pb-6 text-center sm:text-left">
-        <p className="text-3xl sm:text-4xl font-bold primary mb-2">
-          My Projects
+      <div className="mb-10">
+        <div className="flex items-end justify-between flex-wrap gap-3 mb-3">
+          <div>
+            <p className="text-xs uppercase tracking-widest text-cyan-500 mb-2 font-semibold">
+              Portfolio
+            </p>
+            <h1 className="text-4xl sm:text-5xl font-extrabold primary">
+              My Projects
+            </h1>
+          </div>
+          <span className="text-gray-700 text-sm font-mono hidden sm:block">
+            {projects.length} projects
+          </span>
+        </div>
+        <p className="text-gray-500 text-sm max-w-xl">
+          A collection of my work spanning web applications, mobile apps, and
+          desktop systems — each built to solve real problems.
         </p>
-        <p className="text-gray-400 text-sm sm:text-base">
-          Check out some of my recent work
-        </p>
+
+        {/* Category filters */}
+        <div className="flex flex-wrap gap-2 mt-6">
+          {CATEGORIES.map((cat) => {
+            const count =
+              cat === "All"
+                ? projects.length
+                : projects.filter(
+                    (p) => getProjectCategory(p) === cat.toLowerCase()
+                  ).length;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
+                  activeCategory === cat
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/20"
+                    : "border border-white/10 text-gray-400 hover:border-cyan-500/40 hover:text-white"
+                }`}
+              >
+                {cat}
+                <span
+                  className={`ml-1.5 text-xs ${
+                    activeCategory === cat ? "text-white/60" : "text-gray-600"
+                  }`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-6">
-        {/* Description Section */}
-        <div className="flex-1 md:order-1 text-center md:text-left">
-          <h1 className="text-3xl sm:text-4xl text-white font-extrabold mb-2">
-            {projects[currentProject].Count}
-          </h1>
-          <h3 className="text-xl sm:text-2xl font-bold mb-3 text-white">
-            {projects[currentProject].title}
-          </h3>
-          <div>
-            <p className="text-gray-200 text-sm sm:text-base mb-1">
-              {projects[currentProject].description}
-            </p>
-            <p className="text-gray-200 text-sm sm:text-base">
-              {projects[currentProject].description0}
-            </p>
-            <p className="text-gray-500 text-sm ml-4 sm:ml-6">
-              {projects[currentProject].description1}
-            </p>
-            <p className="text-gray-500 text-sm ml-4 sm:ml-6">
-              {projects[currentProject].description2}
-            </p>
-            <p className="text-gray-500 text-sm ml-4 sm:ml-6">
-              {projects[currentProject].description3}
-            </p>
-          </div>
-          {projects[currentProject].link && (
-            <a
-              href={projects[currentProject].link}
-              target="_blank"
-              rel="noopener noreferrer"
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {filtered.map((project, idx) => {
+          const images = getImages(project);
+          const techs = parseTechBadges(project);
+          return (
+            <div
+              key={project.Count}
+              onClick={() => openModal(project)}
+              className="group relative bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-cyan-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col"
             >
-              <div className="border-t-4 border-gray-700 mt-2 justify-center flex md:justify-start">
-                <button className="flex items-center text-white bg-gradient-to-r scale-100 px-6 py-2 rounded-full transition duration-300 mt-2 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 cursor-pointer">
-                  View Project <GrView className="ml-2 scale-100" />
-                </button>
-              </div>
-            </a>
-          )}
-        </div>
-
-        {/* Media Section (Video, Image, or Carousel) */}
-        <div className="flex-1 md:order-2">
-          <div
-            className="relative group rounded-lg shadow-lg overflow-hidden"
-            data-aos="fade-up-left"
-            data-aos-duration="1600"
-          >
-            {projects[currentProject].video ? (
-              // Video display
-              <video
-                src={projects[currentProject].video}
-                controls
-                autoPlay
-                muted
-                loop
-                className="w-full h-full object-cover "
-              />
-            ) : (
-              // Image or Carousel display
-              <div
-                className={`relative transition-opacity duration-300 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
-              >
-                <div
-                  className={`relative ${getImageClass(projects[currentProject].status)}`}
-                >
-                  <Image
-                    key={`${currentProject}-${currentImage}`}
-                    width={size.width}
-                    height={size.height}
-                    src={
-                      getCurrentImageUrl(projects[currentProject]) ||
-                      "/assets/default.png"
-                    }
-                    alt={projects[currentProject].title}
-                    className="w-full h-full rounded-lg transition-all duration-500"
-                    style={{
-                      objectFit:
-                        projects[currentProject].status === "portrait"
-                          ? "contain"
-                          : "cover",
-                    }}
-                    priority={currentProject === 0}
+              {/* Media */}
+              <div className="relative h-48 bg-black overflow-hidden flex-shrink-0">
+                {project.video ? (
+                  <video
+                    src={project.video}
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    className="w-full h-full object-cover"
                   />
-                </div>
-
-                {/* Carousel Controls - Only show if multiple images */}
-                {hasMultipleImages && (
-                  <>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        prevImage();
-                      }}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10 cursor-pointer"
-                      aria-label="Previous image"
-                    >
-                      <FaChevronLeft />
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        nextImage();
-                      }}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-all z-10 cursor-pointer"
-                      aria-label="Next image"
-                    >
-                      <FaChevronRight />
-                    </button>
-
-                    {/* Carousel Indicators */}
-                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
-                      {Array.from({
-                        length: countImages(projects[currentProject]),
-                      }).map((_, index) => (
-                        <button
-                          key={index}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setCurrentImage(index);
-                          }}
-                          className={`w-2 h-2 rounded-full transition-all ${
-                            currentImage === index
-                              ? "bg-white scale-125"
-                              : "bg-white/50"
-                          }`}
-                          aria-label={`Go to image ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </>
+                ) : images[0] ? (
+                  <Image
+                    src={images[0]}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className={`transition-transform duration-700 group-hover:scale-105 ${
+                      project.status === "portrait"
+                        ? "object-contain p-3"
+                        : "object-cover"
+                    }`}
+                    priority={idx < 3}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-cyan-500/10 to-blue-500/10" />
                 )}
 
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-0 group-hover:opacity-80 transition duration-500"></div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-1.5 rounded-full font-medium">
+                    View Details
+                  </span>
+                </div>
+
+                {/* Count badge */}
+                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/10">
+                  <span className="text-xs font-bold primary">
+                    {project.Count}
+                  </span>
+                </div>
+
+                {/* Image count */}
+                {images.length > 1 && (
+                  <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-sm text-[10px] text-gray-400 px-2 py-0.5 rounded-md border border-white/10">
+                    1 / {images.length}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </div>
+
+              {/* Card body */}
+              <div className="p-4 flex flex-col flex-1">
+                <h3 className="text-white font-semibold text-sm mb-2 line-clamp-1 group-hover:text-cyan-400 transition-colors duration-300">
+                  {project.title}
+                </h3>
+
+                {techs.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {techs.slice(0, 3).map((tech, i) => (
+                      <span
+                        key={i}
+                        className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 leading-5"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {techs.length > 3 && (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-gray-500 border border-white/10 leading-5">
+                        +{techs.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                <p className="text-gray-500 text-xs line-clamp-2 flex-1 leading-relaxed">
+                  {project.description}
+                </p>
+
+                {project.link && (
+                  <div className="mt-3 pt-3 border-t border-white/5">
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 text-[11px] text-cyan-400 hover:text-cyan-300 transition-colors"
+                    >
+                      <FaExternalLinkAlt className="text-[9px]" />
+                      Live Project
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      <div className="flex justify-between mt-8 ">
-        <button
-          onClick={prevProject}
-          className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300 cursor-pointer"
+      {/* Modal */}
+      {selectedProject && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm"
+          onClick={closeModal}
         >
-          Previous
-        </button>
-        <button
-          onClick={nextProject}
-          className="text-white bg-gradient-to-r hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 px-4 py-2 rounded-full transition duration-300 cursor-pointer"
-        >
-          Next
-        </button>
-      </div>
+          <div
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 z-20 bg-white/10 hover:bg-white/20 text-white p-2 rounded-full transition-colors cursor-pointer"
+              aria-label="Close"
+            >
+              <FaTimes size={12} />
+            </button>
+
+            {/* Media */}
+            <div className="relative h-56 sm:h-72 bg-black overflow-hidden rounded-t-2xl">
+              {selectedProject.video ? (
+                <video
+                  src={selectedProject.video}
+                  controls
+                  autoPlay
+                  muted
+                  loop
+                  className="w-full h-full object-cover"
+                />
+              ) : modalImages.length > 0 ? (
+                <>
+                  <Image
+                    key={modalImageIdx}
+                    src={modalImages[modalImageIdx]}
+                    alt={selectedProject.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 672px"
+                    className={
+                      selectedProject.status === "portrait"
+                        ? "object-contain p-4"
+                        : "object-cover"
+                    }
+                    priority
+                  />
+                  {modalImages.length > 1 && (
+                    <>
+                      <button
+                        onClick={() =>
+                          setModalImageIdx(
+                            (p) =>
+                              (p - 1 + modalImages.length) % modalImages.length
+                          )
+                        }
+                        className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition cursor-pointer"
+                      >
+                        <FaChevronLeft size={12} />
+                      </button>
+                      <button
+                        onClick={() =>
+                          setModalImageIdx((p) => (p + 1) % modalImages.length)
+                        }
+                        className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-black/60 hover:bg-black/80 text-white p-2 rounded-full transition cursor-pointer"
+                      >
+                        <FaChevronRight size={12} />
+                      </button>
+                      {/* Dot indicators */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                        {modalImages.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setModalImageIdx(i)}
+                            className={`rounded-full transition-all cursor-pointer ${
+                              i === modalImageIdx
+                                ? "bg-white w-4 h-1.5"
+                                : "bg-white/40 w-1.5 h-1.5"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </>
+              ) : null}
+            </div>
+
+            {/* Modal content */}
+            <div className="p-5 sm:p-6">
+              {/* Title */}
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-4xl font-black text-white/10 select-none leading-none">
+                  {selectedProject.Count}
+                </span>
+                <h2 className="text-xl font-bold text-white leading-tight">
+                  {selectedProject.title}
+                </h2>
+              </div>
+
+              {/* Tech badges */}
+              {parseTechBadges(selectedProject).length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {parseTechBadges(selectedProject).map((tech, i) => (
+                    <span
+                      key={i}
+                      className="text-xs px-2.5 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Description */}
+              <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                {selectedProject.description}
+              </p>
+
+              {/* Tech breakdown */}
+              {[
+                selectedProject.description1,
+                selectedProject.description2,
+                selectedProject.description3,
+                selectedProject.description4,
+                selectedProject.description5,
+              ].some(Boolean) && (
+                <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 mb-5">
+                  <p className="text-[10px] uppercase tracking-widest text-gray-600 mb-3">
+                    Technologies Used
+                  </p>
+                  <div className="space-y-2">
+                    {[
+                      selectedProject.description1,
+                      selectedProject.description2,
+                      selectedProject.description3,
+                      selectedProject.description4,
+                      selectedProject.description5,
+                    ]
+                      .filter(Boolean)
+                      .map((d, i) => {
+                        const cleaned = d!.replace(/^[^a-zA-Z(]+/, "").trim();
+                        const colonIdx = cleaned.indexOf(":");
+                        if (colonIdx !== -1) {
+                          const label = cleaned.slice(0, colonIdx).trim();
+                          const value = cleaned.slice(colonIdx + 1).trim();
+                          return (
+                            <div
+                              key={i}
+                              className="flex items-baseline gap-2 text-sm"
+                            >
+                              <span className="text-gray-500 shrink-0 min-w-[80px]">
+                                {label}
+                              </span>
+                              <span className="text-gray-300">{value}</span>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div key={i} className="text-sm text-gray-300">
+                            {cleaned}
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+
+              {/* CTA */}
+              {selectedProject.link && (
+                <a
+                  href={selectedProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-sm px-6 py-2.5 rounded-full font-medium transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30"
+                >
+                  View Live Project <FaExternalLinkAlt size={11} />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
