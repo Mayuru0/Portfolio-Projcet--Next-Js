@@ -20,3 +20,30 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.03) 25%,
+    rgba(255, 255, 255, 0.07) 50%,
+    rgba(255, 255, 255, 0.03) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}

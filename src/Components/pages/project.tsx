@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
   FaChevronLeft,
@@ -69,6 +70,22 @@ function getImages(project: Project): string[] {
   ].filter(Boolean) as string[];
 }
 
+const SkeletonCard = () => (
+  <div className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden flex flex-col">
+    <div className="h-48 skeleton-shimmer flex-shrink-0" />
+    <div className="p-4 flex flex-col gap-3">
+      <div className="h-3 skeleton-shimmer rounded-full w-3/4" />
+      <div className="flex gap-2">
+        <div className="h-4 skeleton-shimmer rounded-full w-14" />
+        <div className="h-4 skeleton-shimmer rounded-full w-14" />
+        <div className="h-4 skeleton-shimmer rounded-full w-10" />
+      </div>
+      <div className="h-2 skeleton-shimmer rounded-full" />
+      <div className="h-2 skeleton-shimmer rounded-full w-5/6" />
+    </div>
+  </div>
+);
+
 interface ProjectCardProps {
   project: Project;
   idx: number;
@@ -76,6 +93,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, idx, onOpen }) => {
+  const delay = `${idx * 60}ms`;
   const images = getImages(project);
   const techs = parseTechBadges(project);
   const [cardImg, setCardImg] = useState(0);
@@ -92,6 +110,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, idx, onOpen }) => {
     <div
       onClick={() => onOpen(project)}
       className="group relative bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-cyan-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col"
+      style={{ animation: `fadeInUp 0.45s ease forwards`, animationDelay: delay, opacity: 0 }}
     >
       {/* Media */}
       <div className="relative h-48 bg-black overflow-hidden flex-shrink-0">
@@ -203,6 +222,13 @@ const ProjectComponent: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [modalImageIdx, setModalImageIdx] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [animKey, setAnimKey] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 700);
+    return () => clearTimeout(t);
+  }, []);
 
   const filtered = projects.filter((p) => {
     if (activeCategory === "All") return true;
@@ -258,7 +284,7 @@ const ProjectComponent: React.FC = () => {
             return (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat)}
+                onClick={() => { setActiveCategory(cat); setAnimKey((k) => k + 1); }}
                 className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${
                   activeCategory === cat
                     ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/20"
@@ -281,24 +307,26 @@ const ProjectComponent: React.FC = () => {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((project, idx) => (
-          <ProjectCard
-            key={project.Count}
-            project={project}
-            idx={idx}
-            onOpen={openModal}
-          />
-        ))}
+        {loading
+          ? Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
+          : filtered.map((project, idx) => (
+              <ProjectCard
+                key={`${animKey}-${project.Count}`}
+                project={project}
+                idx={idx}
+                onOpen={openModal}
+              />
+            ))}
       </div>
 
       {/* Modal */}
-      {selectedProject && (
+      {selectedProject && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm"
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl"
+            className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}
@@ -310,6 +338,7 @@ const ProjectComponent: React.FC = () => {
               <FaTimes size={12} />
             </button>
 
+            <div className="max-h-[90vh] overflow-y-auto rounded-2xl">
             {/* Media */}
             <div className="relative h-56 sm:h-72 bg-black overflow-hidden rounded-t-2xl">
               {selectedProject.video ? (
@@ -469,8 +498,10 @@ const ProjectComponent: React.FC = () => {
                 </a>
               )}
             </div>
+            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
