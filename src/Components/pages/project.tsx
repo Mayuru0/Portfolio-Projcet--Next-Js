@@ -69,6 +69,136 @@ function getImages(project: Project): string[] {
   ].filter(Boolean) as string[];
 }
 
+interface ProjectCardProps {
+  project: Project;
+  idx: number;
+  onOpen: (project: Project) => void;
+}
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, idx, onOpen }) => {
+  const images = getImages(project);
+  const techs = parseTechBadges(project);
+  const [cardImg, setCardImg] = useState(0);
+
+  useEffect(() => {
+    if (images.length <= 1 || project.video) return;
+    const interval = setInterval(() => {
+      setCardImg((prev) => (prev + 1) % images.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [images.length, project.video]);
+
+  return (
+    <div
+      onClick={() => onOpen(project)}
+      className="group relative bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-cyan-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col"
+    >
+      {/* Media */}
+      <div className="relative h-48 bg-black overflow-hidden flex-shrink-0">
+        {project.video ? (
+          <video
+            src={project.video}
+            muted
+            loop
+            autoPlay
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        ) : images[0] ? (
+          <Image
+            key={cardImg}
+            src={images[cardImg] ?? images[0]}
+            alt={project.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className={`transition-all duration-700 group-hover:scale-105 ${
+              project.status === "portrait"
+                ? "object-contain p-3"
+                : "object-cover"
+            }`}
+            priority={idx < 3}
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-cyan-500/10 to-blue-500/10" />
+        )}
+
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-1.5 rounded-full font-medium">
+            View Details
+          </span>
+        </div>
+
+        {/* Count badge */}
+        <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/10">
+          <span className="text-xs font-bold primary">{project.Count}</span>
+        </div>
+
+        {/* Image progress dots */}
+        {images.length > 1 && (
+          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1 z-10">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`block rounded-full transition-all duration-500 ${
+                  i === cardImg
+                    ? "bg-white w-3.5 h-1"
+                    : "bg-white/30 w-1 h-1"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Card body */}
+      <div className="p-4 flex flex-col flex-1">
+        <h3 className="text-white font-semibold text-sm mb-2 line-clamp-1 group-hover:text-cyan-400 transition-colors duration-300">
+          {project.title}
+        </h3>
+
+        {techs.length > 0 && (
+          <div className="flex flex-wrap gap-1 mb-3">
+            {techs.slice(0, 3).map((tech, i) => (
+              <span
+                key={i}
+                className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 leading-5"
+              >
+                {tech}
+              </span>
+            ))}
+            {techs.length > 3 && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-gray-500 border border-white/10 leading-5">
+                +{techs.length - 3}
+              </span>
+            )}
+          </div>
+        )}
+
+        <p className="text-gray-500 text-xs line-clamp-2 flex-1 leading-relaxed">
+          {project.description}
+        </p>
+
+        {project.link && (
+          <div className="mt-3 pt-3 border-t border-white/5">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-1.5 text-[11px] text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              <FaExternalLinkAlt className="text-[9px]" />
+              Live Project
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ProjectComponent: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -151,112 +281,14 @@ const ProjectComponent: React.FC = () => {
 
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filtered.map((project, idx) => {
-          const images = getImages(project);
-          const techs = parseTechBadges(project);
-          return (
-            <div
-              key={project.Count}
-              onClick={() => openModal(project)}
-              className="group relative bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden cursor-pointer hover:border-cyan-500/30 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/10 hover:-translate-y-1 flex flex-col"
-            >
-              {/* Media */}
-              <div className="relative h-48 bg-black overflow-hidden flex-shrink-0">
-                {project.video ? (
-                  <video
-                    src={project.video}
-                    muted
-                    loop
-                    autoPlay
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                ) : images[0] ? (
-                  <Image
-                    src={images[0]}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className={`transition-transform duration-700 group-hover:scale-105 ${
-                      project.status === "portrait"
-                        ? "object-contain p-3"
-                        : "object-cover"
-                    }`}
-                    priority={idx < 3}
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-cyan-500/10 to-blue-500/10" />
-                )}
-
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs px-4 py-1.5 rounded-full font-medium">
-                    View Details
-                  </span>
-                </div>
-
-                {/* Count badge */}
-                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm rounded-md px-2 py-0.5 border border-white/10">
-                  <span className="text-xs font-bold primary">
-                    {project.Count}
-                  </span>
-                </div>
-
-                {/* Image count */}
-                {images.length > 1 && (
-                  <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-sm text-[10px] text-gray-400 px-2 py-0.5 rounded-md border border-white/10">
-                    1 / {images.length}
-                  </div>
-                )}
-              </div>
-
-              {/* Card body */}
-              <div className="p-4 flex flex-col flex-1">
-                <h3 className="text-white font-semibold text-sm mb-2 line-clamp-1 group-hover:text-cyan-400 transition-colors duration-300">
-                  {project.title}
-                </h3>
-
-                {techs.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {techs.slice(0, 3).map((tech, i) => (
-                      <span
-                        key={i}
-                        className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 leading-5"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {techs.length > 3 && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 text-gray-500 border border-white/10 leading-5">
-                        +{techs.length - 3}
-                      </span>
-                    )}
-                  </div>
-                )}
-
-                <p className="text-gray-500 text-xs line-clamp-2 flex-1 leading-relaxed">
-                  {project.description}
-                </p>
-
-                {project.link && (
-                  <div className="mt-3 pt-3 border-t border-white/5">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1.5 text-[11px] text-cyan-400 hover:text-cyan-300 transition-colors"
-                    >
-                      <FaExternalLinkAlt className="text-[9px]" />
-                      Live Project
-                    </a>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
+        {filtered.map((project, idx) => (
+          <ProjectCard
+            key={project.Count}
+            project={project}
+            idx={idx}
+            onOpen={openModal}
+          />
+        ))}
       </div>
 
       {/* Modal */}
