@@ -2,13 +2,24 @@
 
 import { useState, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
-import { VscCircleFilled } from "react-icons/vsc";
+import { VscCircleFilled, VscGitCommit } from "react-icons/vsc";
 
 interface Commit {
   sha: string;
   message: string;
   repo: string;
   date: string;
+}
+
+function timeAgo(dateStr: string): string {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  const days = Math.floor(hrs / 24);
+  if (days < 30) return `${days}d ago`;
+  return `${Math.floor(days / 30)}mo ago`;
 }
 
 const SVG_URL =
@@ -33,80 +44,76 @@ export default function GitHubSnake() {
 
       {/* Section header */}
       <div className="flex items-center gap-3 mb-6">
-        <FaGithub className="text-white/40" size={16} />
-        <span className="text-xs font-semibold uppercase tracking-widest text-gray-500">
-          GitHub Activity
+        <FaGithub className="text-white/25" size={13} />
+        <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/20">
+          Open Source Activity
         </span>
-        <div className="flex-1 h-px bg-white/[0.05]" />
+        <div className="flex-1 h-px bg-white/[0.04]" />
         <a
           href={GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-gray-600 hover:text-gray-400 transition-colors"
+          className="hidden sm:flex items-center gap-1.5 text-[10px] font-mono text-white/20 hover:text-white/40 transition-colors"
         >
-          <FaGithub size={11} />
+          <FaGithub size={10} />
           github.com/Mayuru0
         </a>
       </div>
 
       {/* Card */}
       <div
+        className="rounded-2xl overflow-hidden"
         style={{
           background: "#0d1117",
-          border: "1px solid rgba(255,255,255,0.07)",
-          borderRadius: 16,
-          overflow: "hidden",
+          border: "1px solid rgba(255,255,255,0.06)",
+          boxShadow: "0 0 0 1px rgba(0,0,0,0.5), 0 24px 64px rgba(0,0,0,0.45)",
         }}
       >
-        {/* Window title bar */}
+        {/* Title bar */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 7,
-            padding: "10px 18px",
-            borderBottom: "1px solid rgba(255,255,255,0.05)",
-            background: "rgba(255,255,255,0.02)",
+            gap: 6,
+            padding: "11px 16px",
+            borderBottom: "1px solid rgba(255,255,255,0.04)",
+            background: "rgba(255,255,255,0.012)",
           }}
         >
-          {/* Traffic lights */}
-          <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ff5f57", display: "inline-block" }} />
-          <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#ffbd2e", display: "inline-block" }} />
-          <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#28ca41", display: "inline-block" }} />
-          <span style={{ marginLeft: 10, fontFamily: "monospace", fontSize: 11, color: "#484f58" }}>
-            Mayuru0 — contribution graph
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57", display: "inline-block" }} />
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ffbd2e", display: "inline-block" }} />
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28ca41", display: "inline-block" }} />
+          <span style={{ marginLeft: 8, fontFamily: "monospace", fontSize: 10, color: "#3d444d", letterSpacing: "0.02em" }}>
+            ~/github/Mayuru0 — contribution-graph
           </span>
-          {/* Live badge */}
-          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 5 }}>
-            <VscCircleFilled style={{ color: "#39d353", fontSize: 10 }} />
-            <span style={{ fontFamily: "monospace", fontSize: 10, color: "#484f58" }}>snake: live</span>
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 4 }}>
+            <VscCircleFilled style={{ color: "#39d353", fontSize: 8 }} />
+            <span style={{ fontFamily: "monospace", fontSize: 9, color: "#3d444d" }}>live</span>
           </div>
         </div>
 
-        {/* SVG area */}
-        <div style={{ padding: "20px 20px 16px", overflowX: "auto", minHeight: 140 }}>
+        {/* Snake graph area */}
+        <div style={{ padding: "18px 18px 14px", overflowX: "auto", minHeight: 130 }}>
 
-          {/* Skeleton loader */}
+          {/* Skeleton */}
           {!loaded && !error && (
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              {/* Month label row */}
-              <div style={{ display: "flex", gap: 28, marginLeft: 30, marginBottom: 4 }}>
-                {["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].map(m => (
+            <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+              <div style={{ display: "flex", gap: 26, marginLeft: 28, marginBottom: 3 }}>
+                {["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].map((m) => (
                   <div key={m} style={{
-                    width: 24, height: 10, borderRadius: 3,
-                    background: "rgba(255,255,255,0.04)",
-                    animation: "pulse 1.5s ease-in-out infinite",
+                    width: 22, height: 9, borderRadius: 2,
+                    background: "rgba(255,255,255,0.03)",
+                    animation: "ghpulse 1.5s ease-in-out infinite",
                   }} />
                 ))}
               </div>
-              {/* Grid rows */}
               {Array.from({ length: 7 }).map((_, r) => (
-                <div key={r} style={{ display: "flex", gap: 3, marginLeft: 30 }}>
+                <div key={r} style={{ display: "flex", gap: 3, marginLeft: 28 }}>
                   {Array.from({ length: 52 }).map((_, c) => (
                     <div key={c} style={{
-                      width: 13, height: 13, borderRadius: 3,
-                      background: "rgba(255,255,255,0.04)",
-                      opacity: 0.4 + Math.random() * 0.6,
+                      width: 12, height: 12, borderRadius: 2,
+                      background: "rgba(255,255,255,0.03)",
+                      animation: "ghpulse 1.5s ease-in-out infinite",
                     }} />
                   ))}
                 </div>
@@ -114,26 +121,27 @@ export default function GitHubSnake() {
             </div>
           )}
 
-          {/* Error state */}
+          {/* Error */}
           {error && (
             <div style={{
-              display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-              gap: 10, height: 120, color: "#484f58", fontFamily: "monospace", fontSize: 12,
+              display: "flex", flexDirection: "column", alignItems: "center",
+              justifyContent: "center", gap: 8, height: 110,
+              color: "#3d444d", fontFamily: "monospace", fontSize: 11,
             }}>
-              <FaGithub size={24} style={{ opacity: 0.3 }} />
-              <span>Contribution graph unavailable</span>
+              <FaGithub size={20} style={{ opacity: 0.2 }} />
+              <span>contribution graph unavailable</span>
               <a
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "#39d353", fontSize: 11, textDecoration: "none" }}
+                style={{ color: "#39d353", fontSize: 10, textDecoration: "none" }}
               >
-                View on GitHub →
+                view on github →
               </a>
             </div>
           )}
 
-          {/* Real SVG */}
+          {/* SVG */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={SVG_URL}
@@ -151,86 +159,49 @@ export default function GitHubSnake() {
 
         {/* Recent Commits */}
         {commits.length > 0 && (
-          <div
-            style={{
-              borderTop: "1px solid rgba(255,255,255,0.05)",
-              padding: "14px 20px",
-            }}
-          >
-            <div
-              style={{
-                fontFamily: "monospace",
-                fontSize: 10,
-                color: "#484f58",
-                marginBottom: 10,
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-              }}
-            >
-              Recent Commits
+          <div style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+
+            {/* Commits header */}
+            <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 18px 6px" }}>
+              <VscGitCommit style={{ color: "#39d353", fontSize: 12, opacity: 0.8 }} />
+              <span style={{
+                fontFamily: "monospace", fontSize: 9,
+                color: "#3d444d", textTransform: "uppercase", letterSpacing: "0.15em",
+              }}>
+                recent commits
+              </span>
+              <span style={{
+                fontFamily: "monospace", fontSize: 9, color: "#39d353",
+                background: "rgba(57,211,83,0.07)",
+                border: "1px solid rgba(57,211,83,0.12)",
+                borderRadius: 4, padding: "1px 6px",
+              }}>
+                {commits.length}
+              </span>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {commits.map((c) => (
-                <div
-                  key={c.sha}
-                  style={{ display: "flex", alignItems: "baseline", gap: 10 }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "monospace",
-                      fontSize: 10,
-                      color: "#39d353",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {c.sha}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "monospace",
-                      fontSize: 11,
-                      color: "#7d8590",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      flex: 1,
-                    }}
-                  >
-                    {c.message}
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: "monospace",
-                      fontSize: 10,
-                      color: "#30363d",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {c.repo}
-                  </span>
-                </div>
+
+            {/* Commits list */}
+            <div style={{ paddingBottom: 4 }}>
+              {commits.map((c, i) => (
+                <CommitRow key={c.sha + i} commit={c} isLast={i === commits.length - 1} />
               ))}
             </div>
           </div>
         )}
 
         {/* Footer */}
-        <div
-          style={{
-            padding: "10px 20px 12px",
-            borderTop: "1px solid rgba(255,255,255,0.04)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <span style={{ fontFamily: "monospace", fontSize: 11, color: "#30363d" }}>
-            Powered by{" "}
+        <div style={{
+          padding: "9px 18px 11px",
+          borderTop: "1px solid rgba(255,255,255,0.03)",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+        }}>
+          <span style={{ fontFamily: "monospace", fontSize: 9, color: "#272e38" }}>
+            snake by{" "}
             <a
               href="https://github.com/Platane/snk"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: "#484f58", textDecoration: "none" }}
+              style={{ color: "#3d444d", textDecoration: "none" }}
             >
               Platane/snk
             </a>
@@ -240,26 +211,88 @@ export default function GitHubSnake() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              fontFamily: "monospace", fontSize: 10, color: "#484f58",
-              textDecoration: "none",
-              display: "flex", alignItems: "center", gap: 5,
+              fontFamily: "monospace", fontSize: 9, color: "#3d444d",
+              textDecoration: "none", display: "flex", alignItems: "center", gap: 4,
               transition: "color 0.2s",
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = "#7d8590")}
-            onMouseLeave={e => (e.currentTarget.style.color = "#484f58")}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#7d8590")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#3d444d")}
           >
-            <FaGithub size={12} />
+            <FaGithub size={10} />
             github.com/Mayuru0
           </a>
         </div>
       </div>
 
       <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 0.8; }
+        @keyframes ghpulse {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.65; }
         }
       `}</style>
+    </div>
+  );
+}
+
+function CommitRow({ commit, isLast }: { commit: Commit; isLast: boolean }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        padding: "7px 18px",
+        borderBottom: isLast ? "none" : "1px solid rgba(255,255,255,0.02)",
+        background: hovered ? "rgba(255,255,255,0.018)" : "transparent",
+        transition: "background 0.15s",
+        cursor: "default",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* SHA */}
+      <span style={{
+        fontFamily: "monospace", fontSize: 10,
+        color: "#39d353", flexShrink: 0, minWidth: 50,
+        opacity: hovered ? 1 : 0.75, transition: "opacity 0.15s",
+      }}>
+        {commit.sha}
+      </span>
+
+      {/* Message */}
+      <span style={{
+        fontFamily: "monospace", fontSize: 11,
+        color: hovered ? "#8b949e" : "#6e7681",
+        flex: 1, whiteSpace: "nowrap",
+        overflow: "hidden", textOverflow: "ellipsis",
+        transition: "color 0.15s",
+      }}>
+        {commit.message}
+      </span>
+
+      {/* Repo badge */}
+      <span style={{
+        fontFamily: "monospace", fontSize: 9,
+        color: "#4a8cc9",
+        background: "rgba(74,140,201,0.07)",
+        border: "1px solid rgba(74,140,201,0.12)",
+        borderRadius: 4, padding: "1px 7px",
+        flexShrink: 0, maxWidth: 150,
+        overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+      }}>
+        {commit.repo}
+      </span>
+
+      {/* Time */}
+      <span style={{
+        fontFamily: "monospace", fontSize: 9,
+        color: "#3d444d", flexShrink: 0,
+        minWidth: 44, textAlign: "right",
+      }}>
+        {timeAgo(commit.date)}
+      </span>
     </div>
   );
 }
