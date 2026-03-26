@@ -1,5 +1,6 @@
 import Particles from '@/Components/Animating/Particles'
 import Profile from '@/Components/pages/profile'
+import GitHubSnake from '@/Components/Common/GitHubSnake'
 import Head from 'next/head'
 import React from 'react'
 
@@ -32,6 +33,8 @@ const page = () => {
     <Profile />
   </div>
 </div>
+
+<GitHubSnake />
 
     </>
   )
