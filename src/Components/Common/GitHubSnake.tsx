@@ -1,8 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import { VscCircleFilled } from "react-icons/vsc";
+
+interface Commit {
+  sha: string;
+  message: string;
+  repo: string;
+  date: string;
+}
 
 const SVG_URL =
   "https://raw.githubusercontent.com/Mayuru0/Portfolio-Projcet--Next-Js/output/github-contribution-grid-snake-dark.svg";
@@ -12,6 +19,14 @@ const GITHUB_URL = "https://github.com/Mayuru0";
 export default function GitHubSnake() {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  const [commits, setCommits] = useState<Commit[]>([]);
+
+  useEffect(() => {
+    fetch("/api/github-commits")
+      .then((r) => r.json())
+      .then((data) => setCommits(data.commits ?? []))
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10">
@@ -133,6 +148,71 @@ export default function GitHubSnake() {
             }}
           />
         </div>
+
+        {/* Recent Commits */}
+        {commits.length > 0 && (
+          <div
+            style={{
+              borderTop: "1px solid rgba(255,255,255,0.05)",
+              padding: "14px 20px",
+            }}
+          >
+            <div
+              style={{
+                fontFamily: "monospace",
+                fontSize: 10,
+                color: "#484f58",
+                marginBottom: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+              }}
+            >
+              Recent Commits
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {commits.map((c) => (
+                <div
+                  key={c.sha}
+                  style={{ display: "flex", alignItems: "baseline", gap: 10 }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "monospace",
+                      fontSize: 10,
+                      color: "#39d353",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {c.sha}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "monospace",
+                      fontSize: 11,
+                      color: "#7d8590",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      flex: 1,
+                    }}
+                  >
+                    {c.message}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "monospace",
+                      fontSize: 10,
+                      color: "#30363d",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {c.repo}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <div
