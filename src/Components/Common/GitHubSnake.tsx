@@ -80,13 +80,13 @@ export default function GitHubSnake() {
             background: "rgba(255,255,255,0.012)",
           }}
         >
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57", display: "inline-block" }} />
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ffbd2e", display: "inline-block" }} />
-          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28ca41", display: "inline-block" }} />
-          <span style={{ marginLeft: 8, fontFamily: "monospace", fontSize: 10, color: "#3d444d", letterSpacing: "0.02em" }}>
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57", display: "inline-block", flexShrink: 0 }} />
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#ffbd2e", display: "inline-block", flexShrink: 0 }} />
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#28ca41", display: "inline-block", flexShrink: 0 }} />
+          <span className="gh-titlebar-path" style={{ marginLeft: 8, fontFamily: "monospace", fontSize: 10, color: "#3d444d", letterSpacing: "0.02em" }}>
             ~/github/Mayuru0 — contribution-graph
           </span>
-          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 4 }}>
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 4, flexShrink: 0 }}>
             <VscCircleFilled style={{ color: "#39d353", fontSize: 8 }} />
             <span style={{ fontFamily: "monospace", fontSize: 9, color: "#3d444d" }}>live</span>
           </div>
@@ -229,6 +229,18 @@ export default function GitHubSnake() {
           0%, 100% { opacity: 0.3; }
           50% { opacity: 0.65; }
         }
+        @media (max-width: 640px) {
+          .gh-titlebar-path { display: none; }
+          .gh-commit-row {
+            flex-wrap: wrap !important;
+            gap: 4px !important;
+            align-items: flex-start !important;
+          }
+          .gh-commit-sha { order: 1; min-width: unset !important; }
+          .gh-commit-time { order: 2; margin-left: auto; min-width: unset !important; }
+          .gh-commit-message { order: 3; width: 100% !important; flex: none !important; }
+          .gh-commit-repo { order: 4; max-width: 100% !important; }
+        }
       `}</style>
     </div>
   );
@@ -239,6 +251,7 @@ function CommitRow({ commit, isLast }: { commit: Commit; isLast: boolean }) {
 
   return (
     <div
+      className="gh-commit-row"
       style={{
         display: "flex",
         alignItems: "center",
@@ -253,7 +266,7 @@ function CommitRow({ commit, isLast }: { commit: Commit; isLast: boolean }) {
       onMouseLeave={() => setHovered(false)}
     >
       {/* SHA */}
-      <span style={{
+      <span className="gh-commit-sha" style={{
         fontFamily: "monospace", fontSize: 10,
         color: "#39d353", flexShrink: 0, minWidth: 50,
         opacity: hovered ? 1 : 0.75, transition: "opacity 0.15s",
@@ -262,7 +275,7 @@ function CommitRow({ commit, isLast }: { commit: Commit; isLast: boolean }) {
       </span>
 
       {/* Message */}
-      <span style={{
+      <span className="gh-commit-message" style={{
         fontFamily: "monospace", fontSize: 11,
         color: hovered ? "#8b949e" : "#6e7681",
         flex: 1, whiteSpace: "nowrap",
@@ -273,7 +286,7 @@ function CommitRow({ commit, isLast }: { commit: Commit; isLast: boolean }) {
       </span>
 
       {/* Repo badge */}
-      <span style={{
+      <span className="gh-commit-repo" style={{
         fontFamily: "monospace", fontSize: 9,
         color: "#4a8cc9",
         background: "rgba(74,140,201,0.07)",
@@ -286,7 +299,7 @@ function CommitRow({ commit, isLast }: { commit: Commit; isLast: boolean }) {
       </span>
 
       {/* Time */}
-      <span style={{
+      <span className="gh-commit-time" style={{
         fontFamily: "monospace", fontSize: 9,
         color: "#3d444d", flexShrink: 0,
         minWidth: 44, textAlign: "right",
