@@ -96,16 +96,16 @@ export default function Preloader() {
       <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
         <div className="flex flex-col items-center gap-8 w-full" style={{ maxWidth: 420 }}>
 
-          {/* monogram ring */}
-          <div className="relative" style={{ width: 64, height: 64 }}>
-            <svg width="64" height="64" viewBox="0 0 64 64" style={{ transform: "rotate(-90deg)" }}>
-              <circle cx="32" cy="32" r="30" fill="none"
+          {/* logo ring */}
+          <div className="relative" style={{ width: 80, height: 80 }}>
+            <svg width="80" height="80" viewBox="0 0 80 80" style={{ transform: "rotate(-90deg)" }}>
+              <circle cx="40" cy="40" r="37" fill="none"
                 stroke="rgba(6,182,212,0.1)" strokeWidth="1.5" />
-              <circle cx="32" cy="32" r="30" fill="none"
+              <circle cx="40" cy="40" r="37" fill="none"
                 stroke="#06b6d4" strokeWidth="1.5" strokeLinecap="round"
                 style={{
-                  strokeDasharray: 188,
-                  strokeDashoffset: chars > 0 ? 0 : 188,
+                  strokeDasharray: 232,
+                  strokeDashoffset: chars > 0 ? 0 : 232,
                   transition: "stroke-dashoffset 1.4s cubic-bezier(0.4,0,0.2,1) 0.1s",
                 }}
               />
@@ -117,7 +117,12 @@ export default function Preloader() {
                 transition: "opacity 0.5s ease 0.5s, transform 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.5s",
               }}
             >
-              <span style={{ fontFamily: "monospace", fontWeight: 900, fontSize: 22, color: "#fff" }}>M</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png"
+                alt="logo"
+                style={{ width: 52, height: 52, objectFit: "contain" }}
+              />
             </div>
           </div>
 

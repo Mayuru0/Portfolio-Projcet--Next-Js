@@ -1,58 +1,111 @@
 import Link from "next/link";
 import React from "react";
+import { FaBriefcase, FaExternalLinkAlt } from "react-icons/fa";
+
+const experiences = [
+  {
+    period: "2024 – 2025",
+    role: "Intern Full Stack Developer",
+    company: "Cypso Labs PVT LTD",
+    companyUrl: "https://cypsolabs.com/",
+    type: "Internship · 6 months",
+    description:
+      "Developed scalable web and desktop applications using the MERN stack, Next.js, and Redux. Collaborated with cross-functional teams following agile methodologies, optimized REST APIs, and maintained high code quality with Git version control.",
+    stack: ["React", "Next.js", "Node.js", "Express", "MongoDB", "Redux", "Git"],
+  },
+];
 
 const WorkExperience = () => {
   return (
-    <div className="border border-gray-800 rounded-xl md:rounded-r-2xl text-white flex flex-col p-3 sm:p-6 md:p-8 lg:p-12 mt-20 md:mt-2 w-full">
-      {/* Content */}
-      <div className="flex-1">
-        <div className="space-y-6 sm:space-y-8">
-          <h1
-            className="text-2xl sm:text-3xl md:text-4xl font-mono mb-4 sm:mb-6 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent animate-pulse text-center md:text-left"
-            data-aos="fade-down"
-          >
+    <div className="glass-card rounded-2xl text-white p-5 sm:p-8 w-full">
+
+      {/* Header */}
+      <div className="mb-8" data-aos="fade-up">
+        <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">&lt;experience /&gt;</p>
+        <h2 className="text-2xl sm:text-3xl font-bold text-white">
+          Work{" "}
+          <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             Experience
-          </h1>
+          </span>
+        </h2>
+      </div>
 
-          <div
-            className="text-sm sm:text-base text-gray-300 leading-relaxed text-justify"
-            data-aos="fade-up"
-          >
-            <p>
-              As a full-stack developer, I create quick, scalable, and intuitive
-              web applications using the MERN stack, Next.js, and Redux for
-              state management. I successfully completed a 6-month internship
-              during which I worked on more than five desktop and web
-              applications using these frameworks. During this time, I
-              effectively utilized the GitHub web application and focused on
-              writing clear, efficient, and reusable code while adhering to
-              industry best practices including agile methodologies, version
-              control (Git), and maintaining high code quality. I collaborated
-              with cross-functional teams to enhance application security,
-              optimize REST APIs, and develop user-friendly features.
-            </p>
-          </div>
+      {/* Timeline */}
+      <div data-aos="fade-up" data-aos-delay="100">
+        {experiences.map((exp, i) => (
+          <div key={i} className="flex gap-4">
+            {/* Dot + line */}
+            <div className="flex flex-col items-center">
+              <div className="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400 flex-shrink-0 z-10">
+                <FaBriefcase size={14} />
+              </div>
+              {i < experiences.length - 1 && (
+                <div className="w-px flex-1 mt-2 bg-gradient-to-b from-cyan-400/30 to-transparent" />
+              )}
+            </div>
 
-          <div
-            className="bg-[#252525] rounded-lg p-4 sm:p-6 mt-6 sm:mt-8 w-full sm:w-4/5 md:w-3/4 lg:w-1/2"
-            data-aos="zoom-out"
-          >
-            <div className="text-[#1da1f2] text-sm sm:text-base">2024-2025</div>
-            <h2 className="text-lg sm:text-xl font-semibold mt-1">
-              Intern Fullstack Developer
-            </h2>
-            <div className="mt-3 sm:mt-4 flex items-center animate-bounce">
-              <div className="w-2 h-2 rounded-full bg-[#1da1f2] mr-2 flex-shrink-0"></div>
-              <Link
-                href="https://cypsolabs.com/"
-                className="cursor-pointer hover:text-blue-600 hover:underline text-sm sm:text-base"
-              >
-                Cypso Labs PVT LTD
-              </Link>
+            {/* Card */}
+            <div className="flex-1 pb-2">
+              <div className="glass border border-white/8 hover:border-cyan-400/25 rounded-xl p-5 transition-all duration-300 hover:bg-white/3 group">
+
+                {/* Period + type */}
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                  <span className="text-xs font-mono text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 rounded-md px-2 py-0.5">
+                    {exp.period}
+                  </span>
+                  <span className="text-xs text-gray-500 border border-white/8 rounded-md px-2 py-0.5">
+                    {exp.type}
+                  </span>
+                </div>
+
+                {/* Role */}
+                <h3 className="text-base sm:text-lg font-bold text-white mb-1">
+                  {exp.role}
+                </h3>
+
+                {/* Company */}
+                <Link
+                  href={exp.companyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-cyan-400 transition-colors mb-4"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/60 flex-shrink-0" />
+                  {exp.company}
+                  <FaExternalLinkAlt size={9} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+
+                {/* Description */}
+                <p className="text-sm text-gray-400 leading-relaxed mb-4">
+                  {exp.description}
+                </p>
+
+                {/* Tech stack */}
+                <div className="flex flex-wrap gap-1.5">
+                  {exp.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2.5 py-0.5 rounded-lg border border-white/8 text-gray-300
+                        hover:border-cyan-400/30 hover:text-cyan-300 transition-all duration-200"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
+
+      {/* Empty state if no experience yet shown */}
+      <div className="mt-8 border-t border-white/8 pt-6">
+        <p className="text-xs text-gray-500 font-mono text-center tracking-widest">
+          // more experience coming soon...
+        </p>
+      </div>
+
     </div>
   );
 };
