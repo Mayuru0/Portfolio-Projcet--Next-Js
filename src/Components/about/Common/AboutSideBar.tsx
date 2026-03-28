@@ -44,7 +44,7 @@ const AboutSideBar = () => {
                   onClick={() => navigate(href)}
                   disabled={isLoading}
                   className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium
-                    flex-shrink-0 whitespace-nowrap transition-all duration-300
+                    flex-shrink-0 whitespace-nowrap transition-all duration-300 cursor-pointer
                     ${active
                       ? "bg-cyan-500/20 border border-cyan-400/40 text-cyan-400"
                       : "text-gray-400 hover:text-white hover:bg-white/5"
@@ -78,7 +78,7 @@ const AboutSideBar = () => {
                   onClick={() => navigate(href)}
                   disabled={isLoading}
                   className={`group flex items-center gap-3 px-4 py-3 rounded-xl
-                    text-sm font-medium text-left w-full transition-all duration-300
+                    text-sm font-medium text-left w-full transition-all duration-300 cursor-pointer
                     ${active
                       ? "bg-gradient-to-r from-cyan-500/15 to-blue-500/10 border border-cyan-400/30 text-white"
                       : "text-gray-400 hover:text-white hover:bg-white/5 border border-transparent"
