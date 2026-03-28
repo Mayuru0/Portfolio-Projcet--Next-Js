@@ -65,29 +65,33 @@ const Navbar: React.FC = () => {
       </Head>
 
       <div
-  className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto 
-  flex justify-between items-center px-4 transition-all duration-300
-  bg-black md:bg-transparent
-  ${scrolled ? "md:backdrop-blur-md md:rounded-b-4xl" : ""}
-  `}
+  className={`sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
+  flex justify-between items-center px-6 transition-all duration-500
+  ${scrolled
+    ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
+    : "bg-transparent"
+  }`}
 >
 
-        <h1 className="text-3xl font-bold primary font-mono">
+        <h1 className="text-xl font-bold primary font-mono tracking-wider">
           <Link href="/" onClick={scrollToTop}>
             MAYURU MADHURANGA
           </Link>
         </h1>
 
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex">
+        <ul className="hidden md:flex items-center gap-1">
           {navLinks.map((link) => (
-            <li
-              key={link.name}
-              className={`p-5 hover:text-blue-600 transition duration-300 ${
-                pathname === link.path ? "text-blue-600 font-bold" : ""
-              }`}
-            >
-              <Link href={link.path} onClick={scrollToTop}>
+            <li key={link.name}>
+              <Link
+                href={link.path}
+                onClick={scrollToTop}
+                className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
+                  ${pathname === link.path
+                    ? "text-cyan-400 bg-cyan-400/10 border border-cyan-400/20"
+                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
+              >
                 {link.name}
               </Link>
             </li>
@@ -97,29 +101,33 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Icon */}
         <div
           onClick={handleNav}
-          className="block md:hidden cursor-pointer text-blue-500 "
+          className="block md:hidden cursor-pointer text-cyan-400"
         >
-          {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
+          {nav ? <AiOutlineClose size={22} /> : <AiOutlineMenu size={22} />}
         </div>
 
         {/* Mobile Navigation */}
         <div
-          className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-20 ease-in-out duration-500 ${
-            nav ? "left-0" : "left-[-100%]"
-          }`}
+          className={`fixed h-full top-0 w-[65%] z-20 ease-in-out duration-500
+            backdrop-blur-2xl bg-black/80 border-r border-white/10
+            ${nav ? "left-0" : "left-[-100%]"}`}
         >
-          <h1 className="text-3xl font-bold text-blue-500 m-4">
-            Mayuru Madhuranga
+          <h1 className="text-xl font-bold primary font-mono m-6 pt-4">
+            MAYURU MADHURANGA
           </h1>
-          <ul className="pt-8 text-2xl">
+          <div className="mx-6 gradient-line mb-6" />
+          <ul className="pt-2 space-y-1 px-4">
             {navLinks.map((link) => (
-              <li
-                key={link.name}
-                className={`p-5 hover:text-blue-600 transition duration-300 ${
-                  pathname === link.path ? "text-blue-600 font-bold" : ""
-                }`}
-              >
-                <Link href={link.path} onClick={handleNavClick}>
+              <li key={link.name}>
+                <Link
+                  href={link.path}
+                  onClick={handleNavClick}
+                  className={`block px-4 py-3 rounded-xl text-lg transition-all duration-300
+                    ${pathname === link.path
+                      ? "text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 font-semibold"
+                      : "text-gray-300 hover:text-white hover:bg-white/5"
+                    }`}
+                >
                   {link.name}
                 </Link>
               </li>

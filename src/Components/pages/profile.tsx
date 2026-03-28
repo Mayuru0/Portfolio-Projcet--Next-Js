@@ -1,80 +1,163 @@
 "use client";
 
-import React from "react";
-//import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import Social from "./Social";
-import { TypeAnimation } from "react-type-animation"; // make sure it's named correctly
+import { TypeAnimation } from "react-type-animation";
 import ProfilePhoto from "../ProfilePhoto";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaArrowRight, } from "react-icons/fa";
+
+const techStack = ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "Express" ];
 
 const Profile: React.FC = () => {
+  const [totalCommits, setTotalCommits] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("/api/github-commits")
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.totalCommits !== null) setTotalCommits(data.totalCommits);
+      })
+      .catch(() => {});
+  }, []);
+
+  const stats = [
+    { value: "2+", label: "Years Exp." },
+    { value: "20+", label: "Projects" },
+    { value: "10+", label: "Technologies" },
+    {
+      value: totalCommits !== null ? `${totalCommits}+` : "...",
+      label: "Commits",
+    },
+  ];
+
   return (
     <div
-      // className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8 bg-black"
-       className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:h-[70vh] mx-auto py-8 bg-transparent"
+      className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-[1200px] md:min-h-[80vh] mx-auto py-16 px-4 bg-transparent items-center"
       id="p"
     >
       {/* Profile Image */}
-      <div className="col-span-1 my-auto mx-auto lg:-ml-10">
-        {/* <div className="w-[230px] h-auto lg:w-[320px] mix-blend-lighten">
-          <Image
-            src="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png"
-            alt="Mayuru Madhuranga's Profile Picture"
-            width={320}
-            height={320}
-            priority
-          />
-        </div> */}
-        
+      <div className="col-span-1 my-auto mx-auto sm:-ml-0 md:-ml-10 lg:-ml-20 ">
         <ProfilePhoto />
       </div>
 
       {/* Profile Info */}
-      <div className="col-span-2 px-5 my-auto">
-        <h1
-          className="text-white text-4xl sm:text-8xl font-extrabold"
-          data-aos="fade-in"
-          data-aos-duration="1600"
-        >
-          <span className="primary">I&apos;m a</span>
-        </h1>
-        {/* Ignore TypeScript errors */}
-        <TypeAnimation
-          sequence={[
-            "Full Stack Developer",
-            1000,
-            "MERN Stack Developer",
-            1000,
-          ]}
-          wrapper="span"
-          speed={50}
-          repeat={Infinity}
-          className="text-white text-2xl sm:text-5xl"
-        />
+      <div
+        className="col-span-2 my-auto space-y-6"
+        data-aos="fade-left"
+        data-aos-duration="900"
+      >
+        {/* Status badge */}
+        <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 border border-cyan-400/20">
+          <span className="w-2 h-2 rounded-full bg-cyan-400 glow-dot animate-pulse" />
+          <span className="text-cyan-400 text-xs font-semibold tracking-widest uppercase">
+            Available for work
+          </span>
+        </div>
 
-        <p
-          className="text-white sm:text-lg my-6 lg:text-xl"
-          data-aos="zoom-in-down"
-          data-aos-duration="1600"
-        >
-          I&apos;m Mayuru Madhuranga, and I&apos;m interested in Full-Stack
-          Developer or MERN Stack Developer.
+        {/* Name + Title */}
+        <div>
+        <p className="font-mono text-sm mb-2 flex items-center gap-1.5">
+          <span className="text-pink-400">println</span>
+          <span className="text-gray-500">(</span>
+          <span className="text-emerald-400">&quot;Hello, I&apos;m&quot;</span>
+          <span className="text-gray-500">);</span>
+        </p>
+          <h1 className="text-white text-4xl sm:text-6xl font-extrabold leading-tight mb-2">
+            Mayuru{" "}
+            <span className="primary">Madhuranga</span>
+          </h1>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="text-gray-500 text-base sm:text-lg ">—</span>
+            <TypeAnimation
+              sequence={[
+                "Full Stack Developer",
+                1400,
+                "MERN Stack Developer",
+                1400,
+                "React / Next.js Developer",
+                1400,
+                "Backend Engineer",
+                1400,
+              ]}
+              wrapper="span"
+              speed={55}
+              repeat={Infinity}
+              className="text-cyan-400 text-xl sm:text-2xl font-semibold tracking-wide"
+            />
+          </div>
+        </div>
+
+        {/* Bio */}
+        <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl">
+          Passionate about building{" "}
+          <span className="text-white font-medium">scalable, high-performance</span> web
+          applications. I craft clean UI experiences backed by solid architecture — from
+          database design to deployment.
         </p>
 
-        {/* Download CV Button */}
-        <div className="my-8" data-aos="fade-in" data-aos-duration="2000">
+        {/* Tech Stack chips */}
+        <div className="flex flex-wrap gap-2">
+          {techStack.map((tech) => (
+            <span
+              key={tech}
+              className="text-xs font-medium px-3 py-1 rounded-lg
+                glass border border-white/10 text-gray-300
+                hover:border-cyan-400/40 hover:text-cyan-300
+                transition-all duration-200 cursor-default"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Stats row */}
+        <div className="flex items-center gap-6 py-4 border-t border-b border-white/8">
+          {stats.map(({ value, label }, i) => (
+            <React.Fragment key={label}>
+              <div className="text-center">
+                <div className="text-white text-2xl font-extrabold leading-none">{value}</div>
+                <div className="text-gray-500 text-xs mt-1 tracking-wide">{label}</div>
+              </div>
+              {i < stats.length - 1 && (
+                <div className="h-8 w-px bg-white/10" />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href="/project"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
+              bg-gradient-to-r from-cyan-500 to-blue-600
+              hover:from-cyan-400 hover:to-blue-500
+              text-white font-semibold text-sm
+              shadow-lg shadow-cyan-500/20
+              hover:shadow-cyan-500/35 hover:scale-[1.03]
+              transition-all duration-300"
+          >
+            <span>View My Work</span>
+            <FaArrowRight size={13} />
+          </a>
           <a
             href="https://drive.google.com/uc?export=download&id=1mJH34sHfYu8bwNXMZhKgqpNbIrk49WmL"
-            className="px-4 py-2 sm:px-6 sm:py-3 w-[150px] sm:w-[200px] rounded-xl mr-4 border border-gray-400 hover:bg-gradient-to-br from-cyan-500 to-blue-500 hover:from-cyan-700 hover:to-blue-700 text-white hover:border-none flex items-center justify-center space-x-2 text-xs sm:text-sm md:text-base"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
+              glass border border-white/12
+              hover:border-cyan-400/40
+              text-gray-300 hover:text-white font-semibold text-sm
+              hover:scale-[1.03]
+              transition-all duration-300"
           >
-            <FaDownload size={16} />
+            <FaDownload size={13} />
             <span>Download CV</span>
           </a>
         </div>
 
         {/* Social Links */}
-        <div>
-          <Social Cstyle="flex gap-6" />
+        <div className="pt-2">
+          <p className="text-gray-600 text-xs uppercase tracking-widest mb-3 font-medium">Find me on</p>
+          <Social Cstyle="flex flex-wrap gap-2.5" />
         </div>
       </div>
     </div>

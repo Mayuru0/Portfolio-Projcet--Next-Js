@@ -1,114 +1,125 @@
 "use client";
 
-import React from "react";
-import CountUp from "react-countup";
+import React, { useState } from "react";
 import { skillCategories, professionalSkills } from "@/Data/Skills";
 import Image from "next/image";
 
-const Skills: React.FC = () => {
+const Profile: React.FC = () => {
+  const [active, setActive] = useState(0);
+
+  const category = skillCategories[active];
+
   return (
-    <div className="w-full mt-20 md:mt-2">
+    <div className="w-full">
       <section
-        className="text-white py-6 sm:py-10 border border-gray-800 rounded-xl md:rounded-r-2xl"
+        className="text-white py-6 sm:py-10 glass-card rounded-2xl"
         data-aos="fade-in"
-        data-aos-duration="1600"
+        data-aos-duration="1200"
       >
         <div className="container mx-auto px-3 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-center mb-6 sm:mb-8 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent animate-bounce">
-            My Technical Skills
-          </h2>
 
-          {skillCategories.map((category, index) => (
-            <div key={index} className="mb-6 sm:mb-8">
-              <h3
-                className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 flex items-center gap-2"
-                data-aos="fade-down"
+          {/* Header */}
+          <div className="mb-8">
+            <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">
+              &lt;skills /&gt;
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">
+              Technical{" "}
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Expertise
+              </span>
+            </h2>
+          </div>
+
+          {/* Category tabs */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {skillCategories.map((cat, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
+                  ${active === i
+                    ? "bg-cyan-500/20 border border-cyan-400/50 text-cyan-300"
+                    : "border border-white/8 text-gray-400 hover:border-white/20 hover:text-gray-200"
+                  }`}
               >
-                <span className="text-white text-xl sm:text-2xl">{category.emoji}</span>
-                <span className="bg-gradient-to-l from-cyan-500 to-blue-500 bg-clip-text text-transparent">
-                  {category.title}
-                </span>
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div
-                    key={skillIndex}
-                    className="flex flex-col items-center p-2"
-                    data-aos="zoom-out"
-                  >
-                    <Image
-                      src={skill.img || "/placeholder.svg"}
-                      alt={skill.name}
-                      width={40}
-                      height={40}
-                      className="w-8 h-8 sm:w-10 sm:h-10 object-contain"
-                    />
-                    <span className="text-xs sm:text-sm mt-2 text-center">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                <span>{cat.emoji}</span>
+                <span>{cat.title.trim()}</span>
+              </button>
+            ))}
+          </div>
 
-        {/* Professional Skills */}
-        <div className="container mx-auto px-3 sm:px-6 mt-8 sm:mt-12">
-          <h2
-            className="text-2xl sm:text-3xl font-semibold text-center mb-6 sm:mb-8 bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent animate-bounce"
-            data-aos="fade-down"
-          >
-            Professional Skills
-          </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {professionalSkills.map((skill) => (
+          {/* Skills grid */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+            {category.skills.map((skill, i) => (
               <div
-                key={skill.name}
-                className="flex flex-col items-center"
-                data-aos="zoom-out"
+                key={i}
+                className="group flex flex-col items-center gap-2 p-3 rounded-xl
+                  border border-white/8 bg-white/3
+                  hover:border-cyan-400/30 hover:bg-cyan-400/5
+                  transition-all duration-200 cursor-default"
               >
-                <div className="relative mb-3 sm:mb-4">
-                  <svg className="w-20 h-20 sm:w-24 sm:h-24">
-                    <circle
-                      cx="50%"
-                      cy="50%"
-                      r="35"
-                      strokeWidth="5"
-                      stroke="#1E293B"
-                      fill="none"
-                      className="sm:r-40 sm:stroke-[6]"
-                    />
-                    <circle
-                      cx="50%"
-                      cy="50%"
-                      r="35"
-                      strokeWidth="5"
-                      stroke="#0ea5e9"
-                      strokeDasharray={`${2.2 * skill.percentage} 220`}
-                      fill="none"
-                      className="sm:r-40 sm:stroke-[6]"
-                      style={{
-                        strokeDasharray: `${2.5 * skill.percentage} 251`,
-                      }}
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-lg sm:text-xl font-bold">
-                      <CountUp end={skill.percentage} duration={4} />%
-                    </span>
-                  </div>
+                <div className="w-9 h-9 flex items-center justify-center
+                  rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors duration-200">
+                  <Image
+                    src={skill.img || "/placeholder.svg"}
+                    alt={skill.name}
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                  />
                 </div>
-                <p className="text-center text-sm sm:text-base lg:text-lg font-medium">
+                <span className="text-[11px] text-gray-400 group-hover:text-gray-200
+                  text-center leading-tight transition-colors duration-200 font-medium">
                   {skill.name}
-                </p>
+                </span>
               </div>
             ))}
           </div>
+
+          {/* Divider */}
+          <div className="my-10 border-t border-white/8" />
+
+          {/* Professional Skills */}
+          <div>
+            <div className="mb-6">
+              <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">
+                &lt;soft-skills /&gt;
+              </p>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">
+                Professional{" "}
+                <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                  Skills
+                </span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              {professionalSkills.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between items-center mb-1.5">
+                    <span className="text-sm font-medium text-gray-300">{skill.name}</span>
+                    <span className="text-xs font-mono text-cyan-400">{skill.percentage}%</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
+                      style={{
+                        width: `${skill.percentage}%`,
+                        boxShadow: "0 0 8px rgba(6,182,212,0.4)",
+                        transition: "width 1s cubic-bezier(0.4,0,0.2,1)",
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
     </div>
   );
 };
 
-export default Skills;
+export default Profile;

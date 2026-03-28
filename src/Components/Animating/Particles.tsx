@@ -12,7 +12,7 @@ type Particle = {
 };
 
 const createDust = (): Particle[] =>
-  Array.from({ length: 150 }, (_, i) => ({
+  Array.from({ length: 20 }, (_, i) => ({
     id: i,
     size: Math.random() * 6 + 1,
     left: Math.random() * 100,

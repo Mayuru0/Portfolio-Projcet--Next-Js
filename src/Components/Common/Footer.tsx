@@ -39,73 +39,76 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-black text-gray-400 pt-10 pb-6">
-      <div className="max-w-[1200px] mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3  gap-8 mb-8">
-          {/* About Section */}
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-4 font-mono">
-              MAYURU MADHURANGA
-            </h3>
-            <p className="mb-4">
-              Full-stack developer specializing in creating beautiful,
-              functional, and responsive web applications.
-            </p>
-            <div className="flex space-x-4">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-blue-600 transition duration-300"
-                  aria-label={link.label}
-                >
-                  {link.icon}
-                </a>
-              ))}
-            </div>
-          </div>
+    <footer className="relative mt-8 text-gray-400">
+      {/* Top gradient line */}
+      <div className="gradient-line w-full" />
 
-          
-
-          {/* Quick Links */}
-          <div className="grid">
-            <h3 className="text-xl font-bold text-white mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.path}
-                    className="hover:text-blue-600 transition duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-xl font-bold text-white mb-4">Contact</h3>
-            <p className="mb-2">Email: mayurumaduranga@gmail.com</p>
-            <p className="mb-2">Phone: +94 774366459</p>
-            <div className="flex">
-              <p className="mr-2">Location:</p>
-              <p className="flex">
-                No. 79, Maryland, Wathurugama, Gampaha, Sri Lanka
+      <div className="glass-nav py-12 pb-6">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+            {/* About */}
+            <div>
+              <h3 className="text-lg font-bold primary font-mono mb-3 tracking-wider">
+                MAYURU MADHURANGA
+              </h3>
+              <p className="text-sm leading-relaxed mb-5 text-gray-500">
+                Full-stack developer specializing in creating beautiful,
+                functional, and responsive web applications.
               </p>
+              <div className="flex space-x-3">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="p-2 rounded-lg glass border border-white/8 text-gray-500
+                      hover:text-cyan-400 hover:border-cyan-400/25 transition-all duration-300"
+                  >
+                    {link.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-sm font-bold text-white mb-4 tracking-widest uppercase">
+                Quick Links
+              </h3>
+              <ul className="space-y-2.5">
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.path}
+                      className="text-sm text-gray-500 hover:text-cyan-400 transition-colors duration-300"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h3 className="text-sm font-bold text-white mb-4 tracking-widest uppercase">
+                Contact
+              </h3>
+              <div className="space-y-2 text-sm text-gray-500">
+                <p>mayurumaduranga@gmail.com</p>
+                <p>+94 774366459</p>
+                <p>No. 79, Maryland, Wathurugama, Gampaha, Sri Lanka</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Divider */}
-        <div className="border-t border-gray-800 my-6"></div>
-
-        {/* Copyright */}
-        <div className="text-center">
-          <p>&copy; {currentYear} Mayuru Madhuranga. All rights reserved.</p>
+          <div className="border-t border-white/6 pt-6 text-center">
+            <p className="text-xs text-gray-600">
+              &copy; {currentYear} Mayuru Madhuranga. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -326,7 +326,7 @@ const ProjectComponent: React.FC = () => {
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl"
+            className="relative w-full max-w-2xl bg-[#030610]/90 backdrop-blur-2xl border border-white/12 rounded-2xl shadow-2xl shadow-black/60"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close button */}

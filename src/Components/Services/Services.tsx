@@ -16,17 +16,16 @@ const ServiceCard: FC<{
   icon: React.ReactNode;
 }> = ({ title, description, icon }) => {
   return (
-    <div className="bg-[#212129] rounded-xl p-6 h-full flex flex-col transition-all duration-300 hover:translate-y-[-5px] hover:shadow-lg hover:shadow-[#29a9e1]/10">
-      
-      <div className="bg-[#1a1a20] p-4 rounded-lg w-fit mb-4">
-        <div className="text-[#29a9e1]">{icon}</div>
+    <div className="glass-card glass-card-hover rounded-2xl p-6 h-full flex flex-col">
+      {/* Icon */}
+      <div className="mb-5 w-fit">
+        <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/15 to-blue-600/15 border border-cyan-400/20">
+          <div className="text-cyan-400">{icon}</div>
+        </div>
       </div>
 
-      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-
-      {/* 👇 this makes description stretch evenly */}
-      <p className="text-gray-400 flex-grow">{description}</p>
-
+      <h3 className="text-base font-bold text-white mb-2 tracking-wide">{title}</h3>
+      <p className="text-gray-400 text-sm leading-relaxed flex-grow">{description}</p>
     </div>
   );
 };
@@ -79,31 +78,31 @@ const Services: FC = () => {
 
   return (
     <div
-      className="max-w-[1200px] mx-auto bg-transparent border border-gray-900 rounded-4xl sm:py-20 py-10 px-5"
+      className="max-w-[1200px] mx-auto px-4 sm:py-20 py-10"
       id="services"
       data-aos="fade-in"
-      data-aos-duration="1600"
+      data-aos-duration="1200"
     >
+      {/* Section header */}
       <div className="text-center mb-16" data-aos="fade-down">
-        <h2 className="text-4xl font-bold text-white mb-4">My Services</h2>
-        <div className="w-20 h-1 bg-[#29a9e1] mx-auto mb-6"></div>
-        <p className="text-gray-400 max-w-2xl mx-auto">
-          I offer a comprehensive range of digital services to help bring your
-          vision to life. Each service is tailored to meet your specific needs
-          and goals.
+        <span className="inline-block text-cyan-400 text-xs font-bold tracking-[0.2em] uppercase mb-4 glass rounded-full px-4 py-1.5 border border-cyan-400/20">
+          What I Do
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">My Services</h2>
+        <div className="gradient-line w-24 mx-auto mb-6" />
+        <p className="text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
+          A comprehensive range of digital services tailored to bring your
+          vision to life with modern technologies.
         </p>
       </div>
 
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        data-aos="zoom-out"
-      >
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {services.map((service, index) => (
           <div
             key={index}
             data-aos="fade-up"
-            data-aos-delay={index * 150} // 👈 one by one
-            data-aos-duration="800"
+            data-aos-delay={index * 100}
+            data-aos-duration="700"
             data-aos-once="true"
           >
             <ServiceCard
@@ -115,20 +114,24 @@ const Services: FC = () => {
         ))}
       </div>
 
-      <div className="mt-16 text-center" data-aos="fade-in">
-        <div className="bg-[#212129] rounded-xl p-8 max-w-3xl mx-auto">
-          <h3 className="text-2xl font-bold text-white mb-4">
+      {/* CTA */}
+      <div className="mt-16 text-center" data-aos="fade-up">
+        <div className="glass-card rounded-2xl p-8 max-w-3xl mx-auto border border-cyan-400/10">
+          <h3 className="text-2xl font-bold text-white mb-3">
             Need a custom solution?
           </h3>
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-400 text-sm mb-7 max-w-lg mx-auto leading-relaxed">
             I&apos;m always open to discussing new projects and creative ideas.
-            If you have a specific requirement that&apos;s not listed above,
-            let&apos;s talk about it.
+            If you have a specific requirement, let&apos;s talk about it.
           </p>
-
           <a
             href="/contact"
-            className="inline-block px-8 py-3 bg-[#29a9e1] text-white font-medium rounded-md hover:bg-[#1d8cbf] transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl
+              bg-gradient-to-r from-cyan-500 to-blue-600
+              hover:from-cyan-400 hover:to-blue-500
+              text-white font-semibold text-sm
+              shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35
+              hover:scale-[1.03] transition-all duration-300"
           >
             Let&apos;s work together
           </a>

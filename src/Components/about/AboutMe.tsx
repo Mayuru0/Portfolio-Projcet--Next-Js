@@ -1,171 +1,174 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import React from "react";
+import { FaMapMarkerAlt, FaLanguage, FaGamepad, FaCode, FaUser } from "react-icons/fa";
+
+const highlights = [
+  { icon: <FaUser size={12} />,         label: "Age",       value: "25" },
+  { icon: <FaMapMarkerAlt size={12} />, label: "Location",  value: "Wathurugama, Sri Lanka" },
+  { icon: <FaLanguage size={12} />,     label: "Languages", value: "Sinhala, English" },
+  { icon: <FaCode size={12} />,         label: "Interests", value: "Programming, Video Editing" },
+  { icon: <FaGamepad size={12} />,      label: "Hobbies",   value: "Coding, Gaming, Videography, Traveling" },
+];
+
+const techHighlights = [
+  "MERN Stack", "Next.js", "TypeScript", "React Native",
+  "Tauri.js", "Docker", "CI/CD", "AWS EC2",
+];
+
+const stats = [
+  { value: "2+",  label: "Years Exp." },
+  { value: "20+", label: "Projects" },
+  { value: "6mo", label: "Internship" },
+];
 
 export default function AboutMe() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-in-out",
-    });
-  }, []);
-
-  const personalInfo = {
-    name: "Mayuru Madhuranga",
-    age: 25,
-    from: "No 79,Maryland Wathurugama",
-    languages: ["Sinhala", "English"],
-    interests: ["Programming", "Video Editing"],
-    hobbies: ["Coding", "Gaming", "Videography", "Traveling"],
-  };
-
   return (
-    <div className="min-h-screen bg-transparent border border-gray-800 rounded-xl md:rounded-r-2xl text-white flex flex-col p-3 sm:p-6 md:p-8 lg:p-12 mt-20 md:mt-2 ">
-      <div className="max-w-5xl mx-auto w-full">
-        {/* Heading */}
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 sm:mb-8 primary animate-bounce text-center sm:text-left">
-          About Me
-        </h1>
+    <div className="glass-card rounded-2xl text-white p-5 sm:p-8 w-full">
+      <div className="max-w-4xl mx-auto w-full">
 
-        {/* Profile Section */}
-        <div className="flex flex-col md:flex-row items-center md:items-start mb-8 sm:mb-12 gap-4 sm:gap-6">
-          {/* Profile Image */}
-          <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-gray-700 flex-shrink-0">
-            <Image
-              src="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png"
-              alt="Profile Picture"
-              width={192}
-              height={192}
-              className="object-cover "
-            />
+        {/* Header */}
+        <div className="mb-8" data-aos="fade-up">
+          <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">&lt;about-me /&gt;</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">
+            Who{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              I Am
+            </span>
+          </h2>
+        </div>
+
+        {/* Profile card */}
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10" data-aos="fade-up" data-aos-delay="100">
+
+          {/* Avatar */}
+          <div className="relative flex-shrink-0">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border border-cyan-400/25 shadow-lg shadow-cyan-400/10">
+              <Image
+                src="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png"
+                alt="Mayuru Madhuranga"
+                width={144}
+                height={144}
+                className="object-cover w-full "
+              />
+            </div>
+            {/* Available badge */}
+            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 text-[10px] font-semibold bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 rounded-full px-2.5 py-0.5 whitespace-nowrap">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Available
+            </span>
           </div>
 
-          {/* Personal Info */}
-          <div className="flex-1 text-center md:text-left" data-aos="fade-left">
-            <h2
-              className="text-xl sm:text-2xl font-semibold"
-              data-aos="fade-up"
-            >
-              {personalInfo.name}
-            </h2>
-            <p className="text-base sm:text-lg text-gray-400 mb-3 sm:mb-4 animate-pulse">
-              Fullstack Developer | MERN Stack Developer
-            </p>
+          {/* Name + role + stats */}
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-0.5">Mayuru Madhuranga</h3>
+            <p className="text-sm text-cyan-400 font-mono mb-4">Full Stack Developer · MERN Stack</p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm sm:text-base text-gray-300">
-              <p>
-                <span className="font-semibold primary">Age:</span>{" "}
-                {personalInfo.age}
-              </p>
-              <p>
-                <span className="font-semibold primary">From:</span>{" "}
-                {personalInfo.from}
-              </p>
-              <p className="sm:col-span-2">
-                <span className="font-semibold primary">Languages:</span>{" "}
-                {personalInfo.languages.join(", ")}
-              </p>
+            {/* Mini stats */}
+            <div className="flex justify-center sm:justify-start gap-5">
+              {stats.map(({ value, label }) => (
+                <div key={label} className="text-center">
+                  <div className="text-lg font-extrabold text-white">{value}</div>
+                  <div className="text-[10px] text-gray-500 tracking-wide">{label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Interests & Hobbies */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
-          data-aos="fade-left"
-        >
-          {/* Interests */}
-          <section>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 primary">
-              Interests
-            </h3>
-            <ul className="list-disc list-inside text-sm sm:text-base text-gray-300 leading-relaxed space-y-1">
-              {personalInfo.interests.map((interest, index) => (
-                <li key={index}>{interest}</li>
-              ))}
-            </ul>
-          </section>
-
-          {/* Hobbies */}
-          <section>
-            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 primary">
-              Hobbies
-            </h3>
-            <ul className="list-disc list-inside text-sm sm:text-base text-gray-300 leading-relaxed space-y-1">
-              {personalInfo.hobbies.map((hobby, index) => (
-                <li key={index}>{hobby}</li>
-              ))}
-            </ul>
-          </section>
+        {/* Personal info grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10" data-aos="fade-up" data-aos-delay="150">
+          {highlights.map(({ icon, label, value }) => (
+            <div key={label} className="flex items-start gap-3 glass border border-white/8 rounded-xl px-4 py-3">
+              <span className="mt-0.5 text-cyan-400 flex-shrink-0">{icon}</span>
+              <div>
+                <p className="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-0.5">{label}</p>
+                <p className="text-sm text-gray-300">{value}</p>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* My Journey Section */}
-        <section className="mt-8 sm:mt-12" data-aos="fade-up">
-          <h3
-            className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 primary"
-            data-aos="fade-up"
-          >
-            My Journey
-          </h3>
-          <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-300 leading-relaxed text-justify">
+        {/* Divider */}
+        <div className="border-t border-white/8 mb-8" />
+
+        {/* Journey */}
+        <div className="mb-10" data-aos="fade-up" data-aos-delay="200">
+          <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">&lt;my-journey /&gt;</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-5">
+            My{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              Story
+            </span>
+          </h2>
+
+          <div className="space-y-4 text-sm sm:text-base text-gray-400 leading-relaxed">
             <p>
               I&apos;m a committed and capable student currently pursuing a{" "}
-              <strong>Higher National Diploma in Information Technology</strong>
-              . As a passionate and skilled{" "}
-              <strong>Full-Stack Developer</strong>, I specialize in building
-              responsive web applications using the <strong>MERN stack</strong>{" "}
-              and <strong>Next.js</strong>, developing cross-platform desktop
-              applications using <strong>Rust</strong> and{" "}
-              <strong>Tauri.js</strong>, and creating mobile applications using{" "}
-              <strong>React Native</strong>.
+              <span className="text-white font-medium">Higher National Diploma in Information Technology</span>. As a passionate and skilled{" "}
+              <span className="text-white font-medium">Full-Stack Developer</span>, I specialize in building responsive web applications using the{" "}
+              <span className="text-cyan-400 font-medium">MERN stack</span> and{" "}
+              <span className="text-cyan-400 font-medium">Next.js</span>, developing cross-platform desktop applications using{" "}
+              <span className="text-cyan-400 font-medium">Rust</span> and{" "}
+              <span className="text-cyan-400 font-medium">Tauri.js</span>, and creating mobile applications using{" "}
+              <span className="text-cyan-400 font-medium">React Native</span>.
             </p>
             <p>
-              I have <strong>6 months</strong> of hands-on internship experience
-              and over <strong>1 year</strong> of self-driven project
-              development, where I actively used <strong>GitHub</strong> for
-              version control, collaboration, and code management. My backend
-              development experience includes <strong>Node.js</strong>,{" "}
-              <strong>Express.js</strong>, and basic knowledge of{" "}
-              <strong>NestJS</strong>, along with using{" "}
-              <strong>Firebase</strong> for backend services. Additionally, I
-              have implemented image uploading functionality using{" "}
-              <strong>Cloudinary</strong>.
+              I have <span className="text-white font-medium">6 months</span> of hands-on internship experience and over{" "}
+              <span className="text-white font-medium">1 year</span> of self-driven project development, where I actively used{" "}
+              <span className="text-cyan-400 font-medium">GitHub</span> for version control, collaboration, and code management. My backend
+              development experience includes <span className="text-cyan-400 font-medium">Node.js</span>,{" "}
+              <span className="text-cyan-400 font-medium">Express.js</span>, and basic knowledge of{" "}
+              <span className="text-cyan-400 font-medium">NestJS</span>, along with using{" "}
+              <span className="text-cyan-400 font-medium">Firebase</span> for backend services. Additionally, I have implemented image uploading
+              functionality using <span className="text-cyan-400 font-medium">Cloudinary</span>.
             </p>
             <p>
               My development journey includes working with{" "}
-              <strong>JavaScript</strong>, <strong>TypeScript</strong>, and{" "}
-              <strong>Redux</strong>, as well as implementing{" "}
-              <strong>JWT authentication</strong> and optimizing both{" "}
-              <strong>MongoDB</strong> and <strong>MySQL</strong> databases for
-              better performance and scalability.
+              <span className="text-cyan-400 font-medium">JavaScript</span>,{" "}
+              <span className="text-cyan-400 font-medium">TypeScript</span>, and{" "}
+              <span className="text-cyan-400 font-medium">Redux</span>, as well as implementing{" "}
+              <span className="text-cyan-400 font-medium">JWT authentication</span> and optimizing both{" "}
+              <span className="text-cyan-400 font-medium">MongoDB</span> and{" "}
+              <span className="text-cyan-400 font-medium">MySQL</span> databases for better performance and scalability.
             </p>
             <p>
-              I&apos;ve also gained experience in <strong>Docker</strong> for
-              containerizing applications, and implemented{" "}
-              <strong>CI/CD pipelines</strong> using{" "}
-              <strong>GitHub Actions</strong> to automate build, test, and
-              deployment workflows. Furthermore, I&apos;ve deployed and managed
-              applications on <strong>AWS EC2</strong> and{" "}
-              <strong>AWS Lightsail</strong> with <strong>Nginx</strong> and{" "}
-              <strong>SSL</strong> configurations, ensuring secure and efficient
-              deployment processes.
+              I&apos;ve also gained experience in <span className="text-cyan-400 font-medium">Docker</span> for containerizing applications, and
+              implemented <span className="text-cyan-400 font-medium">CI/CD pipelines</span> using{" "}
+              <span className="text-cyan-400 font-medium">GitHub Actions</span> to automate build, test, and deployment workflows. Furthermore,
+              I&apos;ve deployed and managed applications on{" "}
+              <span className="text-cyan-400 font-medium">AWS EC2</span> and{" "}
+              <span className="text-cyan-400 font-medium">AWS Lightsail</span> with{" "}
+              <span className="text-cyan-400 font-medium">Nginx</span> and{" "}
+              <span className="text-cyan-400 font-medium">SSL</span> configurations, ensuring secure and efficient deployment processes.
             </p>
             <p>
-              I&apos;m passionate about writing clean, efficient, and
-              maintainable code, and I thrive in{" "}
-              <strong>agile, collaborative development environments</strong>.
-              With a solid foundation in multiple programming languages and
-              tools, I&apos;m eager to contribute creative and practical
-              solutions to dynamic, fast-paced teams. Additionally, I aim to
-              pursue a <strong>top-up degree</strong> to further deepen my
-              technical expertise and career growth.
+              I&apos;m passionate about writing clean, efficient, and maintainable code, and I thrive in{" "}
+              <span className="text-white font-medium">agile, collaborative development environments</span>. With a solid foundation in multiple
+              programming languages and tools, I&apos;m eager to contribute creative and practical solutions to dynamic, fast-paced teams.
+              Additionally, I aim to pursue a <span className="text-white font-medium">top-up degree</span> to further deepen my technical
+              expertise and career growth.
             </p>
           </div>
-        </section>
+        </div>
+
+        {/* Tech highlights */}
+        <div data-aos="fade-up" data-aos-delay="250">
+          <p className="text-[10px] text-gray-500 uppercase tracking-widest font-mono mb-3">Core Technologies</p>
+          <div className="flex flex-wrap gap-2">
+            {techHighlights.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs px-3 py-1 rounded-lg border border-white/8 text-gray-300
+                  hover:border-cyan-400/30 hover:text-cyan-300 transition-all duration-200"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
