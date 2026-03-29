@@ -5,6 +5,7 @@ import Navbar from "@/Components/Common/NavBar";
 import Footer from "@/Components/Common/Footer";
 import Preloader from "@/Components/Common/Preloader";
 import TopProgressBar from "@/Components/Common/TopProgressBar";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -70,11 +71,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TopProgressBar />
-        <Preloader />
-        <Navbar/>
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <TopProgressBar />
+          <Preloader />
+          <Navbar/>
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

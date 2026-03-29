@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "@types/react-type-animation": "^1.1.4",
     "aos": "^2.3.4",
     "firebase": "^12.8.0",
@@ -21,6 +22,7 @@
     "react-countup": "^6.5.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
+    "react-redux": "^9.2.0",
     "react-type-animation": "^3.2.0"
   },
   "devDependencies": {

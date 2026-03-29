@@ -1,19 +1,52 @@
 "use client"
 
-import { useEffect, type FC } from "react"
-import { Phone, Mail, MapPin, ChevronDown, Send } from "lucide-react"
-
+import { useEffect, useState, type FC } from "react"
+import { Phone, Mail, MapPin, ChevronDown, Send, CheckCircle, AlertCircle } from "lucide-react"
 import AOS from "aos";
 import "aos/dist/aos.css"
+import { useSendContactMutation } from "@/store/api/portfolioApi"
 
 const Contact: FC = () => {
+  const [sendContact, { isLoading }] = useSendContactMutation();
+  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const [form, setForm] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-in-out",
-    });
+    AOS.init({ duration: 1000, once: true, easing: "ease-in-out" });
   }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("idle");
+
+    const name = `${form.firstname} ${form.lastname}`.trim();
+    const subject = form.service || "General Inquiry";
+    const message = form.phone
+      ? `Phone: ${form.phone}\n\n${form.message}`
+      : form.message;
+
+    try {
+      await sendContact({ name, email: form.email, subject, message }).unwrap();
+      setStatus("success");
+      setForm({ firstname: "", lastname: "", email: "", phone: "", service: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
     <div
@@ -38,12 +71,14 @@ const Contact: FC = () => {
           data-aos="fade-right"
           data-aos-duration="800"
         >
-          <form action="https://getform.io/f/ayvkqmeb" method="POST" className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <input
                 type="text"
                 name="firstname"
                 placeholder="Firstname"
+                value={form.firstname}
+                onChange={handleChange}
                 className="glass-input w-full px-4 py-3 text-gray-300 placeholder-gray-600 rounded-xl text-sm"
                 required
               />
@@ -51,6 +86,8 @@ const Contact: FC = () => {
                 type="text"
                 name="lastname"
                 placeholder="Lastname"
+                value={form.lastname}
+                onChange={handleChange}
                 className="glass-input w-full px-4 py-3 text-gray-300 placeholder-gray-600 rounded-xl text-sm"
                 required
               />
@@ -60,6 +97,8 @@ const Contact: FC = () => {
               type="email"
               name="email"
               placeholder="Email address"
+              value={form.email}
+              onChange={handleChange}
               className="glass-input w-full px-4 py-3 text-gray-300 placeholder-gray-600 rounded-xl text-sm"
               required
             />
@@ -68,14 +107,17 @@ const Contact: FC = () => {
               type="tel"
               name="phone"
               placeholder="Phone number"
+              value={form.phone}
+              onChange={handleChange}
               className="glass-input w-full px-4 py-3 text-gray-300 placeholder-gray-600 rounded-xl text-sm"
             />
 
             <div className="relative">
               <select
                 name="service"
+                value={form.service}
+                onChange={handleChange}
                 className="glass-input w-full px-4 py-3 text-gray-400 rounded-xl text-sm appearance-none"
-                defaultValue=""
               >
                 <option value="" className="bg-[#0a0f1e]">UI/UX Design</option>
                 <option value="web-development" className="bg-[#0a0f1e]">Web Development</option>
@@ -90,22 +132,40 @@ const Contact: FC = () => {
             <textarea
               name="message"
               placeholder="Type your message here."
+              value={form.message}
+              onChange={handleChange}
               className="glass-input w-full px-4 py-3 text-gray-300 placeholder-gray-600 rounded-xl text-sm resize-none"
               rows={5}
               required
             />
 
+            {status === "success" && (
+              <div className="flex items-center gap-2 text-emerald-400 text-sm bg-emerald-400/10 border border-emerald-400/20 rounded-xl px-4 py-3">
+                <CheckCircle className="h-4 w-4 shrink-0" />
+                Message sent successfully!
+              </div>
+            )}
+
+            {status === "error" && (
+              <div className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3">
+                <AlertCircle className="h-4 w-4 shrink-0" />
+                Failed to send message. Please try again.
+              </div>
+            )}
+
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full flex items-center justify-center gap-2.5 p-4 rounded-xl
                 bg-gradient-to-r from-cyan-500 to-blue-600
                 hover:from-cyan-400 hover:to-blue-500
                 text-white font-semibold text-sm
                 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35
-                hover:scale-[1.02] transition-all duration-300 cursor-pointer"
+                hover:scale-[1.02] transition-all duration-300 cursor-pointer
+                disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
             >
               <Send className="h-4 w-4" />
-              Send Message
+              {isLoading ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>

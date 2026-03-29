@@ -1,183 +1,151 @@
-import html from "../../public/assets/html.png";
-import css from "../../public/assets/css.png";
+import type { ApiSkillCategory, ApiProfessionalSkill } from '@/types/api';
 
-import react from "../../public/assets/react.png";
-import java from "../../public/assets/java.png";
-import Nodejs from "../../public/assets//Nodejs.png";
-import expressjs from "../../public/assets/express-js.png";
-
-import tailwind from "../../public/assets/tailwind.png";
-import mysql from "../../public/assets/mysql.png";
-import mongoDB from "../../public/assets/mongoDB.png";
-import Figma from "../../public/assets/Figma.png";
-import wordpress from "../../public/assets/wordpress.png";
-import AdobePhotoshop from "../../public/assets/AdobePhotoshop.png";
-import AdobeLightroom from "../../public/assets/AdobeLightroom.png";
-import AdobePremiere from "../../public/assets/AdobePremiere.png";
-import nextjs from "../../public/assets/nextjs.png";
-import typescript from "../../public/assets/typescript.png";
-import nest from "../../public/assets/nest.png";
-//import tauri from "../../public/assets/tauri.jpg";
-import redux from "../../public/assets/redux.png";
-import Context from "../../public/assets/Context.png";
-import github from "../../public/assets/github.png";
-import docker from "../../public/assets/docker.png";
-import Python from "../../public/assets/Python.png";
-import { SkillCategory } from "@/types/Skills";
-import C from "../../public/assets/C Sharp Logo.svg";
-import Redux from "../../public/assets/Reduxq.png";
-import turi from "../../public/assets/tauri.png";
-import Flutter from "../../public/assets/Flutter.png";
-import PostgreSQL from "../../public/assets/PostgreSQL.png";
-import VSCode from "../../public/assets/VSCode.png";
-import IntelliJ from "../../public/assets/IntelliJ.png";
-import NetBeans from "../../public/assets/NetBeans.png";
-import Android from "../../public/assets/Android.png";
-import GIT from "../../public/assets/GIT.png";
-import POSTMAN from "../../public/assets/POSTMAN.png";
-import Firebase from "../../public/assets/Firebase.png";
-import Xampp from "../../public/assets/XAMPP.webp";
-import Vercel from "../../public/assets/Vercel.png";
-import Cloudinary from "../../public/assets/Cloudinary.png";
-import JavaScript from "../../public/assets/js.png";
-import AWS from "../../public/assets/AWS.png";
-import Nginx from "../../public/assets/Nginx.png";
-import AaPanel_Logo from "../../public/assets/AaPanel_Logo.png";
-import Jenkins from "../../public/assets/Jenkins.png";
-import cicd from "../../public/assets/cicd.png";
-import githubaction from "../../public/assets/githubaction.png";
-import WAMP  from "../../public/assets/WAMP.png";
-import Cursor  from "../../public/assets/Cursor.png";
-import Linux  from "../../public/assets/Linux-Logo.png";
-import reactnative  from "../../public/assets/React Native.png";
-
-export const skillCategories: SkillCategory[] = [
+export const skillCategoriesData: ApiSkillCategory[] = [
   {
-    emoji: "👨‍💻",
-    title: " Programming Languages",
+    _id: 'cat-1',
+    emoji: '👨‍💻',
+    title: ' Programming Languages',
+    order: 1,
+    isActive: true,
     skills: [
-      { name: "JavaScript", img: JavaScript },
-      { name: "TypeScript", img: typescript },
-      { name: "Java", img: java },
-      { name: "C#", img: C },
-      { name: "Python", img: Python },
-      { name: "HTML", img: html },
-      { name: "CSS", img: css },
+      { name: 'JavaScript', imageUrl: '/assets/js.png', imagePublicId: '' },
+      { name: 'TypeScript', imageUrl: '/assets/typescript.png', imagePublicId: '' },
+      { name: 'Java', imageUrl: '/assets/java.png', imagePublicId: '' },
+      { name: 'C#', imageUrl: '/assets/C Sharp Logo.svg', imagePublicId: '' },
+      { name: 'Python', imageUrl: '/assets/Python.png', imagePublicId: '' },
+      { name: 'HTML', imageUrl: '/assets/html.png', imagePublicId: '' },
+      { name: 'CSS', imageUrl: '/assets/css.png', imagePublicId: '' },
     ],
   },
   {
-    emoji: "🌐",
-    title: " Frontend Development",
+    _id: 'cat-2',
+    emoji: '🌐',
+    title: ' Frontend Development',
+    order: 2,
+    isActive: true,
     skills: [
-      { name: "React.js", img: react },
-      { name: "Next.js", img: nextjs },
-      { name: "Redux", img: Redux },
-       { name: "Tailwind CSS", img: tailwind },
-      { name: "HTML", img: html },
-      { name: "CSS", img: css },
+      { name: 'React.js', imageUrl: '/assets/react.png', imagePublicId: '' },
+      { name: 'Next.js', imageUrl: '/assets/nextjs.png', imagePublicId: '' },
+      { name: 'Redux', imageUrl: '/assets/Reduxq.png', imagePublicId: '' },
+      { name: 'Tailwind CSS', imageUrl: '/assets/tailwind.png', imagePublicId: '' },
+      { name: 'HTML', imageUrl: '/assets/html.png', imagePublicId: '' },
+      { name: 'CSS', imageUrl: '/assets/css.png', imagePublicId: '' },
     ],
   },
   {
-    emoji: "⚙️",
-    title: " Backend Development",
+    _id: 'cat-3',
+    emoji: '⚙️',
+    title: ' Backend Development',
+    order: 3,
+    isActive: true,
     skills: [
-      { name: "Node.js", img: Nodejs },
-      { name: "Express.js", img: expressjs },
-      { name: "Nest.js", img: nest },
+      { name: 'Node.js', imageUrl: '/assets/Nodejs.png', imagePublicId: '' },
+      { name: 'Express.js', imageUrl: '/assets/express-js.png', imagePublicId: '' },
+      { name: 'Nest.js', imageUrl: '/assets/nest.png', imagePublicId: '' },
     ],
   },
   {
-    emoji: "📦",
-    title: " State Management",
+    _id: 'cat-4',
+    emoji: '📦',
+    title: ' State Management',
+    order: 4,
+    isActive: true,
     skills: [
-      { name: "Redux RTK", img: redux },
-      { name: "Context API", img: Context },
-    ],
-  },
-    {
-    emoji: "🖥",
-    title: " Desktop Development",
-    skills: [
-      { name: "Tauri.js", img: turi },
-     
-    ],
-  },
-    {
-    emoji: "📱",
-    title: " Mobile Development",
-    skills: [
-
-      { name: "Flutter", img: Flutter },
-
-      { name: "React Native", img: reactnative },
-      
-    ],
-  },
-   {
-    emoji: "☁",
-    title: " Databases ",
-    skills: [
-      { name: "MongoDB", img: mongoDB },
-      { name: "MySQL", img: mysql },
-      { name: "PostgreSQL", img: PostgreSQL },
+      { name: 'Redux RTK', imageUrl: '/assets/redux.png', imagePublicId: '' },
+      { name: 'Context API', imageUrl: '/assets/Context.png', imagePublicId: '' },
     ],
   },
   {
-  emoji: "🚀",
-  title: " DevOps & Cloud Engineering",
-  skills: [
-    { name: "Docker", img: docker },
-    { name: "GitHub Actions", img: githubaction },
-    { name: "CI/CD Pipelines", img: cicd },
-    { name: "AWS", img: AWS },
-    { name: "Jenkins", img: Jenkins },
-    { name: "aaPanel", img: AaPanel_Logo },
-    { name: "Nginx", img: Nginx }, 
-    { name: "Cloudinary", img: Cloudinary },
-    { name: "Vercel", img: Vercel },
-    { name: "Firebase Hosting", img: Firebase },
-    { name: "Linux ", img: Linux },
-    // { name: "Postman", img: POSTMAN },
-  ],
-},
-  {
-    emoji: "🛠 ",
-    title: "Software & Tools",
+    _id: 'cat-5',
+    emoji: '🖥',
+    title: ' Desktop Development',
+    order: 5,
+    isActive: true,
     skills: [
-      { name: "VS Code", img: VSCode },
-      { name: "Cursor ", img: Cursor },
-      { name: "IntelliJ", img: IntelliJ },
-      { name: "Apache NetBeans", img:  NetBeans },
-      { name: "Android Studio", img: Android },
-      { name: "GitHub", img: github },
-      { name: "GIT", img: GIT },
-      // { name: "Docker", img: docker },
-      { name: "POSTMAN", img: POSTMAN },
-      { name: "Xampp", img: Xampp },
-      { name: "WAMP ", img: WAMP  },
-      // { name: "Firebase", img: Firebase },
-      // { name: "Vercel", img: Vercel },
-      // { name: "Cloudinary", img: Cloudinary }, 
-      // { name: "AWS", img: AWS }, 
-      { name: "WordPress", img: wordpress },
+      { name: 'Tauri.js', imageUrl: '/assets/tauri.png', imagePublicId: '' },
     ],
   },
- 
   {
-    emoji: "🎨",
-    title: "  Editing",
+    _id: 'cat-6',
+    emoji: '📱',
+    title: ' Mobile Development',
+    order: 6,
+    isActive: true,
     skills: [
-      { name: "Adobe Lightroom", img: AdobeLightroom },
-      { name: "Adobe Photoshop", img: AdobePhotoshop },
-      { name: "Adobe Premiere Pro", img: AdobePremiere },
-      { name: "Figma", img: Figma },
+      { name: 'Flutter', imageUrl: '/assets/Flutter.png', imagePublicId: '' },
+      { name: 'React Native', imageUrl: '/assets/React Native.png', imagePublicId: '' },
+    ],
+  },
+  {
+    _id: 'cat-7',
+    emoji: '☁',
+    title: ' Databases',
+    order: 7,
+    isActive: true,
+    skills: [
+      { name: 'MongoDB', imageUrl: '/assets/mongoDB.png', imagePublicId: '' },
+      { name: 'MySQL', imageUrl: '/assets/mysql.png', imagePublicId: '' },
+      { name: 'PostgreSQL', imageUrl: '/assets/PostgreSQL.png', imagePublicId: '' },
+    ],
+  },
+  {
+    _id: 'cat-8',
+    emoji: '🚀',
+    title: ' DevOps & Cloud Engineering',
+    order: 8,
+    isActive: true,
+    skills: [
+      { name: 'Docker', imageUrl: '/assets/docker.png', imagePublicId: '' },
+      { name: 'GitHub Actions', imageUrl: '/assets/githubaction.png', imagePublicId: '' },
+      { name: 'CI/CD Pipelines', imageUrl: '/assets/cicd.png', imagePublicId: '' },
+      { name: 'AWS', imageUrl: '/assets/AWS.png', imagePublicId: '' },
+      { name: 'Jenkins', imageUrl: '/assets/Jenkins.png', imagePublicId: '' },
+      { name: 'aaPanel', imageUrl: '/assets/AaPanel_Logo.png', imagePublicId: '' },
+      { name: 'Nginx', imageUrl: '/assets/Nginx.png', imagePublicId: '' },
+      { name: 'Cloudinary', imageUrl: '/assets/Cloudinary.png', imagePublicId: '' },
+      { name: 'Vercel', imageUrl: '/assets/Vercel.png', imagePublicId: '' },
+      { name: 'Firebase Hosting', imageUrl: '/assets/Firebase.png', imagePublicId: '' },
+      { name: 'Linux', imageUrl: '/assets/Linux-Logo.png', imagePublicId: '' },
+    ],
+  },
+  {
+    _id: 'cat-9',
+    emoji: '🛠',
+    title: 'Software & Tools',
+    order: 9,
+    isActive: true,
+    skills: [
+      { name: 'VS Code', imageUrl: '/assets/VSCode.png', imagePublicId: '' },
+      { name: 'Cursor', imageUrl: '/assets/Cursor.png', imagePublicId: '' },
+      { name: 'IntelliJ', imageUrl: '/assets/IntelliJ.png', imagePublicId: '' },
+      { name: 'Apache NetBeans', imageUrl: '/assets/NetBeans.png', imagePublicId: '' },
+      { name: 'Android Studio', imageUrl: '/assets/Android.png', imagePublicId: '' },
+      { name: 'GitHub', imageUrl: '/assets/github.png', imagePublicId: '' },
+      { name: 'GIT', imageUrl: '/assets/GIT.png', imagePublicId: '' },
+      { name: 'POSTMAN', imageUrl: '/assets/POSTMAN.png', imagePublicId: '' },
+      { name: 'Xampp', imageUrl: '/assets/XAMPP.webp', imagePublicId: '' },
+      { name: 'WAMP', imageUrl: '/assets/WAMP.png', imagePublicId: '' },
+      { name: 'WordPress', imageUrl: '/assets/wordpress.png', imagePublicId: '' },
+    ],
+  },
+  {
+    _id: 'cat-10',
+    emoji: '🎨',
+    title: ' Editing',
+    order: 10,
+    isActive: true,
+    skills: [
+      { name: 'Adobe Lightroom', imageUrl: '/assets/AdobeLightroom.png', imagePublicId: '' },
+      { name: 'Adobe Photoshop', imageUrl: '/assets/AdobePhotoshop.png', imagePublicId: '' },
+      { name: 'Adobe Premiere Pro', imageUrl: '/assets/AdobePremiere.png', imagePublicId: '' },
+      { name: 'Figma', imageUrl: '/assets/Figma.png', imagePublicId: '' },
     ],
   },
 ];
 
-export const professionalSkills = [
-  { name: "Creativity", percentage: 90 },
-  { name: "Communication", percentage: 65 },
-  { name: "Problem Solving", percentage: 75 },
-  { name: "Teamwork", percentage: 85 },
+export const professionalSkillsData: ApiProfessionalSkill[] = [
+  { _id: 'prof-1', name: 'Creativity', percentage: 90, order: 1 },
+  { _id: 'prof-2', name: 'Communication', percentage: 65, order: 2 },
+  { _id: 'prof-3', name: 'Problem Solving', percentage: 75, order: 3 },
+  { _id: 'prof-4', name: 'Teamwork', percentage: 85, order: 4 },
 ];

@@ -1,3 +1,5 @@
+"use client";
+
 import type React from "react";
 import type { FC } from "react";
 import {
@@ -7,8 +9,32 @@ import {
   Laptop,
   Palette,
   Film,
+  Code,
+  Globe,
+  Smartphone,
+  Database,
+  Settings,
+  Layers,
 } from "lucide-react";
 import { BiMobile } from "react-icons/bi";
+import { useGetServicesQuery } from "@/store/api/portfolioApi";
+import { servicesData } from "@/Data/Services";
+
+const iconMap: Record<string, React.ReactNode> = {
+  LayoutGrid: <LayoutGrid className="h-6 w-6" />,
+  Server: <Server className="h-6 w-6" />,
+  MonitorSmartphone: <MonitorSmartphone className="h-6 w-6" />,
+  Laptop: <Laptop className="h-6 w-6" />,
+  Palette: <Palette className="h-6 w-6" />,
+  Film: <Film className="h-6 w-6" />,
+  BiMobile: <BiMobile className="h-6 w-6" />,
+  Code: <Code className="h-6 w-6" />,
+  Globe: <Globe className="h-6 w-6" />,
+  Smartphone: <Smartphone className="h-6 w-6" />,
+  Database: <Database className="h-6 w-6" />,
+  Settings: <Settings className="h-6 w-6" />,
+  Layers: <Layers className="h-6 w-6" />,
+};
 
 const ServiceCard: FC<{
   title: string;
@@ -30,51 +56,21 @@ const ServiceCard: FC<{
   );
 };
 
+const SkeletonCard = () => (
+  <div className="glass-card rounded-2xl p-6 h-full flex flex-col space-y-4">
+    <div className="w-12 h-12 rounded-xl bg-white/8" />
+    <div className="h-4 w-2/3 bg-white/8 rounded-full" />
+    <div className="space-y-2 flex-1">
+      <div className="h-3 bg-white/8 rounded-full" />
+      <div className="h-3 bg-white/8 rounded-full w-5/6" />
+      <div className="h-3 bg-white/8 rounded-full w-4/5" />
+    </div>
+  </div>
+);
+
 const Services: FC = () => {
-  const services = [
-    {
-      title: "Frontend Development",
-      description:
-        "Crafting visually appealing and responsive user interfaces using React.js, Next.js, Tailwind CSS, and modern UI libraries.",
-      icon: <LayoutGrid className="h-6 w-6" />,
-    },
-    {
-      title: "Backend Development",
-      description:
-        "Building scalable and secure server-side applications using Node.js, Express.js, NestJS, and MongoDB with API integrations.",
-      icon: <Server className="h-6 w-6" />,
-    },
-    {
-      title: "Fullstack Development",
-      description:
-        "Developing end-to-end web applications with both frontend and backend technologies for a seamless user experience.",
-      icon: <MonitorSmartphone className="h-6 w-6" />,
-    },
-    {
-      title: "Desktop  App Development",
-      description:
-        "Creating powerful and efficient desktop applications using Tauri.js and other cross-platform frameworks.",
-      icon: <Laptop className="h-6 w-6" /> ,
-    },
-    {
-  title: "Mobile App Development",
-  description:
-    "Building high-performance and user-friendly mobile applications using Flutter, React Native, and other modern cross-platform technologies.",
-  icon: <BiMobile className="h-6 w-6" />,
-},
-    {
-      title: "Graphic Design",
-      description:
-        "Designing stunning visuals, branding elements, and UI/UX assets using Adobe Photoshop, Illustrator, and Figma.",
-      icon: <Palette className="h-6 w-6" />,
-    },
-    {
-      title: "Video Editing",
-      description:
-        "Editing and producing high-quality videos with effects, transitions, and animations using Adobe Premiere Pro and After Effects.",
-      icon: <Film className="h-6 w-6" />,
-    },
-  ];
+  const { data, isLoading, isError } = useGetServicesQuery();
+  const services = (isError || !data) ? servicesData : data;
 
   return (
     <div
@@ -97,21 +93,27 @@ const Services: FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {services.map((service, index) => (
-          <div
-            key={index}
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
-            data-aos-duration="700"
-            data-aos-once="true"
-          >
-            <ServiceCard
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-            />
-          </div>
-        ))}
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} data-aos="fade-up" data-aos-delay={i * 100} data-aos-duration="700" data-aos-once="true">
+                <SkeletonCard />
+              </div>
+            ))
+          : services.map((service, index) => (
+              <div
+                key={service._id}
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+                data-aos-duration="700"
+                data-aos-once="true"
+              >
+                <ServiceCard
+                  title={service.title}
+                  description={service.description}
+                  icon={iconMap[service.icon] ?? <LayoutGrid className="h-6 w-6" />}
+                />
+              </div>
+            ))}
       </div>
 
       {/* CTA */}
