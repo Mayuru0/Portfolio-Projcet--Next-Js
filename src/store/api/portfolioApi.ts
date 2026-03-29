@@ -7,6 +7,7 @@ import type {
   ApiExperience,
   ApiService,
   ApiProfile,
+  ApiAbout,
   ContactInput,
 } from '@/types/api';
 
@@ -16,6 +17,10 @@ export const portfolioApi = createApi({
   reducerPath: 'portfolioApi',
   baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/api` }),
   endpoints: (builder) => ({
+    getAbout: builder.query<ApiAbout, void>({
+      query: () => '/about',
+      transformResponse: (res: { data: ApiAbout }) => res.data,
+    }),
     getProfile: builder.query<ApiProfile, void>({
       query: () => '/profile',
       transformResponse: (res: { data: ApiProfile }) => res.data,
@@ -55,6 +60,7 @@ export const portfolioApi = createApi({
 });
 
 export const {
+  useGetAboutQuery,
   useGetProfileQuery,
   useGetServicesQuery,
   useGetEducationQuery,

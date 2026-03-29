@@ -76,6 +76,24 @@ export interface ApiProject {
   isActive: boolean;
 }
 
+export interface ApiHighlight {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+export interface ApiAbout {
+  _id: string;
+  name: string;
+  role: string;
+  image: string;
+  imagePublicId: string;
+  highlights: ApiHighlight[];
+  stats: ApiStat[];
+  story: string[];
+  techHighlights: string[];
+}
+
 export interface ContactInput {
   name: string;
   email: string;
