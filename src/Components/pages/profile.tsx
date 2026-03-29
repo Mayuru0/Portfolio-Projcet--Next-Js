@@ -106,11 +106,16 @@ const Profile: React.FC = () => {
         { value: "...", label: "Commits" },
       ];
 
-  const stats = baseStats.map((s) =>
-    s.label === "Commits"
+  const hasCommitStat = baseStats.some((s) => s.label.toLowerCase().includes("commit"));
+  const mappedStats = baseStats.map((s) =>
+    s.label.toLowerCase().includes("commit")
       ? { ...s, value: totalCommits !== null ? `${totalCommits}+` : s.value }
       : s
   );
+  const stats =
+    !hasCommitStat && totalCommits !== null
+      ? [...mappedStats, { value: `${totalCommits}+`, label: "Commits" }]
+      : mappedStats;
 
   const typingSequence: (string | number)[] = profile?.typingTitles?.length
     ? profile.typingTitles.flatMap((t) => [t, 1400])
