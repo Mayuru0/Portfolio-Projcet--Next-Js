@@ -30,7 +30,7 @@ export default function AboutMe() {
 
         {/* Header */}
         <div className="mb-8" data-aos="fade-up">
-          <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">&lt;about-me /&gt;</p>
+          <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1 animate-bounce">&lt;about-me /&gt;</p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">
             Who{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
@@ -55,7 +55,7 @@ export default function AboutMe() {
             </div>
             {/* Available badge */}
             <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 inline-flex items-center gap-1 text-[10px] font-semibold bg-emerald-500/15 border border-emerald-400/30 text-emerald-400 rounded-full px-2.5 py-0.5 whitespace-nowrap">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse " />
               Available
             </span>
           </div>
@@ -63,12 +63,12 @@ export default function AboutMe() {
           {/* Name + role + stats */}
           <div className="flex-1 text-center sm:text-left">
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-0.5">Mayuru Madhuranga</h3>
-            <p className="text-sm text-cyan-400 font-mono mb-4">Full Stack Developer · MERN Stack</p>
+            <p className="text-sm text-cyan-400 font-mono mb-4 animate-pulse">Full Stack Developer · MERN Stack</p>
 
             {/* Mini stats */}
             <div className="flex justify-center sm:justify-start gap-5">
               {stats.map(({ value, label }) => (
-                <div key={label} className="text-center">
+                <div key={label} className="text-center ">
                   <div className="text-lg font-extrabold text-white">{value}</div>
                   <div className="text-[10px] text-gray-500 tracking-wide">{label}</div>
                 </div>
@@ -95,7 +95,7 @@ export default function AboutMe() {
 
         {/* Journey */}
         <div className="mb-10" data-aos="fade-up" data-aos-delay="200">
-          <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1">&lt;my-journey /&gt;</p>
+          <p className="text-cyan-400 font-mono text-xs tracking-widest uppercase mb-1 animate-bounce">&lt;my-journey /&gt;</p>
           <h2 className="text-xl sm:text-2xl font-bold text-white mb-5">
             My{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">

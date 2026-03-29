@@ -5,7 +5,13 @@ import { motion } from "framer-motion";
 import ProfileViews from "./Animating/ProfileViews";
 
 
-const ProfilePhoto: React.FC = () => {
+const FALLBACK_IMAGE = "https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png";
+
+interface ProfilePhotoProps {
+  imageUrl?: string;
+}
+
+const ProfilePhoto: React.FC<ProfilePhotoProps> = ({ imageUrl }) => {
   return (
     <div className="relative">
       <motion.div>
@@ -20,7 +26,7 @@ const ProfilePhoto: React.FC = () => {
 
             {/* Profile image clipped to circle */}
             <image
-              href="https://res.cloudinary.com/dy972wrlb/image/upload/v1741633214/Portfolio%20%20%28React%20Js%29/lr88uy5trjaefcxsdjjj.png"
+              href={imageUrl || FALLBACK_IMAGE}
               x="-40"
               y="20"
               width="600"
