@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://mayuru-portfolio.vercel.app/
+Host: https://www.mayurumadhuranga.ooguy.com
 
 # Sitemaps
-Sitemap: https://mayuru-portfolio.vercel.app/sitemap.xml
+Sitemap: https://www.mayurumadhuranga.ooguy.com/sitemap.xml
