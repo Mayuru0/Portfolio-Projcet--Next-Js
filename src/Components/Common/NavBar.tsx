@@ -68,8 +68,8 @@ const Navbar: React.FC = () => {
   className={`sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
   flex justify-between items-center px-6 transition-all duration-500
   ${scrolled
-    ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
-    : "bg-transparent md:bg-transparent"
+    ? "glass-nav-solid md:glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
+    : "bg-transparent"
   }`}
 >
 
