@@ -108,10 +108,10 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Navigation */}
         <div
-          className={`fixed h-full top-0 w-[65%] z-20 ease-in-out duration-500
-            backdrop-blur-2xl bg-black border-r border-white/10
-            ${nav ? "left-0" : "left-[-100%]"}`}
-        >
+  className={`fixed h-full top-0 w-[65%] z-50 overflow-y-auto ease-in-out duration-500
+    backdrop-blur-2xl bg-black/70 border-r border-white/10
+    ${nav ? "left-0" : "left-[-100%]"}`}
+>
           <h1 className="text-xl font-bold primary font-mono m-6 pt-4">
             MAYURU MADHURANGA
           </h1>
