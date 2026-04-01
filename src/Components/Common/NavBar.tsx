@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
   flex justify-between items-center px-6 transition-all duration-500
   ${scrolled
     ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
-    : "bg-transparent"
+    : "bg-transparent md:bg-transparent"
   }`}
 >
 
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation */}
         <div
           className={`fixed h-full top-0 w-[65%] z-20 ease-in-out duration-500
-            backdrop-blur-2xl bg-black/80 border-r border-white/10
+            backdrop-blur-2xl bg-black border-r border-white/10
             ${nav ? "left-0" : "left-[-100%]"}`}
         >
           <h1 className="text-xl font-bold primary font-mono m-6 pt-4">
