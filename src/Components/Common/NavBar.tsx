@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
   className={`sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
   flex justify-between items-center px-6 transition-all duration-500
   ${scrolled
-    ? "glass-nav-solid md:glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
+    ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
     : "bg-transparent"
   }`}
 >
@@ -108,10 +108,10 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Navigation */}
         <div
-  className={`fixed h-full top-0 w-[65%] z-50 overflow-y-auto ease-in-out duration-500
-    backdrop-blur-2xl bg-black/70 border-r border-white/10
-    ${nav ? "left-0" : "left-[-100%]"}`}
->
+          className={`fixed h-full top-0 w-[65%] z-50 ease-in-out duration-500
+            backdrop-blur-2xl bg-black/80 border-r border-white/10
+            ${nav ? "left-0" : "left-[-100%]"}`}
+        >
           <h1 className="text-xl font-bold primary font-mono m-6 pt-4">
             MAYURU MADHURANGA
           </h1>
