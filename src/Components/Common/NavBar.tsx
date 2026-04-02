@@ -9,7 +9,6 @@ import Head from "next/head";
 const Navbar: React.FC = () => {
   const [nav, setNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
   const handleNav = () => {
@@ -36,17 +35,10 @@ const Navbar: React.FC = () => {
       setScrolled(window.scrollY > 50);
     };
 
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize();
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -71,9 +63,9 @@ const Navbar: React.FC = () => {
       <div
   className={`navbar-wrap sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
   flex justify-between items-center px-6 transition-all duration-500
-  ${(scrolled || isMobile)
+  ${scrolled
     ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
-    : "bg-transparent"
+    : "md:bg-transparent"
   }`}
 >
 
@@ -138,9 +130,12 @@ const Navbar: React.FC = () => {
             ))}
           </ul>
         </div>
+
       </div>
     </>
   );
 };
 
+
 export default Navbar;
+
