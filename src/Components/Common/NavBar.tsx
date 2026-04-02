@@ -9,6 +9,7 @@ import Head from "next/head";
 const Navbar: React.FC = () => {
   const [nav, setNav] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
   const handleNav = () => {
@@ -32,17 +33,20 @@ const Navbar: React.FC = () => {
   // Listen for scroll to change background color
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    handleResize();
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -67,7 +71,7 @@ const Navbar: React.FC = () => {
       <div
   className={`sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
   flex justify-between items-center px-6 transition-all duration-500
-  ${scrolled
+  ${(scrolled || isMobile)
     ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
     : "bg-transparent"
   }`}
