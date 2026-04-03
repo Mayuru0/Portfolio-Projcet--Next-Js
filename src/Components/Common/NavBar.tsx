@@ -11,31 +11,40 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  const handleNav = () => setNav(!nav);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleNav = () => {
+    setNav(!nav);
   };
 
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  // Handle navigation with scroll to top
   const handleNavClick = () => {
     setNav(false);
     scrollToTop();
   };
 
-  // Scroll effect
+  // Listen for scroll to change background color
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  // 🔥 Prevent background scroll (iOS fix)
-  useEffect(() => {
-    document.body.style.overflow = nav ? "hidden" : "auto";
-  }, [nav]);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -51,100 +60,72 @@ const Navbar: React.FC = () => {
         <title>Home | Mayuru Maduranga</title>
         <meta
           name="description"
-          content="Welcome to my portfolio."
+          content="Welcome to my portfolio. I'm a full-stack developer passionate about building modern web applications."
         />
       </Head>
 
-      {/* NAVBAR */}
       <div
-        className={`sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
-        flex justify-between items-center px-6 transition-all duration-500
-        ${
-          scrolled
-            ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
-            : "bg-transparent"
-        }`}
-      >
-        {/* LOGO */}
-        <h1 className="text-xl font-bold font-mono tracking-wider">
+  className={`sticky top-0 z-50 h-[100px] text-gray-400 max-w-[1200px] mx-auto 
+  flex justify-between items-center px-4 transition-all duration-300
+  bg-black md:bg-transparent
+  ${scrolled ? "md:backdrop-blur-md md:rounded-b-4xl" : ""}
+  `}
+>
+
+        <h1 className="text-3xl font-bold primary font-mono">
           <Link href="/" onClick={scrollToTop}>
             MAYURU MADHURANGA
           </Link>
         </h1>
 
-        {/* DESKTOP NAV */}
-        <ul className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation */}
+        <ul className="hidden md:flex">
           {navLinks.map((link) => (
-            <li key={link.name}>
-              <Link
-                href={link.path}
-                onClick={scrollToTop}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300
-                ${
-                  pathname === link.path
-                    ? "text-cyan-400 bg-cyan-400/10 border border-cyan-400/20"
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
-                }`}
-              >
+            <li
+              key={link.name}
+              className={`p-5 hover:text-blue-600 transition duration-300 ${
+                pathname === link.path ? "text-blue-600 font-bold" : ""
+              }`}
+            >
+              <Link href={link.path} onClick={scrollToTop}>
                 {link.name}
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* MOBILE ICON */}
+        {/* Mobile Menu Icon */}
         <div
           onClick={handleNav}
-          className="block md:hidden cursor-pointer text-cyan-400 z-50"
+          className="block md:hidden cursor-pointer text-blue-500 "
         >
-          {nav ? <AiOutlineClose size={22} /> : <AiOutlineMenu size={22} />}
+          {nav ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
         </div>
 
-        {/* 🔥 MOBILE MENU (iOS FIXED) */}
+        {/* Mobile Navigation */}
         <div
-          className={`fixed top-0 left-0 h-full w-[65%] z-40
-          transition-transform duration-500 ease-in-out
-          ${nav ? "translate-x-0" : "-translate-x-full"}`}
+          className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-20 ease-in-out duration-500 ${
+            nav ? "left-0" : "left-[-100%]"
+          }`}
         >
-          {/* 🔥 BACKGROUND LAYER (KEY FIX) */}
-          <div className="absolute inset-0 bg-black/85 backdrop-blur-xl -z-10" />
-
-          {/* CONTENT */}
-          <div className="relative z-10 h-full">
-            <h1 className="text-xl font-bold font-mono m-6 pt-4">
-              MAYURU MADHURANGA
-            </h1>
-
-            <div className="mx-6 border-b border-white/10 mb-6" />
-
-            <ul className="px-4 space-y-1">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.path}
-                    onClick={handleNavClick}
-                    className={`block px-4 py-3 rounded-xl text-lg transition-all duration-300
-                    ${
-                      pathname === link.path
-                        ? "text-cyan-400 bg-cyan-400/10 border border-cyan-400/20 font-semibold"
-                        : "text-gray-300 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <h1 className="text-3xl font-bold text-blue-500 m-4">
+            Mayuru Madhuranga
+          </h1>
+          <ul className="pt-8 text-2xl">
+            {navLinks.map((link) => (
+              <li
+                key={link.name}
+                className={`p-5 hover:text-blue-600 transition duration-300 ${
+                  pathname === link.path ? "text-blue-600 font-bold" : ""
+                }`}
+              >
+                <Link href={link.path} onClick={handleNavClick}>
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-
-        {/* OVERLAY */}
-        {nav && (
-          <div
-            onClick={() => setNav(false)}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 md:hidden"
-          />
-        )}
       </div>
     </>
   );
