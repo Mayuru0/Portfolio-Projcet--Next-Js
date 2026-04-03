@@ -13,36 +13,29 @@ const Navbar: React.FC = () => {
 
   const handleNav = () => setNav(!nav);
 
- // Scroll to top function
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleNavClick = () => {
     setNav(false);
     scrollToTop();
   };
- // Listen for scroll to change background color
+
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // // 🔥 Prevent background scroll (iOS fix)
-  // useEffect(() => {
-  //   document.body.style.overflow = nav ? "hidden" : "auto";
-  // }, [nav]);
+  // 🔥 Prevent background scroll (iOS fix)
+  useEffect(() => {
+    document.body.style.overflow = nav ? "hidden" : "auto";
+  }, [nav]);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -66,7 +59,6 @@ const Navbar: React.FC = () => {
       <div
         className={`sticky top-0 z-50 h-[72px] text-gray-300 max-w-[1200px] mx-auto
         flex justify-between items-center px-6 transition-all duration-500
-
         ${
           scrolled
             ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
