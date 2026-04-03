@@ -22,14 +22,21 @@ const Navbar: React.FC = () => {
     scrollToTop();
   };
 
-  // Scroll effect
+   // Listen for scroll to change background color
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   // 🔥 Prevent background scroll (iOS fix)
