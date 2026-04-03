@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
         ${
           scrolled
             ? "glass-nav rounded-2xl mt-2 mx-4 shadow-lg shadow-black/40"
-            : "md:bg-transparent"
+            : "bg-[#050814]/90 md:bg-transparent"
         }`}
       >
         {/* LOGO */}
