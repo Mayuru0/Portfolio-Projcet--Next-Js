@@ -107,11 +107,12 @@ const Navbar: React.FC = () => {
           {nav ? <AiOutlineClose size={22} /> : <AiOutlineMenu size={22} />}
         </div>
 
-        {/* 🔥 MOBILE MENU (iOS FIXED) */}
+      
+        {/* Mobile Navigation */}
         <div
-          className={`fixed top-0 left-0 h-full w-[65%] z-40
-          transition-transform duration-500 ease-in-out
-          ${nav ? "translate-x-0" : "-translate-x-full"}`}
+          className={`fixed h-full left-0 top-0 w-[60%] bg-black/90 z-20 ease-in-out duration-500 ${
+            nav ? "left-0" : "left-[-100%]"
+          }`}
         >
           {/* 🔥 BACKGROUND LAYER (KEY FIX) */}
           <div className="absolute inset-0 bg-black/85 backdrop-blur-xl -z-10" />
