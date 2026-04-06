@@ -454,14 +454,14 @@ const ProjectComponent: React.FC = () => {
                 {/* Tech breakdown */}
                 {selectedProject.descriptionItems.length > 0 && (
                   <div className="bg-white/[0.03] border border-white/10 rounded-xl p-4 mb-5">
-                    <p className="text-[10px] uppercase tracking-widest text-gray-600 mb-3">
-                      Technologies Used
+                    <p className="text-[13px] font-bold uppercase tracking-widest text-gray-600 mb-3">
+                      💻 Technologies Used:
                     </p>
                     <div className="space-y-2">
                       {selectedProject.descriptionItems.map((item, i) => (
                         <div key={i} className="flex items-baseline gap-2 text-sm">
                           <span className="text-gray-500 shrink-0 min-w-[80px]">
-                            {item.label}
+                           🔴 {item.label} :
                           </span>
                           <span className="text-gray-300">{item.value}</span>
                         </div>
