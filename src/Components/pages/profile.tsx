@@ -117,9 +117,15 @@ const Profile: React.FC = () => {
       ? [...mappedStats, { value: `${totalCommits}+`, label: "Commits" }]
       : mappedStats;
 
-  const typingSequence: (string | number)[] = profile?.typingTitles?.length
-    ? profile.typingTitles.flatMap((t) => [t, 1400])
+  const profileTitles = Array.isArray(profile?.typingTitles)
+    ? profile.typingTitles.filter((t): t is string => typeof t === "string" && t.trim().length > 0)
+    : [];
+
+  const typingSequence: (string | number)[] = profileTitles.length
+    ? profileTitles.flatMap((t) => [t, 1400])
     : ["Full Stack Developer", 1400, "MERN Stack Developer", 1400, "React / Next.js Developer", 1400, "Backend Engineer", 1400];
+
+  const typingKey = profileTitles.length ? profileTitles.join("|") : "default-typing";
 
   const statusColor = profile?.statusColor ?? "cyan";
   const nameParts = profile?.name?.split(" ") ?? ["Mayuru", "Madhuranga"];
@@ -169,6 +175,7 @@ const Profile: React.FC = () => {
           <div className="flex items-center gap-2 mt-2">
             <span className="text-gray-500 text-base sm:text-lg ">—</span>
             <TypeAnimation
+              key={typingKey}
               sequence={typingSequence}
               wrapper="span"
               speed={55}
