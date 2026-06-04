@@ -20,6 +20,7 @@ const Custom404 = () => {
           <h2 className="mb-4 text-3xl font-bold text-white">
             Page Not Found
           </h2>
+          
           <p className="mb-6 text-gray-400">
             Oops! The page you&apos;re looking for seems to have wandered off
             into the digital wilderness.
